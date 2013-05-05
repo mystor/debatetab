@@ -1,0 +1,7 @@
+<template name="tournament_list">
+	<ul>
+		{{#each tournaments}}
+		<li><a href="{{tournamentPath slug}}">{{name}}</a></li>
+		{{/each}}
+	</ul>
+</template>

@@ -1,0 +1,23 @@
+<template name="navbar">
+  <div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar">&nbsp;</span>
+          <span class="icon-bar">&nbsp;</span>
+          <span class="icon-bar">&nbsp;</span>
+        </button>
+
+        <a class="brand" href="/">DebateTab</a>
+        
+        {{loginButtons align="right"}}
+
+        <ul class="nav nav-collapse">
+          <li class=""><a href="{{tournament_listUrl}}">Tournaments</a></li>
+          <li class=""><a href="{{aboutusUrl}}">About Us</a></li>
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</template>
