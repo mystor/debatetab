@@ -1,17 +1,17 @@
 <template name="tournamentLayout">
   <div class="row">
-    <div class="span3">
+    <div class="col col-lg-3">
       <!-- sidebar -->
       <div class="well sidebar-nav">
         <ul class="nav nav-list" id="sidebar">
-          {{#if pagePerms 'team_list'}}<li><a href="{{team_listUrl tournament.slug}}">Teams</a></li>{{/if}}
-          <li>Sidebar nav 1</li>
-          <li>Sidebar nav 2</li>
+          {{#if pagePerms 'team_list'}}
+          <li><a href="{{team_listUrl tournament.slug}}">Teams</a></li>
+          {{/if}}
         </ul>
       </div>
     </div>
 
-    <div class="span9">
+    <div class="col col-lg-9">
       {{deviceRender}}
     </div>
   </div>

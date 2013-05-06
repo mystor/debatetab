@@ -7,6 +7,8 @@
     "HTML5-History-API": {},
     "router": {},
     "accounts-ui-bootstrap-dropdown": {},
-    "device-detection": {}
+    "device-detection": {},
+    "bootstrap-3": {},
+    "accounts-ui-bootstrap-3": {}
   }
 }

@@ -1,23 +1,27 @@
 <template name="navbar">
   <div class="navbar navbar-static-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar">&nbsp;</span>
-          <span class="icon-bar">&nbsp;</span>
-          <span class="icon-bar">&nbsp;</span>
-        </button>
+    <div class="container">
+      {{! Toggle Switch - only visisble on mobile }}
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-        <a class="brand" href="/">DebateTab</a>
-        
-        {{loginButtons align="right"}}
-
-        <ul class="nav nav-collapse">
+      {{! Navigation Items }}
+      <a class="navbar-brand" href="/">DebateTab</a>
+      
+      <div class="nav-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
           <li class=""><a href="{{tournament_listUrl}}">Tournaments</a></li>
           <li class=""><a href="{{aboutusUrl}}">About Us</a></li>
         </ul>
-        
+
+        {{! XXX: replace login button system with one which works better }}
+        {{loginButtons align="right"}}
       </div>
+
+      
     </div>
   </div>
 </template>

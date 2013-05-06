@@ -1,65 +1,110 @@
 <template name="team_list">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>School</th>
-        <th>Name</th>
-        {{#times tournament.team_size}}
-        <th>Debater {{index1}}</th>
-        <th>Flags</th>
-        {{/times}}
-      </tr>
-    </thead>
-    {{#each teams}}
-    <tr>
-      <td>{{school}}</td>
-      <td>{{name}}</td>
-      {{#each speakers}}
-      <td>{{name}}</td>
-      <td>{{#if novice}}n{{/if}}</td>
-      {{/each}}
-    </tr>
-    {{/each}}
-  </table>
+  <div class="panel primary-bg">
+    {{! HEADING }}
+    <div class="panel-heading">
+      <i class="icon-group"></i>
+      Teams
 
-  <div class="modal" style="position: relative; top: auto; left: auto; right: auto; margin: 0 auto 20px; z-index: 1; max-width: 100%;">
-    <div class="modal-header">
-      <h3>Add New Team</h3>
+      {{> csv_controls}}
     </div>
-    <div class="modal-body">
-      <div class="row-fluid">
-        <input type="text" value="school" class="span3">
-        <input type="text" value="name" class="span9">
-      </div>
-      <div class="row-fluid">
-        <div class="span3">Debaters</div>
-        <div class="span6">
-          <input type="text" value="debater_name" style="width: 100%; box-sizing: border-box">
+
+    {{! TOOLBELT }}
+    {{#if adding_team}}
+      {{> team_add_form}}
+    {{else}}
+      {{> team_controls}}
+    {{/if}}
+
+    {{! TEAM LISTING }}
+    <div class="list-group list-group-flush">
+      {{#each teams}}
+      <div class="list-group-item">
+        <div class="pull-right">
+          {{! EDIT ICON }}
+          <i class="icon-edit icon-large"></i>
         </div>
-        <div class="span3">
-          <input type="text" value="flags" style="width: 100%">
-        </div>
+        
+        {{! TEAM DATA }}
+        <h4 class="list-group-item-heading">[{{school}}] {{name}}</h4>
+        {{#each speakers}}
+          <p class="list-group-item-text">{{name}}</p>
+        {{/each}}
       </div>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn">Reset Form</a>
-      <a href="#" class="btn btn-primary">Add Team</a>
+      {{/each}}
     </div>
   </div>
 </template>
 
-<template name="team_list_phone">
-  {{#each teams}}
-  <div class="well" style="padding: 6px;">
-    <p><strong>[{{school}}] {{name}}</strong></p>
-    <table style="width: 100%;">
-      {{#each speakers}}
-      <tr>
-        <td>{{name}}</td>
-        <td style="text-align: right;">{{#if novice}}n{{/if}}</td>
-      </tr>
-      {{/each}}
-    </table>
+<template name="csv_controls">
+  {{! CONTROLS FOR UPLOADING AND DOWNLOADING CSVS }}
+  <div class="btn-group pull-right">
+    <button id="download-csv" class="btn btn-mini btn-info">
+      <i class="icon-download-alt"></i> Download
+    </button>
+    <button id="upload-csv" class="btn btn-mini btn-warning">
+      <i class="icon-upload-alt"></i> Upload
+    </button>
   </div>
-  {{/each}}
+</template>
+
+<template name="team_controls">
+  {{! UTILITY BELT }}
+  <div>
+    {{! Add Team }}
+    <button id="add_team" class="btn btn-mini btn-primary">
+      <i class="icon-plus"></i> Add Team</span>
+    </button>
+
+
+    {{! Search Text Box }}
+    <div class="input-group pull-right col col-lg-8 col-sm-8">
+      <span class="input-group-addon input-small"><i class="icon-search"></i></span>
+      <input id="search_box" type="text" class="input-small" placeholder="Search">
+    </div>
+  </div>
+</template>
+
+<template name="team_add_form">
+  {{! Add form box - display to users when add team pressed }}
+  <div class="panel">
+    <div class="panel-heading">
+      Add New Team
+      <button id="close_team_add_form" class="close" aria-hidden="true" style="margin-top: -2px;">&times;</button>
+    </div>
+
+    <form id="team_add_form" action="#">
+      {{! School & Team Name }}
+      <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group col col-lg-3 col-sm-4">
+          <span class="input-group-addon"><i class="icon-home"></i></span>
+          <input type="text" name="school" placeholder="School">
+        </div>
+        <div class="input-group col col-lg-9 col-sm-8">
+          <span class="input-group-addon"><i class="icon-group"></i></span>
+          <input type="text" name="name" placeholder="Team Name">
+        </div>
+      </div>
+
+      {{! Debater Names & Flags }}
+      {{#times tournament.team_size}}
+        <div class="row" style="margin-bottom: 10px;">
+          <div class="input-group col col-lg-8">
+            <span class="input-group-addon"><i class="icon-user"></i></span>
+            <input type="text" name="debatername_{{index0}}" placeholder="Speaker {{index1}} Name">
+          </div>
+          <div class="input-group col col-lg-4">
+            <span class="input-group-addon"><i class="icon-flag"></i></span>
+            <input type="text" name="debatername_{{index0}}" placeholder="Flags">
+          </div>
+        </div>
+      {{/times}}
+
+      {{! Submit button }}
+      <div class="row">
+        <div class="col col-lg-6 col-offset-6">
+          <input type="submit" class="btn btn-primary btn-block" value="Add Team">
+        </div>
+      </div>
+    </form>
+  </div>
 </template>

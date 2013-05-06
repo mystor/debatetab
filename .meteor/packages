@@ -9,8 +9,8 @@ coffeescript
 HTML5-History-API
 router
 accounts-password
-bootstrap
 underscore
 stylus
-accounts-ui-bootstrap-dropdown
 device-detection
+bootstrap-3
+accounts-ui-bootstrap-3
