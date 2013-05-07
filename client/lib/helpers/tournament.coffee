@@ -8,3 +8,6 @@ Handlebars.registerHelper 'pagePerms', (page) ->
 # the session var tournament should be set
 Handlebars.registerHelper 'tournament', ->
   Session.get 'tournament'
+
+Handlebars.registerHelper 'side_nav_class', (page) ->
+  if Session.equals 'side_page', page then 'active' else ''

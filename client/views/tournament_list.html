@@ -1,7 +1,15 @@
 <template name="tournament_list">
-	<ul>
-		{{#each tournaments}}
-		<li><a href="{{tournamentPath slug}}">{{name}}</a></li>
-		{{/each}}
-	</ul>
+  <div class="panel panel-list">
+    <div class="panel-heading">
+      <i class="icon-trophy"></i>
+      Tournaments
+    </div>
+    
+    <div class="list-group list-group-flush">
+      {{#each tournaments}}
+      <a class="list-group-item" href="{{tournamentPath slug}}">{{name}}</a>
+      {{/each}}
+    </div>
+
+  </div>
 </template>

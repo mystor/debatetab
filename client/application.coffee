@@ -12,4 +12,8 @@ Deps.autorun ->
     when 'tournament_list'
       Meteor.subscribe 'all-tournaments'
     when 'team_list'
-      Meteor.subscribe 'teams', t_slug: Session.get 't_slug'
+      if Session.get('tournament')
+        Meteor.subscribe 'teams', 
+          t_id: Session.get('tournament')._id
+          query: Session.get 'search_query'
+          page_num: Session.get 'page_num'

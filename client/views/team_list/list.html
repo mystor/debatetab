@@ -1,0 +1,54 @@
+<template name="team_list">
+  <div class="panel primary-bg">
+    {{! HEADING }}
+    <div class="panel-heading">
+      <i class="icon-group"></i>
+      Teams
+
+      {{> csv_controls}}
+    </div>
+
+    {{! TOOLBELT }}
+    {{#if adding_team}}
+      {{> team_add_form}}
+    {{else}}
+      {{> team_controls}}
+    {{/if}}
+
+    {{! TEAM LISTING }}
+    <div class="list-group list-group-flush">
+      {{#each teams}}
+      <div class="list-group-item">
+        <div class="pull-right">
+          {{! EDIT ICON }}
+          <i class="icon-edit icon-large"></i>
+        </div>
+        
+        {{! TEAM DATA }}
+        <h4 class="list-group-item-heading">[{{school}}] {{name}}</h4>
+        {{#each speakers}}
+          <p class="list-group-item-text">
+            {{name}}
+            {{#each flags}}
+              <span class="label label-info">{{this}}</span>
+            {{/each}}
+          </p>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="team_controls">
+  <div>
+    {{! Search Text Box }}
+    {{> search_box}}
+    
+    {{! Add Team }}
+    <button id="add_team" class="btn btn-mini btn-primary">
+      <i class="icon-plus"></i> Add Team</span>
+    </button>
+  </div>
+</template>
+

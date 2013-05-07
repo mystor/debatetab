@@ -8,11 +8,14 @@
 
 <body>
   {{> navbar}}
+
   {{> body}}
 </body>
 
 <template name="body">
   <div class="container">
+    {{> meteorErrors}}
+
     {{deviceRender layoutName}}
   </div>
 </template>

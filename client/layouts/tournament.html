@@ -2,12 +2,20 @@
   <div class="row">
     <div class="col col-lg-3">
       <!-- sidebar -->
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list" id="sidebar">
+      <div class="panel panel-list">
+        <div class="panel-heading">
+          <i class="icon-trophy"></i>
+          {{tournament.name}}
+        </div>
+
+
+        <div class="link-group list-group-flush">
+          <a class="list-group-item {{side_nav_class 'overview'}}" href="{{tournamentUrl tournament.slug}}">Overview</a></li>
           {{#if pagePerms 'team_list'}}
-          <li><a href="{{team_listUrl tournament.slug}}">Teams</a></li>
+          <a class="list-group-item {{side_nav_class 'team_list'}}" href="{{team_listUrl tournament.slug}}">Teams</a></li>
           {{/if}}
-        </ul>
+        </div>
+
       </div>
     </div>
 

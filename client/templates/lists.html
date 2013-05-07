@@ -1,0 +1,23 @@
+<template name="csv_controls">
+  {{! Controls for Uploading & Downloading CSVs}}
+  {{! Place in header of panel}}
+  <div class="btn-group pull-right">
+    <button id="download-csv" class="btn btn-mini btn-info">
+      <i class="icon-download-alt"></i> Download
+    </button>
+    <button id="upload-csv" class="btn btn-mini btn-warning">
+      <i class="icon-upload-alt"></i> Upload
+    </button>
+  </div>
+</template>
+
+<template name="search_box">
+  <form id="search_form" action="#" style="">
+    <div class="input-group pull-right col col-lg-8 col-sm-8">
+      <input name="query" type="text" class="input-small" placeholder="Search">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-small"><i class="icon-search"></i></button>
+      </span>
+    </div>
+  </form>
+</template>
