@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col col-lg-3">
       <!-- sidebar -->
-      <div class="panel panel-list">
+      <div class="panel panel-list {{#unless navigating}}hidden-phone{{/unless}}">
         <div class="panel-heading">
           <i class="icon-trophy"></i>
           {{tournament.name}}
@@ -10,9 +10,14 @@
 
 
         <div class="link-group list-group-flush">
-          <a class="list-group-item {{side_nav_class 'overview'}}" href="{{tournamentUrl tournament.slug}}">Overview</a></li>
+          {{#sidebar_item name='Overview' slug='overview'}}
+            {{tournamentUrl tournament.slug}}
+          {{/sidebar_item}}
+
           {{#if pagePerms 'team_list'}}
-          <a class="list-group-item {{side_nav_class 'team_list'}}" href="{{team_listUrl tournament.slug}}">Teams</a></li>
+            {{#sidebar_item name='Teams' slug='team_list'}}
+              {{team_listUrl tournament.slug}}
+            {{/sidebar_item}}
           {{/if}}
         </div>
 
@@ -23,4 +28,11 @@
       {{deviceRender}}
     </div>
   </div>
+</template>
+
+<template name="sidebar_item">
+  <a class="list-group-item {{side_nav_class slug}}" href="{{url}}">
+    {{name}}
+    <span class="glyphicon glyphicon-chevron-right visible-phone"></span>
+  </a>
 </template>

@@ -1,16 +1,17 @@
 <template name="team_list">
-  <div class="panel primary-bg">
+  <div class="panel primary-bg {{#if navigating}}hidden-phone{{/if}}">
     {{! HEADING }}
     <div class="panel-heading">
-      <i class="icon-group"></i>
-      Teams
+      {{content_panel_name 'icon-group' 'Teams'}}
 
       {{> csv_controls}}
     </div>
 
     {{! TOOLBELT }}
-    {{#if adding_team}}
-      {{> team_add_form}}
+    {{#if adding}}
+      {{#isolate}}
+        {{> team_add_form}}
+      {{/isolate}}
     {{else}}
       {{> team_controls}}
     {{/if}}
@@ -19,25 +20,37 @@
     <div class="list-group list-group-flush">
       {{#each teams}}
       <div class="list-group-item">
-        <div class="pull-right">
-          {{! EDIT ICON }}
-          <i class="icon-edit icon-large"></i>
-        </div>
-        
-        {{! TEAM DATA }}
-        <h4 class="list-group-item-heading">[{{school}}] {{name}}</h4>
-        {{#each speakers}}
-          <p class="list-group-item-text">
-            {{name}}
-            {{#each flags}}
-              <span class="label label-info">{{this}}</span>
-            {{/each}}
-          </p>
-        {{/each}}
+        {{#if equals _id editing}}
+          {{> team_edit_form}}
+        {{else}}
+          {{> team_display}}
+        {{/if}}
       </div>
       {{/each}}
     </div>
   </div>
+</template>
+
+<template name="team_display">
+  <div class="pull-right">
+    {{! Edit icon }}
+    <a href="#" class="edit_team_button" data-teamid="{{_id}}">
+      <i class="icon-edit icon-large"></i>
+    </a>
+    {{! XXX: Add delete button}}
+  </div>
+
+  {{! Display team data}}
+  <h4 class="list-group-item-heading">[{{school}}] {{name}}</h4>
+  {{#each speakers}}
+    <p class="list-group-item-text">
+      {{name}}
+      {{#each flags}}
+        <span class="label label-info">{{this}}</span>
+      {{/each}}
+    </p>
+  {{/each}}
+
 </template>
 
 <template name="team_controls">

@@ -26,7 +26,7 @@ parse_team_form = (form) ->
       # Just add the key/value pair to doc
       doc[element.name] = element.value
 
-    doc
+  doc
 
 ###
 # Adding a team
@@ -34,7 +34,7 @@ parse_team_form = (form) ->
 
 Template.team_add_form.events
   'click #close_team_add_form': (e) ->
-    Session.set 'adding_team', false
+    Session.set 'adding', false
 
   'submit #team_add_form': (e, tmpl) ->
     e.preventDefault()
@@ -51,7 +51,8 @@ Template.team_add_form.events
     for error in validation_errors
       Meteor.Errors.warning error
 
-    if validation_errors
+    unless _.isEmpty validation_errors
+      console.log doc
       return
 
     Teams.insert doc
@@ -62,4 +63,25 @@ Template.team_add_form.events
 Template.team_add_form.rendered = ->
   # Focus the text area on opening form
   $(this.find 'input[type=text]').focus()
+
+###
+# Editing a team
+###
+
+Template.team_edit_form.events
+  'click #close_team_edit_form, click #cancel_team_edit_form': (e) ->
+    Session.set 'editing', ''
+
+  'submit #team_edit_form': (e, tmpl) ->
+    console.log 'submittin!'
+    e.preventDefault()
+
+    form = $ tmpl.find '#team_edit_form'
+
+    # Get the form data
+    doc = parse_team_form form
+
+    # XXX: Finish parsing
+    console.log doc
+
 

@@ -1,13 +1,18 @@
 <template name="csv_controls">
   {{! Controls for Uploading & Downloading CSVs}}
   {{! Place in header of panel}}
-  <div class="btn-group pull-right">
-    <button id="download-csv" class="btn btn-mini btn-info">
-      <i class="icon-download-alt"></i> Download
-    </button>
-    <button id="upload-csv" class="btn btn-mini btn-warning">
-      <i class="icon-upload-alt"></i> Upload
-    </button>
+  <div class="pull-right">
+    <div class="btn-group">
+      <button id="download-csv" class="btn btn-mini btn-info">
+        <i class="icon-download-alt"></i> 
+        <span><span class="hidden-phone">Download</span></span>
+      </button>
+      <button id="upload-csv" class="btn btn-mini btn-warning">
+        <i class="icon-upload-alt"></i> 
+        <span><span class="hidden-phone">Upload</span></span>
+      </button>
+    </div>
+
   </div>
 </template>
 

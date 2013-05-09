@@ -59,7 +59,7 @@ Teams.validation =
         return ['Invalid key in speaker']
 
     # Validate fields
-    err = Teams.validation.validate_name speaker.name
+    err = Teams.validation.validate_speaker_name speaker.name
 
     _.union err, Teams.validation.validate_flags speaker.flags
 
@@ -74,7 +74,7 @@ Teams.validation =
         return ['Invalid key in team']
 
     # Validate fields
-    err = Teams.validation.validate_name team.name
+    err = Teams.validation.validate_team_name team.name
 
     err = _.union err, Teams.validation.validate_school team.school
 

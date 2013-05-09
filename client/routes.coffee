@@ -2,10 +2,6 @@ load_tournament = (t_slug) ->
   Session.set 't_slug', t_slug
   Session.set 'top_page', 'tournaments'
 
-reset_list = ->
-  Session.set 'search_query', ''
-  Session.set 'page_num', 0
-
 Meteor.Router.add
   '/': 
     as: 'home'
@@ -17,7 +13,6 @@ Meteor.Router.add
     as: 'tournament_list'
     to: ->
       Session.set 'top_page', 'tournaments'
-      reset_list()
       'tournament_list'
   
   '/t/:t_slug': 
@@ -31,16 +26,27 @@ Meteor.Router.add
     as: 'team_list'
     to: (t_slug) ->
       load_tournament t_slug
-      reset_list()
       Session.set 'side_page', 'team_list'
       'team_list'
 
+Meteor.Router.beforeRouting = ->
+  # Run before any routing function
+  Session.set 'search_query', ''
+  Session.set 'page_num', 0
+  Session.set 'editing', ''
+  Session.set 'adding', false
+  Session.set 'navigating', false
+
 # layout Helper
 Template.body.helpers
-  layoutName: () ->
-    switch Meteor.Router.page()
-      when 'home', 'tournament_list'
-        'baseLayout'
-      when 'tournament', 'team_list'
-        'tournamentLayout'
+  layoutName: ->
+    tournament_pages = [
+      'tournament'
+      'team_list'
+    ]
+
+    if Meteor.Router.page() in tournament_pages
+      'tournamentLayout'
+    else
+      'baseLayout'
 

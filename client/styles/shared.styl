@@ -1,4 +1,4 @@
-
+// For panels which will contain a list and nothing else
 .panel-list
   .panel-heading
     margin-bottom 0px
@@ -9,3 +9,24 @@
     *:first-child
       border-top none
 
+// Make the back-navigation from content to navigation black rather than blue
+a.nav-back
+  color black
+
+// Fix for flush group list padding
+.list-group-flush
+  .list-group-item
+    padding-right 15px
+
+    // Part of fix below
+    .glyphicon-chevron-right, .badge
+      margin-right 0px
+
+// Heading unit used in list group items
+// Used in editing panels
+.list-group-heading
+  padding 10px 15px
+  margin -10px -15px 15px
+  font-size 17.5px
+  font-weight 500
+  background-color #f5f5f5
