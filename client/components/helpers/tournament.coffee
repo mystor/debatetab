@@ -4,14 +4,17 @@ Handlebars.registerHelper 'pagePerms', (page) ->
   # Meteor.userId in Session.get('tournament').admins or Session.get('tournament').public[page]
   true
 
-Handlebars.registerHelper 'page_public', (page, tournament) ->
-  page ||= Meteor.Router.page()
-  tournament ||= Session.get 'tournament'
+Handlebars.registerHelper 'page_public', (options) ->
+  page = Meteor.Router.page()
+  tournament = Session.get 'tournament'
   tournament.public[page]
 
-Handlebars.registerHelper 'tournament_admin', (tournament) ->
-  tournament ||= Session.get 'tournament'
-  Meteor.userId in tournament
+Handlebars.registerHelper 'tournament_admin', (options) ->
+  tournament = Session.get 'tournament'
+  unless tournament
+    return false
+
+  Meteor.userId() in tournament.admins
 
 # General helper to get the current tournament
 # Don't use outside of a tournament context where 

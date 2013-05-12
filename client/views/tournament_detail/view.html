@@ -1,0 +1,42 @@
+<template name="tournament">
+  <div class="panel {{#if navigating}}hidden-phone{{/if}}">
+    <div class="panel-heading">
+      {{content_panel_name 'icon-trophy' 'Tournament Info'}}
+    </div>
+    {{#with tournament}}
+    <table>
+      <tr>
+        <th>Name</th>
+        <td>{{name}}</td>
+      </tr>
+      <tr>
+        <th>Slug</th>
+        <td>{{slug}}</td>
+      </tr>
+    </table>
+    {{/with}}
+    This is the place where I will have information about the tournament as well as a map as to where the tournament will be.
+  </div>
+
+  <div class="panel primary-bg {{#if navigating}}hidden-phone{{/if}}">
+    <div class="panel-heading">
+      {{content_panel_name 'icon-comments' 'Latest Updates'}}
+    </div>
+
+    {{! The form for adding a post }}
+    <form id="post_add_form" action="#">
+      <div class="input-group">
+        <input name="update" type="text" class="input-small" placeholder="Post New Update">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-small">
+            <i class="icon-share-alt"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+
+
+    </div>
+
+  </div>
+</template>

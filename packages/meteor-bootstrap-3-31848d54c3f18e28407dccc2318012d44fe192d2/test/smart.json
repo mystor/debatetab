@@ -1,0 +1,10 @@
+{
+  "meteor": {
+    "branch": "master"
+  },
+  "packages": {
+    "bootstrap-3" : {
+      "path": "/media/storage/workspace/repos/meteor-packages/meteor-bootstrap-3"
+    }
+  }
+}

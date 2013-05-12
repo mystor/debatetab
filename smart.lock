@@ -11,7 +11,8 @@
       "accounts-ui-bootstrap-dropdown": {},
       "device-detection": {},
       "bootstrap-3": {},
-      "accounts-ui-bootstrap-3": {}
+      "accounts-ui-bootstrap-3": {},
+      "moment": {}
     },
     "packages": {
       "HTML5-History-API": {
@@ -31,18 +32,23 @@
       },
       "device-detection": {
         "git": "https://github.com/Mystor/meteor-device-detection.git",
-        "tag": "v0.1.1",
-        "commit": "b31266e3fe69d4e6b11d0e9c68a4bba6e7b6bf7f"
+        "tag": "v0.1.3",
+        "commit": "8d865454f32f8ffe1a5281b6e9f9488b2c9bc142"
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v0.1.9",
-        "commit": "31848d54c3f18e28407dccc2318012d44fe192d2"
+        "tag": "v0.2.1",
+        "commit": "a19436ae28a14831c039a89ac3ef0c396864c4da"
       },
       "accounts-ui-bootstrap-3": {
-        "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-dropdown.git",
-        "tag": "v0.1.3",
-        "commit": "688783d1fe282246eaa111c61518694b79a9bd18"
+        "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
+        "tag": "v0.1.5",
+        "commit": "4be5a541987b31e87c93277a54126e2ac08e5a1b"
+      },
+      "moment": {
+        "git": "https://github.com/possibilities/meteor-moment.git",
+        "tag": "v1.7.0",
+        "commit": "c64b6ec0e714b9556f4b6643d430b868ba69d3d7"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

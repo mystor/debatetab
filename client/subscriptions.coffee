@@ -3,8 +3,7 @@
 ###
 Deps.autorun ->
   if Session.get 't_slug' # If the tournament is set, subscribe to it
-    Meteor.subscribe 'tournament', t_slug: Session.get 't_slug', ->
-      Session.set 'tournament', Tournaments.findOne slug: Session.get 't_slug'
+    Meteor.subscribe 'tournament', t_slug: Session.get 't_slug'
 
   # Page-based subscriptions
   page = Meteor.Router.page()
@@ -17,3 +16,8 @@ Deps.autorun ->
           t_id: Session.get('tournament')._id
           query: Session.get 'search_query'
           page_num: Session.get 'page_num'
+
+# Set the current tournament
+Deps.autorun ->
+  tournament = Tournaments.findOne() #slug: Session.get 't_slug'
+  Session.set 'tournament', tournament

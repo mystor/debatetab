@@ -4,7 +4,10 @@
     <div class="panel-heading">
       {{content_panel_name 'icon-group' 'Teams'}}
 
-      {{> csv_controls}}
+      <div class="pull-right">
+        {{> csv_controls}}
+        {{> page_public_status}}
+      </div>
     </div>
 
     {{! TOOLBELT }}
@@ -33,11 +36,14 @@
 
 <template name="team_display">
   <div class="pull-right">
-    {{! Edit icon }}
-    <a href="#" class="edit_team_button" data-teamid="{{_id}}">
-      <i class="icon-edit icon-large"></i>
-    </a>
-    {{! XXX: Add delete button}}
+    <div class="btn-group">
+      <button href="#" class="btn btn-info btn-small edit_team_button" data-teamid="{{_id}}">
+        <i class="icon-edit icon-large"></i>
+      </button>
+      <button href="#" class="btn btn-danger btn-small delete_team_button" data-teamid="{{_id}}">
+        <i class="icon-trash icon-large"></i>
+      </button>
+    </div>
   </div>
 
   {{! Display team data}}

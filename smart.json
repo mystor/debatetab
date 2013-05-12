@@ -9,6 +9,7 @@
     "accounts-ui-bootstrap-dropdown": {},
     "device-detection": {},
     "bootstrap-3": {},
-    "accounts-ui-bootstrap-3": {}
+    "accounts-ui-bootstrap-3": {},
+    "moment": {}
   }
 }

@@ -1,10 +1,10 @@
 <template name="content_panel_name">
   <span>
-    <a class="nav-back visible-phone">
+    <button class="nav-back visible-phone">
       <i class="icon-angle-left"></i>
       <i class="{{icon}}"></i>
       {{name}}
-    </a>
+    </button>
     <span class="hidden-phone">
       <i class="{{icon}}"></i>
       {{name}}
@@ -14,14 +14,14 @@
 
 <template name="page_public_status">
   {{! Private/Public Controls}}
-  {{#if page_admin}}
+  {{#if tournament_admin}}
     {{#if page_public}}
-      <button id="public" class="btn btn-mini btn-success">
+      <button id="page_public_status_btn" class="btn btn-mini btn-success">
         <i class="icon-eye-open"></i> 
         <span><span class="hidden-phone">Public</span></span>
       </button>
     {{else}}
-      <button id="private" class="btn btn-mini btn-danger">
+      <button id="page_public_status_btn" class="btn btn-mini btn-danger">
         <i class="icon-eye-close"></i> 
         <span><span class="hidden-phone">Private</span></span>
       </button>

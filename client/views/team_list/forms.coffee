@@ -73,15 +73,33 @@ Template.team_edit_form.events
     Session.set 'editing', ''
 
   'submit #team_edit_form': (e, tmpl) ->
-    console.log 'submittin!'
     e.preventDefault()
 
+    # Get info from the form
     form = $ tmpl.find '#team_edit_form'
-
-    # Get the form data
+    id = form.data 'id'
     doc = parse_team_form form
 
-    # XXX: Finish parsing
-    console.log doc
+    # Parse the speakers object into the correct identifier type
+    speakers = doc.speakers
+    delete doc.speakers
 
+    for speaker, index in speakers
+      key_prefix = "speakers.#{index}"
 
+      for key, value of speaker
+        key = "#{key_prefix}.#{key}"
+        doc[key] = value
+
+    # Generate the modifier
+    modifier = 
+      $set: doc
+
+    # Perform the update
+    Teams.update
+        _id: id
+      ,
+        modifier
+
+    # Close the editing display
+    Session.set 'editing', ''

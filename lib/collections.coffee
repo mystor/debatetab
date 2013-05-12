@@ -82,3 +82,4 @@ Teams.validation =
       err = _.union err, Teams.validation.validate_speaker speaker
 
     _.union err, Teams.validation.validate_tournament team.tournament
+
