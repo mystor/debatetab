@@ -21,5 +21,8 @@ Handlebars.registerHelper 'item_prop', (pointer, args...) ->
 
   pointer
 
+Handlebars.registerHelper 'encodeURIComponent', (str) ->
+  encodeURIComponent str
+
 Handlebars.registerHelper 'top_nav_class', (page) ->
   if Session.equals 'top_page', page then 'active' else ''

@@ -43,7 +43,7 @@ Template.team_add_form.events
 
     # Get the form data
     doc = parse_team_form form
-    doc.tournament = Session.get('tournament')._id
+    doc.tournament = DebateTab.tournament '_id'
     
     # Validate the form data
     validation_errors = Teams.validation.validate doc

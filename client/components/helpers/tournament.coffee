@@ -6,21 +6,20 @@ Handlebars.registerHelper 'pagePerms', (page) ->
 
 Handlebars.registerHelper 'page_public', (options) ->
   page = Meteor.Router.page()
-  tournament = Session.get 'tournament'
+  tournament = DebateTab.tournament()
   tournament.public[page]
 
 Handlebars.registerHelper 'tournament_admin', (options) ->
-  tournament = Session.get 'tournament'
+  tournament = DebateTab.tournament()
   unless tournament
     return false
 
   Meteor.userId() in tournament.admins
 
 # General helper to get the current tournament
-# Don't use outside of a tournament context where 
-# the session var tournament should be set
+# Don't use outside of a tournament context
 Handlebars.registerHelper 'tournament', ->
-  Session.get 'tournament'
+  DebateTab.tournament()
 
 Handlebars.registerHelper 'side_nav_class', (page) ->
   if Session.equals 'side_page', page then 'active' else ''

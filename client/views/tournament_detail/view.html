@@ -4,27 +4,47 @@
       {{content_panel_name 'icon-trophy' 'Tournament Info'}}
     </div>
     {{#with tournament}}
-    <table>
-      <tr>
-        <th>Name</th>
-        <td>{{name}}</td>
-      </tr>
-      <tr>
-        <th>Slug</th>
-        <td>{{slug}}</td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="col col-lg-6">
+        <table cellpadding="5">
+          <tr>
+            <th>Name</th>
+            <td>{{name}}</td>
+          </tr>
+          <tr>
+            <th>Slug</th>
+            <td>{{slug}}</td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>
+              <a href="//maps.google.com/maps?q={{encodeURIComponent location}}" target="_blank">
+                {{location}}
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col col-lg-6 text-center">
+        <a href="//maps.google.com/maps?q={{encodeURIComponent location}}" target="_blank">
+          <img src="//maps.googleapis.com/maps/api/staticmap?zoom=11&size=150x150&markers={{encodeURIComponent location}}&sensor=false">
+        </a>
+      </div>
+    </div>
     {{/with}}
-    This is the place where I will have information about the tournament as well as a map as to where the tournament will be.
   </div>
 
+  {{> updates_list}}
+</template>
+
+<template name="updates_list">
   <div class="panel primary-bg {{#if navigating}}hidden-phone{{/if}}">
     <div class="panel-heading">
       {{content_panel_name 'icon-comments' 'Latest Updates'}}
     </div>
 
     {{! The form for adding a post }}
-    <form id="post_add_form" action="#">
+    <form id="update_add_form" action="#">
       <div class="input-group">
         <input name="update" type="text" class="input-small" placeholder="Post New Update">
         <span class="input-group-btn">
@@ -35,7 +55,13 @@
       </div>
     </form>
 
-
+    <div class="list-group list-group-flush">
+      {{#each updates}}
+        <div class="list-group-item">
+          <h2>{{text}}</h2>
+          <i>{{created}}</i>
+        </div>
+      {{/each}}
     </div>
 
   </div>

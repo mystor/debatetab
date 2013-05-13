@@ -1,5 +1,6 @@
 @Tournaments = new Meteor.Collection 'tournaments'
 @Teams = new Meteor.Collection 'teams'
+@Updates = new Meteor.Collection 'updates'
 
 Teams.validation = 
   team_fields: [

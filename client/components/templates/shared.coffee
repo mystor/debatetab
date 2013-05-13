@@ -15,7 +15,7 @@ Template.page_public_status.events
   'click #page_public_status_btn': (e, tmpl) ->
     # Load the current state
     page_name = Meteor.Router.page()
-    current_state = Session.get('tournament').public[page_name]
+    current_state = DebateTab.tournament('public')[page_name]
 
     # Create the modifier
     modifier = 
@@ -24,7 +24,7 @@ Template.page_public_status.events
 
     # Modify the tournament
     Tournaments.update
-        _id: Session.get('tournament')._id
+        _id: DebateTab.tournament '_id'
       ,
         modifier
 

@@ -51,3 +51,9 @@ Meteor.publish 'teams', ({t_id, query, page_num}) ->
       skip: page_num * page_size
       limit: page_size
 
+Meteor.publish 'updates', ({t_id}) ->
+  Updates.find
+      tournament: t_id
+    ,
+      limit: 5
+      sort: [['created', 'desc']]

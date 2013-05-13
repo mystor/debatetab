@@ -10,14 +10,14 @@ Deps.autorun ->
   switch page
     when 'tournament_list'
       Meteor.subscribe 'all-tournaments'
+    when 'tournament'
+      if DebateTab.tournament()
+        Meteor.subscribe 'updates',
+          t_id: DebateTab.tournament '_id'
     when 'team_list'
-      if Session.get('tournament')
+      console.log DebateTab.tournament()
+      if DebateTab.tournament()
         Meteor.subscribe 'teams', 
-          t_id: Session.get('tournament')._id
+          t_id: DebateTab.tournament '_id'
           query: Session.get 'search_query'
           page_num: Session.get 'page_num'
-
-# Set the current tournament
-Deps.autorun ->
-  tournament = Tournaments.findOne() #slug: Session.get 't_slug'
-  Session.set 'tournament', tournament

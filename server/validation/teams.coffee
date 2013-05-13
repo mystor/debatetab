@@ -32,6 +32,7 @@ allowedFields = [
   'name'
   'school'
   'speakers'
+  'tournament'
 ]
 allowedSpeakerFields = [
   'name'
@@ -42,6 +43,7 @@ Teams.deny
   insert: (userId, doc) ->
     for key of doc
       unless key in allowedFields
+        console.log "#{userId} submitted bad key: #{key}"
         return true
     false
   update: (userId, doc, fieldNames, modifier) ->

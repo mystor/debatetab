@@ -1,6 +1,3 @@
-Template.tournamentLayout.tournament = ->
-  Session.get 'tournament'
-
 Template.tournamentLayout.sidebar_item = (options) ->
   url = options.fn this
 
