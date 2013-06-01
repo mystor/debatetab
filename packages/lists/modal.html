@@ -1,0 +1,28 @@
+<template name="modal_dialog">
+  {{#if show_modal}}
+    <div class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" aria-hidden="true">&times;</button>
+            {{#isolate}}
+              {{modal_header}}
+            {{/isolate}}
+          </div>
+
+          <div class="modal-body">
+            {{#isolate}}
+              {{modal_body}}
+            {{/isolate}}
+          </div>
+
+          <div class="modal-footer">
+            {{#isolate}}
+              {{modal_footer}}
+            {{/isolate}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

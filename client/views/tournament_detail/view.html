@@ -25,7 +25,8 @@
           </tr>
         </table>
       </div>
-      <div class="col col-lg-6 text-center">
+      {{! Google Maps Image - only display on desktops to save phone space}}
+      <div class="col col-lg-6 text-right hidden-phone">
         <a href="//maps.google.com/maps?q={{encodeURIComponent location}}" target="_blank">
           <img src="//maps.googleapis.com/maps/api/staticmap?zoom=11&size=150x150&markers={{encodeURIComponent location}}&sensor=false">
         </a>
@@ -58,8 +59,15 @@
     <div class="list-group list-group-flush">
       {{#each updates}}
         <div class="list-group-item">
-          <h2>{{text}}</h2>
-          <i>{{created}}</i>
+          <div class="pull-right text-right">
+            <i>{{calendar created}}</i>
+            <br>
+            <div class="btn-group" style="display: none">
+              <button class="btn">h</button>
+              <button class="btn">i</button>
+            </div>
+          </div>
+          <h3 style="margin: 10px 0px">{{text}}</h3>
         </div>
       {{/each}}
     </div>

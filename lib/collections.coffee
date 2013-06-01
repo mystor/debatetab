@@ -1,3 +1,7 @@
+if Meteor.isClient
+  @Counts = new Meteor.Collection 'counts'
+  console.log 'hi'
+
 @Tournaments = new Meteor.Collection 'tournaments'
 @Teams = new Meteor.Collection 'teams'
 @Updates = new Meteor.Collection 'updates'

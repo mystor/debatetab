@@ -1,7 +1,7 @@
 # Helpers
 Template.team_list.helpers
   teams: ->
-    Teams.find {}, limit: 20
+    Teams.find {tournament: DebateTab.tournament '_id'}, limit: 20, sort: ['school', 'name']
   adding: ->
     Session.get 'adding'
   editing: ->

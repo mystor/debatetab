@@ -24,5 +24,11 @@ Handlebars.registerHelper 'item_prop', (pointer, args...) ->
 Handlebars.registerHelper 'encodeURIComponent', (str) ->
   encodeURIComponent str
 
+Handlebars.registerHelper 'fromNow', (date) ->
+  moment(date).fromNow()
+
+Handlebars.registerHelper 'calendar', (date) ->
+  moment(date).calendar()
+
 Handlebars.registerHelper 'top_nav_class', (page) ->
   if Session.equals 'top_page', page then 'active' else ''

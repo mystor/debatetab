@@ -12,12 +12,17 @@ Deps.autorun ->
       Meteor.subscribe 'all-tournaments'
     when 'tournament'
       if DebateTab.tournament()
-        Meteor.subscribe 'updates',
+        Meteor.subscribe 'updates-page',
           t_id: DebateTab.tournament '_id'
+          page_num: Session.get 'page_num'
+          page_size: 5
     when 'team_list'
-      console.log DebateTab.tournament()
       if DebateTab.tournament()
-        Meteor.subscribe 'teams', 
+        Meteor.subscribe 'teams-page', 
           t_id: DebateTab.tournament '_id'
           query: Session.get 'search_query'
           page_num: Session.get 'page_num'
+          page_size: 20
+        Meteor.subscribe 'teams-count',
+          t_id: DebateTab.tournament '_id'
+          query: Session.get 'search_query'
