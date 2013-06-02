@@ -1,0 +1,9 @@
+[submodule "debatetab/packages/meteor-router"]
+	path = debatetab/packages/meteor-router
+	url = https://github.com/tmeasday/meteor-router.git
+[submodule "debatetab/packages/bootstrapless/bootstrap"]
+	path = debatetab/packages/bootstrapless/bootstrap
+	url = https://github.com/twitter/bootstrap.git
+[submodule "debatetab/packages/page-js-ie-support"]
+	path = debatetab/packages/page-js-ie-support
+	url = https://github.com/tmeasday/meteor-page-js-ie-support.git

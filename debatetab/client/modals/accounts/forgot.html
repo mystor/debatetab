@@ -1,0 +1,28 @@
+<template name="forgot_modal">
+  <form id="forgot-form" action="#">
+    <div class="modal-body">
+      {{> modal_err}}
+
+      <div class="control-group">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+          <input type="text" name="email" placeholder="Email">
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Send Recovery Email</button>
+    </div>
+  </form>
+</template>
+
+<template name="forgot_success_modal">
+  <div class="modal-body">
+    <p>We have sent you a recovery email.</p>
+    <p>Click the link in the email you recieved to recover your password</p>
+  </div>
+  <div class="modal-footer">
+    <button id="close_success_modal" type="button" class="btn">Close</button>
+  </div>
+</template>

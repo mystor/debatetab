@@ -1,0 +1,16 @@
+// Logo
+.navbar-brand small {
+  font-size: 60%;
+}
+
+// Login Bar
+@media (min-width: @screen-tablet) {
+  .navbar .account-nav {
+    .pull-right;
+    
+    .dropdown-menu {
+      right: 0;
+      left: auto;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<template name="login_modal">
+  <form id="login-form" action="#">
+    <div class="modal-body">
+      {{> modal_err}}
+      
+      {{! Login Form}}
+      <div class="control-group">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+          <input type="text" id="email" placeholder="Email">
+        </div>
+      </div>
+      <div class="control-group" style="margin-top: 10px;">
+        <label class="control-label" for="password">Password</label>
+        <a id="forgot-password" href="#">(forgot?)</a>
+        <div class="controls">
+          <input type="password" id="password" placeholder="Password">
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" id="create-account" class="btn btn-info pull-left">Create Account</button>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+  </form>
+</template>

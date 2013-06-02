@@ -1,0 +1,32 @@
+<template name="tournamentLayout">
+  <div class="navbar navbar-static-top">
+    <div class="container">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-response-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">DebateTab<small>.net</small></a>
+      
+      <div class="nav-collapse collapse navbar-response-collapse">
+        {{#isolate}}
+          <ul class="nav navbar-nav">
+            <li><a href="{{updatesUrl t_slug}}">Updates</a></li>
+            <li><a href="{{team_pairingsUrl t_slug round 'teams'}}">Pairings</a></li>
+            <li><a href="{{resultsUrl t_slug 'teams'}}">Results</a></li>
+            <li><a href="{{teamsUrl t_slug}}">Set Up</a></li>
+          </ul>
+        {{/isolate}}
+
+        {{! Account Navigation}}
+        {{> accountNav}}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {{#isolate}}
+      {{renderPage}}
+    {{/isolate}}
+  </div>
+</template>
