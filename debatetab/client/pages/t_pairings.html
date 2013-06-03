@@ -1,0 +1,73 @@
+<template name="t_pairings">
+
+  {{! ROUND SELECTION & SEARCH BOX}}
+  {{> pairings_header}}
+
+  {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
+  <div style="height: 40px; margin-top: 10px;">
+    <div class="control-bar input-group" data-spy="affix" data-offset-top="120" data-offset-bottom="270">
+      <span class="input-group-addon">
+        <i class="icon-wrench"></i>
+      </span>
+
+      {{> pairings_default_controlbar}}
+    </div>
+  </div>
+
+  {{! MOBILE VIEW SELECTOR}}
+  {{#isolate}}
+    <div class="nav nav-tabs nav-justified visible-sm" style="margin-top: 10px;">
+      <li class="{{team_active}}"><a id="pairings-select-teams" href="#">Teams</a></li>
+      <li class="{{judge_active}}"><a id="pairings-select-judges" href="#">Judges</a></li>
+    </div>
+  {{/isolate}}
+
+  {{! PAIRINGS DISPLAY}}
+  <table class="table table-pairings">
+    <thead>
+      <tr>
+        <th>Room</th>
+        <th>Teams</th>
+        <th>Judges</th>
+      </tr>
+    </thead>
+    {{#isolate}}
+      {{#each pairings}}
+        <tr>
+          {{! Room Name}}
+          <td>
+            {{room_name room}}
+            {{#if room_find_url room}}
+            <p style="text-align: center;">
+              <a href="{{room_find_url room}}">
+                <i class="icon-map-marker icon-2x"></i>
+              </a>
+            </p>
+            {{/if}}
+          </td>
+
+          {{! Teams}}
+          <td class="{{team_class}}">
+            {{#each teams}}
+              <div data-id="{{this}}">
+                <span class="label label-success">Pos</span>
+                [{{team_school this}}]
+                {{team_name this}}
+              </div>
+            {{/each}}
+          </td>
+          <td class="{{judge_class}}">
+            {{#each judges}}
+              <div class="{{chair_class this ../chair}}" data-id="{{this}}">
+                [{{judge_school this}}]
+                {{judge_name this}}
+              </div>
+            {{/each}}
+            <div class="empty-cell">empty</div>
+          </td>
+        </tr>
+      {{/each}}
+    {{/isolate}}
+  </table>
+
+</template>

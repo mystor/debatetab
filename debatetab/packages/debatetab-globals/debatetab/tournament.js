@@ -20,7 +20,7 @@ _.extend(DebateTab, {
      * Get the current round
      */
     if (Session.get('round')) {
-      return parseInt(Session.get('round'), 10);
+      return Session.get('round');
     } else {
       // Default to getting the current round from the tournament
       return DebateTab.tournament('round');

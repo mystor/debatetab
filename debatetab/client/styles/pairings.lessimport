@@ -1,3 +1,6 @@
+.judge-chair {
+  font-weight: bold;
+}
 .empty-cell {
   border: 3px dotted @gray-light;
   border-radius: @border-radius-base;

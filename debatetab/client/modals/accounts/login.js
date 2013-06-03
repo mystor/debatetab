@@ -1,5 +1,5 @@
 Modal.Login = {
-  title: 'Login/Register',
+  title: 'Login',
   template: 'login_modal'
 };
 

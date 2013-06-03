@@ -2,48 +2,44 @@ var load_tournament = function(t_slug) {
   Session.set('t_slug', t_slug);
 };
 
-var load_round = function(t_slug, round) {
+var load_round = function(t_slug, _round) {
   load_tournament(t_slug);
 
-  if (round) {
+  var round = parseInt(_round, 10);
+
+  if ((!_.isNaN(round)) && round > 0)  {
     Session.set('round', round);
   } else {
-    // Get the current round
-    round = DebateTab.current_round();
-    Session.set('round', round);
+    alert('wtf?');
+    alert(round);
+    // Redirect to tournament overview
+    Meteor.defer(function() {
+      Meteor.Router.to('overview', t_slug);
+    });
   }
 };
 
 // Define the routes
 Meteor.Router.add({
-  '/': { // Home, display the list of tournaments
+  '/': { // TODO: Home, display the list of tournaments
     as: 'tournament_list',
     to: 'tournament_list'
   },
-  '/t/:_slug': { // Display updates for tournament
-    as: 'updates',
-    to: 't_updates',
+  '/t/:_slug': { // TODO: Display updates for tournament
+    as: 'overview',
+    to: 't_overview',
     and: load_tournament
   },
-  '/t/:_slug/pairings/:_round?': {
-    to: function(_slug, _round) {
-      Meteor.defer(function() {
-        Meteor.Router.to('team_pairings', _slug, _round);
-      });
-      return '';
+  // TODO: Add redirecting to current round for when no round is defined
+  '/t/:_slug/pairings/:_round': { // TODO: Display pairings for round
+    as: 'pairings',
+    to: 't_pairings',
+    and: function(_slug, _round) {
+      load_round(_slug, _round);
+      Session.set('pairings_show', 'teams');
     }
   },
-  '/t/:_slug/pairings/team/:_round?': {
-    as: 'team_pairings',
-    to: 't_pairings_team',
-    and: load_round
-  },
-  '/t/:_slug/pairings/judge/:_round?': {
-    as: 'judge_pairings',
-    to: 't_pairings_judge',
-    and: load_round
-  },
-  '/t/:_slug/results': {
+  '/t/:_slug/results': { // Redirect to team results tab
     to: function(_slug) {
       Meteor.defer(function () {
         Meteor.Router.to('results', _slug, 'team');
@@ -51,28 +47,22 @@ Meteor.Router.add({
       return '';
     }
   },
-  '/t/:_slug/results/:_round': {
-    as: 'results',
-    to: function(_slug, _round) {
-      var tmpl = '';
-      if (_round === 'team') {
-        load_tournament(_slug);
-
-        tmpl = 't_team_results';
-      } else if (_round === 'speaker') {
-        load_tournament(_slug);
-
-        tmpl = 't_speaker_results';
-      } else {
-        load_round(_slug, _round);
-
-        tmpl = 't_results';
-      }
-
-      return tmpl;
-    }
+  '/t/:_slug/results/team': { // TODO: Display team tab
+    as: 'team_results',
+    to: 't_team_results',
+    and: load_tournament
   },
-  '/t/:_slug/pairing/:_id': { // Display individual pairing
+  '/t/:_slug/results/speaker': { // TODO: Display speaker tab
+    as: 'speaker_results',
+    to: 't_speaker_results',
+    and: load_tournament
+  },
+  '/t/:_slug/results/:_round': { // TODO: Display results
+    as: 'results',
+    to: 't_results',
+    and: load_round
+  },
+  '/t/:_slug/pairing/:_id': { // TODO: Display individual pairing
     as: 'pairing',
     to: 't_pairing',
     and: function(_slug, _id) {
@@ -80,30 +70,19 @@ Meteor.Router.add({
       Session.set('pairing', _id);
     }
   },
-  '/t/:_slug/ballot/:_guid': {
+  '/t/:_slug/ballot/:_guid': { // TODO: Allow for modifying of ballot
     as: 'ballot',
     to: 't_ballot',
     and: function(_slug, _guid) {
       load_tournament(_slug);
       Session.set('ballot_key', _guid);
     }
-  },
-  '/t/:_slug/team_tab': {
-    as: 'team_tab',
-    to: 't_team_tab',
-    and: load_tournament
-  },
-  '/t/:_slug/speaker_tab': {
-    as: 'speaker_tab',
-    to: 't_speaker_tab',
-    and: load_tournament
   }
 });
 
 Meteor.Router.beforeRouting = function() {
-  Session.set('search', '');
   Modal.hide();
+  Session.set('search', '');
   Session.set('t_slug', '');
   Session.set('round', 0);
 };
-

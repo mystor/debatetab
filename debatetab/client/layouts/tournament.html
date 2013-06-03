@@ -12,10 +12,18 @@
       <div class="nav-collapse collapse navbar-response-collapse">
         {{#isolate}}
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{{updatesUrl t_slug}}">Updates</a></li>
-            <li class="disabled"><a href="{{team_pairingsUrl t_slug round 'team'}}">Pairings</a></li>
-            <li><a href="{{resultsUrl t_slug 'team'}}">Results</a></li>
-            <li><a href="{{teamsUrl t_slug}}">Set Up</a></li>
+            <li class="active">
+              <a href="{{updatesUrl t_slug}}">Updates</a>
+            </li>
+            <li>
+              <a href="{{pairingsUrl t_slug round}}">Pairings</a>
+            </li>
+            <li>
+              <a href="{{team_resultsUrl t_slug}}">Results</a>
+            </li>
+            <li>
+              <a href="#">Set Up</a>
+            </li>
           </ul>
         {{/isolate}}
 
