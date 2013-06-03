@@ -102,6 +102,8 @@ Meteor.Router.add({
 
 Meteor.Router.beforeRouting = function() {
   Session.set('search', '');
-  Session.set('modal', {});
+  Modal.hide();
+  Session.set('t_slug', '');
+  Session.set('round', 0);
 };
 

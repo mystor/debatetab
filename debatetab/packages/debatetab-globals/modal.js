@@ -8,6 +8,7 @@ Modal = {
   get: function() {
     return Session.get('modal');
   },
+
   /*
    * Error Management
    */
@@ -37,32 +38,6 @@ Modal = {
   helpers: {
     consume_err: function() {
       return Modal.consume_err();
-    }
-  }
-};
-DebateTab = {
-  /**
-   * Get a value from the current tournament
-   * Will return the current tournament if no value is passed
-   */
-  tournament: function(key) {
-    var tournament = Tournaments.findOne({
-      slug: Session.get('t_slug')
-    });
-
-    if (tournament) {
-      if (key) {
-        return tournament[key];
-      } else {
-        return tournament;
-      }
-    }
-  },
-  round: function() {
-    if (Session.get('round')) {
-      return parseInt(Session.get('round'), 10);
-    } else {
-      return DebateTab.tournament('round');
     }
   }
 };
