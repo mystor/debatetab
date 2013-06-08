@@ -37,6 +37,18 @@ Meteor.Router.add({
     and: function(_slug, _round) {
       load_round(_slug, _round);
       Session.set('pairings_show', 'teams');
+      Session.set('swapping', false);
+      Session.set('holding', {});
+    }
+  },
+  '/t/:_slug/pairings/:_round/autopair': {
+    as: 'autopair',
+    to: 't_autopair',
+    and: function(_slug, _round) {
+      load_round(_slug, _round);
+      Session.setDefault('TeamStrategy', 0);
+      Session.setDefault('JudgeStrategy', 0);
+      Session.setDefault('RoomStrategy', 0);
     }
   },
   '/t/:_slug/results': { // Redirect to team results tab

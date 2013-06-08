@@ -10,7 +10,13 @@
         <i class="icon-wrench"></i>
       </span>
 
-      {{> pairings_default_controlbar}}
+      {{#isolate}}
+        {{#if swapping}}
+          {{> pairings_swap_controlbar}}
+        {{else}}
+          {{> pairings_default_controlbar}}
+        {{/if}}
+      {{/isolate}}
     </div>
   </div>
 
@@ -36,20 +42,22 @@
         <tr>
           {{! Room Name}}
           <td>
-            {{room_name room}}
-            {{#if room_find_url room}}
-            <p style="text-align: center;">
-              <a href="{{room_find_url room}}">
-                <i class="icon-map-marker icon-2x"></i>
-              </a>
-            </p>
-            {{/if}}
+            <div class="room" data-id="{{room}}" data-pairingId="{{_id}}">
+              {{room_name room}}
+              {{#if room_find_url room}}
+              <p style="text-align: center;">
+                <a href="{{room_find_url room}}">
+                  <i class="icon-map-marker icon-2x"></i>
+                </a>
+              </p>
+              {{/if}}
+            </div>
           </td>
 
           {{! Teams}}
           <td class="{{team_class}}">
             {{#each teams}}
-              <div data-id="{{this}}">
+              <div class="team" data-id="{{this}}" data-pairingId="{{../_id}}">
                 <span class="label label-success">Pos</span>
                 [{{team_school this}}]
                 {{team_name this}}
@@ -58,12 +66,14 @@
           </td>
           <td class="{{judge_class}}">
             {{#each judges}}
-              <div class="{{chair_class this ../chair}}" data-id="{{this}}">
+              <div class="judge {{chair_class this ../chair}}" data-id="{{this}}" data-pairingId="{{../_id}}">
                 [{{judge_school this}}]
                 {{judge_name this}}
               </div>
             {{/each}}
-            <div class="empty-cell">empty</div>
+            {{#if holding_judge}}
+            <div class="empty-cell empty-judge" data-pairingid="{{_id}}">empty</div>
+            {{/if}}
           </td>
         </tr>
       {{/each}}

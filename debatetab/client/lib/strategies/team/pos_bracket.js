@@ -149,13 +149,22 @@ var pairings_from_pos_grps = function(pos_grps, room_size) {
  */
 DebateTab.registerTeamStrategy({
   name: 'Pos-Bracket',
-  description: 'Allocates teams into brackets by point totals\n'+
-               'Promotes from top of bracket\n'+
-               'Chooses brackets to maximise position diversity\n'+
-               'Ignores school\n'+
-               'Ignores scratches',
+  description: '* Allocates teams into brackets by point totals\n'+
+               '* Promotes from top of bracket\n'+
+               '* Chooses brackets to maximise position diversity\n'+
+               '* Ignores school\n'+
+               '* Ignores scratches',
 
-  algorithm: function(tournament, round, teams) {
+  validate: function() {
+    if (DebateTab.teamCount() % DebateTab.tournament('room_size') !== 0) {
+      throw 'The team count must be an even multiple of the room size';
+    }
+  },
+
+  algorithm: function(teams) {
+    var tournament = DebateTab.tournament();
+    var round = DebateTab.round();
+
     var room_size = tournament.room_size;
     var t_id = tournament._id;
 

@@ -1,0 +1,35 @@
+<template name="pairings_publish_modal">
+  <div class="modal-body">
+    {{> modal_err}}
+
+    <div class="control-group">
+      <label class="control-label" for="publish-pairings">Publish Pairings</label>
+      <p style="display: none; line-height: 13px"><small>One your pairings have been published, they will be avaliable for viewing online through the DebateTab.net website. Debaters &amp; Judges will be able to visit the pairings page and see which room they will be debating in</small></p>
+      <div class="controls">
+        {{#if published}}
+          <button name="publish-pairings" type="button" class="btn btn-block btn-success">
+            <i class="icon-eye-open"></i> Public
+          </button>
+        {{else}}
+          <button name="publish-pairings" type="button" class="btn btn-block btn-danger">
+            <i class="icon-eye-close"></i> Private
+          </button>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="control-group" style="margin-top: 10px">
+      <label class="control-label" for="send-eballots">e-Ballots</label>
+      <div class="alert alert-warning" style="line-height: 13px;"><small>All e-ballot URLs previously sent this round will be disabled</small></div>
+      <div class="contols">
+        <button name="send-eballots" type="button" class="btn btn-block btn-info">
+          <i class="icon-envelope-alt"></i> Send e-Ballots
+        </button>
+      </div>
+
+    
+  </div>
+  <!--<div class="modal-footer">
+    <button class="btn btn-primary">Done</button>
+  </div>-->
+</template>

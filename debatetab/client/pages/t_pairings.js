@@ -20,20 +20,85 @@ Template.t_pairings.helpers({
   judge_school: function(_id) {
     return Judges.findOne({_id: _id}).school;
   },
-  // The list or pairings which we are using
+  /*
+   * LIST OF PAIRINGS
+   */
   pairings: function() {
-    return Pairings.find({
+    var $regex = {
+      $regex: Meteor.Regex.clean(Session.get('search')),
+      $options: 'i'
+    };
+    // Find any teams which match the search query
+    var teams = _.map(Teams.find({
       tournament: DebateTab.tournament('_id'),
-      round: DebateTab.round()
+      $or: [
+        {name: $regex},
+        {school: $regex},
+        {
+          speakers: {
+            $elemMatch: {
+              name: $regex
+            }
+          }
+        }
+      ]
+    }).fetch(), function(team) {return team._id;});
+
+    var rooms = _.map(Rooms.find({
+      tournament: DebateTab.tournament('_id'),
+      name: $regex
+    }).fetch(), function(room) {return room._id;});
+
+    var judges = _.map(Judges.find({
+      tournament: DebateTab.tournament('_id'),
+      $or: [
+        {name: $regex},
+        {school: $regex}
+      ]
+    }).fetch(), function(judge) {return judge._id;});
+
+    var pairings = Pairings.find({
+      tournament: DebateTab.tournament('_id'),
+      round: DebateTab.round(),
+      $or: [
+        {
+          $where: function() {
+            return !_.isEmpty(_.intersection(this.teams, teams));
+          }
+        },
+        {
+          $where: function() {
+            return !_.isEmpty(_.intersection(this.judges, judges));
+          }
+        },
+        {
+          room: {
+            $in: rooms
+          }
+        }
+      ]
     });
+    // console.log(pairings.fetch());
+    return pairings;
   },
-  // Make chairs bold
+
+  swapping: function() {
+    return Session.get('swapping');
+  },
+  holding_judge: function() {
+    var holding = Session.get('holding');
+    return (Session.get('swapping') && 
+            !_.isEmpty(holding) && 
+            holding.type === 'judge' &&
+            !holding.chair);
+  },
+
+  // MAKE CHAIRS BOLD
   chair_class: function(judge, chair) {
     if (judge === chair) {
       return 'judge-chair';
     }
   },
-
   /*
    * MOBILE DISPLAY ONLY TEAMS/JUDGES
    * BASED ON SESSION VARAIBLE
@@ -45,7 +110,7 @@ Template.t_pairings.helpers({
     return Session.equals('pairings_show', 'judges') ? '' : 'hidden-sm';
   },
   team_active: function() {
-    return Session.equals('pairings_show', 'teams') ? 'active': '';
+    return Session.equals('pairings_show', 'teams') ? 'active' : '';
   },
   judge_active: function() {
     return Session.equals('pairings_show', 'judges') ? 'active': '';
@@ -53,6 +118,154 @@ Template.t_pairings.helpers({
 });
 
 Template.t_pairings.events({
+  /*
+   * SWAPPING - DETECT CLICKS ON PAIRING ELEMENTS
+   */
+  'click .room, tap .room': function(e, tmpl) {
+    e.preventDefault();
+
+    if (!Session.get('swapping')) {
+      return;
+    }
+
+    var element = e.currentTarget;
+    var _id = element.dataset.id;
+    var pairing_id = element.dataset.pairingid;
+
+    var holding = Session.get('holding');
+    if (_.isEmpty(holding)) {
+      Session.set('holding', {
+        _id: _id,
+        pairing: pairing_id,
+        type: 'room'
+      });
+    } else if (holding.type === 'room') {
+      var a_pairing = Pairings.findOne({_id: pairing_id});
+      var b_pairing = Pairings.findOne({_id: holding.pairing});
+      
+      Pairings.update({_id: a_pairing._id}, {$set: {room: holding._id}});
+      Pairings.update({_id: b_pairing._id}, {$set: {room: _id}});
+
+      Session.set('holding', {});
+    }
+  },
+  'click .team, tap .team': function(e, tmpl) {
+    e.preventDefault();
+
+    if (!Session.get('swapping')) {
+      return;
+    }
+
+    var element = e.currentTarget;
+    var _id = element.dataset.id;
+    var pairing_id = element.dataset.pairingid;
+
+    var holding = Session.get('holding');
+    if (_.isEmpty(holding)) {
+      Session.set('holding', {
+        _id: _id,
+        pairing: pairing_id,
+        type: 'team'
+      });
+    } else if (holding.type === 'team') {
+      var a_pairing = Pairings.findOne({_id: pairing_id});
+      var b_pairing = Pairings.findOne({_id: holding.pairing});
+      
+      var a_index = _.indexOf(a_pairing.teams, _id);
+      var b_index = _.indexOf(b_pairing.teams, holding._id);
+
+      var a_update = {
+        $set: {}
+      };
+      a_update.$set['teams.'+a_index] = holding._id;
+
+      var b_update = {
+        $set: {}
+      };
+      b_update.$set['teams.'+b_index] = _id;
+
+      Pairings.update({_id: a_pairing._id}, a_update);
+      Pairings.update({_id: b_pairing._id}, b_update);
+
+      Session.set('holding', {});
+    }
+  },
+  'click .judge, tap .judge': function(e, tmpl) {
+    e.preventDefault();
+
+    if (!Session.get('swapping')) {
+      return;
+    }
+
+    var element = e.currentTarget;
+    var _id = element.dataset.id;
+    var pairing_id = element.dataset.pairingid;
+
+    var classes = element.className.split(' ');
+    var chair = _.indexOf(classes, 'judge-chair') !== -1;
+
+    var holding = Session.get('holding');
+    if (_.isEmpty(holding)) {
+      Session.set('holding', {
+        _id: _id,
+        pairing: pairing_id,
+        type: 'judge',
+        chair: chair
+      });
+    } else if (holding.type === 'judge') {
+      var a_pairing = Pairings.findOne({_id: pairing_id});
+      var b_pairing = Pairings.findOne({_id: holding.pairing});
+
+      var a_index = _.indexOf(a_pairing.judges, _id);
+      var b_index = _.indexOf(b_pairing.judges, holding._id);
+
+      var a_update = {
+        $set: {}
+      };
+      a_update.$set['judges.'+a_index] = holding._id;
+      if (chair) {
+        a_update.$set.chair = holding._id;
+      }
+
+      var b_update = {
+        $set: {}
+      };
+      b_update.$set['judges.'+b_index] = _id;
+      if (holding.chair) {
+        b_update.$set.chair = _id;
+      }
+
+      Pairings.update({_id: a_pairing._id}, a_update);
+      Pairings.update({_id: b_pairing._id}, b_update);
+
+      Session.set('holding', {});
+    }
+  },
+  'click .empty-judge, tap .empty-judge': function(e, tmpl) {
+    e.preventDefault();
+
+    var element = e.currentTarget;
+    var pairing_id = element.dataset.pairingid;
+
+    var holding = Session.get('holding');
+    var a_pairing = Pairings.findOne({_id: pairing_id});
+    var b_pairing = Pairings.findOne({_id: holding.pairing});
+
+    var b_index = _.indexOf(b_pairing.judges, holding._id);
+
+    var a_update = {
+      $push: { judges: holding._id }
+    };
+    var b_update = {
+      $pull: { judges: holding._id }
+    };
+
+    Pairings.update({_id: b_pairing._id}, b_update);
+    Pairings.update({_id: a_pairing._id}, a_update);
+    
+    Session.set('holding', {});
+  },
+  // MOBILE ONLY: switch between showing teams and judges
   'click #pairings-select-teams, tap #pairings-select-teams': function(e, tmpl) {
     e.preventDefault();
 
@@ -62,4 +275,4 @@ Template.t_pairings.events({
     e.preventDefault();
     Session.set('pairings_show', 'judges');
   }
-})
+});

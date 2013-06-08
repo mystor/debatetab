@@ -1,17 +1,22 @@
 <template name="pairings_swap_controlbar">
   <div class="btn-group btn-group-justified">
-    <a href="#" class="btn btn-info disabled" style="width: 100%; text-align: left;">
-      {{! TODO: Show the icon for the current held type}}
-      <i class="icon-group"></i>
-      [QDU] IsThereAnything
+    <a href="#" class="btn btn-info disabled" style="width: 100%; text-align: left; opacity: 1;">
+      {{#if is_holding}}
+        <i class="{{held_icon}}"></i> 
+        {{held_name}}
+      {{else}}
+        <em>Choose first target&hellip;</em>
+      {{/if}}
     </a>
-    <a href="#" class="btn btn-danger">
-      <i class="icon-remove"></i>
-      <span class="ctrl-dscr">
-        Drop
-      </span>
-    </a>
-    <a href="#" class="btn btn-primary">
+    {{#if is_holding}}
+      <a id="drop-ctrl" href="#" class="btn btn-warning">
+        <i class="icon-remove"></i>
+        <span class="ctrl-dscr">
+          Drop
+        </span>
+      </a>
+    {{/if}}
+    <a id="done-ctrl" href="#" class="btn btn-primary">
       <i class="icon-check"></i>
       <span class="ctrl-dscr">
         Done

@@ -10,6 +10,10 @@ Handlebars.registerHelper('round', function() {
   return DebateTab.round();
 });
 
+Handlebars.registerHelper('isAdmin', function() {
+  return DebateTab.isAdmin();
+});
+
 Handlebars.registerHelper('times', function(count, options) {
   var out = '';
 
@@ -22,3 +26,4 @@ Handlebars.registerHelper('times', function(count, options) {
 
   return out;
 });
+
