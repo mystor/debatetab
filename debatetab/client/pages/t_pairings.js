@@ -20,6 +20,13 @@ Template.t_pairings.helpers({
   judge_school: function(_id) {
     return Judges.findOne({_id: _id}).school;
   },
+
+  position_slug: function(position) {
+    return DebateTab.tournament('positions')[position].slug;
+  },
+  position_class: function(position) {
+    return DebateTab.tournament('positions')[position].prop ? 'label-info' : 'label-danger';
+  },
   /*
    * LIST OF PAIRINGS
    */
@@ -103,12 +110,6 @@ Template.t_pairings.helpers({
    * MOBILE DISPLAY ONLY TEAMS/JUDGES
    * BASED ON SESSION VARAIBLE
    */
-  team_class: function() {
-    return Session.equals('pairings_show', 'teams') ? '' : 'hidden-sm';
-  },
-  judge_class: function() {
-    return Session.equals('pairings_show', 'judges') ? '' : 'hidden-sm';
-  },
   team_active: function() {
     return Session.equals('pairings_show', 'teams') ? 'active' : '';
   },
@@ -121,7 +122,7 @@ Template.t_pairings.events({
   /*
    * SWAPPING - DETECT CLICKS ON PAIRING ELEMENTS
    */
-  'click .room, tap .room': function(e, tmpl) {
+  'click .room': function(e, tmpl) {
     e.preventDefault();
 
     if (!Session.get('swapping')) {
@@ -149,7 +150,7 @@ Template.t_pairings.events({
       Session.set('holding', {});
     }
   },
-  'click .team, tap .team': function(e, tmpl) {
+  'click .team': function(e, tmpl) {
     e.preventDefault();
 
     if (!Session.get('swapping')) {
@@ -190,7 +191,7 @@ Template.t_pairings.events({
       Session.set('holding', {});
     }
   },
-  'click .judge, tap .judge': function(e, tmpl) {
+  'click .judge': function(e, tmpl) {
     e.preventDefault();
 
     if (!Session.get('swapping')) {
@@ -241,7 +242,7 @@ Template.t_pairings.events({
       Session.set('holding', {});
     }
   },
-  'click .empty-judge, tap .empty-judge': function(e, tmpl) {
+  'click .empty-judge': function(e, tmpl) {
     e.preventDefault();
 
     var element = e.currentTarget;
@@ -266,13 +267,36 @@ Template.t_pairings.events({
     Session.set('holding', {});
   },
   // MOBILE ONLY: switch between showing teams and judges
-  'click #pairings-select-teams, tap #pairings-select-teams': function(e, tmpl) {
+  'click #pairings-select-teams': function(e, tmpl) {
     e.preventDefault();
 
     Session.set('pairings_show', 'teams');
   },
-  'click #pairings-select-judges, tap #pairings-select-judges': function(e, tmpl) {
+  'click #pairings-select-judges': function(e, tmpl) {
     e.preventDefault();
     Session.set('pairings_show', 'judges');
+  }
+});
+
+Template.t_pairings.rendered = function() {
+  // Make the toolbar stick to the top of the screen
+  $('.control-bar').each(function() {
+    $(this).affix({
+      offset: {
+        top: 120
+      }
+    });
+  });
+};
+
+Deps.autorun(function() {
+  if (Meteor.Router.page() === 't_pairings') {
+    if (Session.equals('pairings_show', 'teams')) {
+      $('#pairings-table').removeClass('show-judges');
+      $('#pairings-table').addClass('show-teams');
+    } else {
+      $('#pairings-table').removeClass('show-teams');
+      $('#pairings-table').addClass('show-judges');
+    }
   }
 });

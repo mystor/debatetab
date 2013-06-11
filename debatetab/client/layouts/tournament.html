@@ -22,7 +22,7 @@
               <a href="{{team_resultsUrl t_slug}}">Results</a>
             </li>
             <li>
-              <a href="#">Set Up</a>
+              <a href="#swapping">Set Up</a>
             </li>
           </ul>
         {{/isolate}}
@@ -34,7 +34,15 @@
   </div>
   <div class="container">
     {{#isolate}}
-      {{renderPage}}
+      {{#if tournamentLoaded}}
+        {{renderPage}}
+      {{else}}
+        <div class="text-center">
+          <i class="icon-spinner icon-spin icon-4x"></i><br>
+          <h3>Loading Tournament Information...</h3>
+
+        </div>
+      {{/if}}
     {{/isolate}}
   </div>
   <hr />

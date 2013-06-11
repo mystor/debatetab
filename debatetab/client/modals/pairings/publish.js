@@ -5,6 +5,27 @@ Modal.PairingsPublish = {
 
 Template.pairings_publish_modal.helpers({
   published: function() {
-    return true;
+    var published = DebateTab.tournament('published');
+    if (published) {
+      return published['pairings-'+DebateTab.round()];
+    }
+  }
+});
+
+Template.pairings_publish_modal.events({
+  'click button[name=publish-pairings]': function(e, tmpl) {
+    e.preventDefault();
+
+    var published = DebateTab.tournament('published');
+    if (published) {
+      var new_state = !published['pairings-'+DebateTab.round()];
+      var update = {
+        $set: {
+        }
+      };
+      update.$set['published.pairings-'+DebateTab.round()] = new_state;
+
+      Tournaments.update({_id: DebateTab.tournament('_id')}, update);
+    }
   }
 });

@@ -5,7 +5,7 @@ Modal.Login = {
 
 Template.login_modal.helpers(Modal.helpers);
 Template.login_modal.events({
-  'tap #forgot-password, click #forgot-password': function (e, tmpl) {
+  'click #forgot-password': function (e, tmpl) {
     e.preventDefault();
 
     Modal.show(Modal.Forgot);
@@ -35,7 +35,7 @@ Template.login_modal.events({
       template: 'progress_modal'
     });
   },
-  'tap #create-account, click #create-account': function (e, tmpl) {
+  'click #create-account': function (e, tmpl) {
     Modal.show(Modal.Register);
   }
 });

@@ -1,6 +1,6 @@
 <template name="pairings_default_controlbar">
   <div class="btn-group btn-group-justified">
-    <a id="edit-ctrl" href="#" class="btn btn-success">
+    <a id="manual-ctrl" href="#" class="btn btn-success">
       {{! Manual Edit Button}}
       <i class="icon-pencil"></i>
       <span class="ctrl-dscr">
@@ -21,12 +21,22 @@
         Swap
       </span>
     </a>
-    <a id="publish-ctrl" href="#" class="btn btn-danger">
-      {{! Public/Private Button}}
-      <i class="icon-eye-close"></i>
-      <span class="ctrl-dscr">
-        Private
-      </span>
-    </a>
+    {{#if published}}
+      <a id="publish-ctrl" href="#" class="btn btn-success">
+        {{! Public Button}}
+        <i class="icon-eye-open"></i>
+        <span class="ctrl-dscr">
+          Public
+        </span>
+      </a>
+    {{else}}
+      <a id="publish-ctrl" href="#" class="btn btn-danger">
+        {{! Public/Private Button}}
+        <i class="icon-eye-close"></i>
+        <span class="ctrl-dscr">
+          Private
+        </span>
+      </a>
+    {{/if}}
   </div>
 </template>

@@ -31,12 +31,12 @@ Template.pairings_swap_controlbar.helpers({
 });
 
 Template.pairings_swap_controlbar.events({
-  'click #drop-ctrl, tap #drop-ctrl': function(e, tmpl) {
+  'click #drop-ctrl': function(e, tmpl) {
     e.preventDefault();
 
     Session.set('holding', {});
   },
-  'click #done-ctrl, tap #done-ctrl': function(e, tmpl) {
+  'click #done-ctrl': function(e, tmpl) {
     e.preventDefault();
 
     Session.set('holding', {});

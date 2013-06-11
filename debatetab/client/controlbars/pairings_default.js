@@ -1,14 +1,26 @@
+Template.pairings_default_controlbar.helpers({
+  published: function() {
+    var published = DebateTab.tournament('published');
+    if (published) {
+      return published['pairings-'+DebateTab.round()];
+    }
+  }
+});
+
 Template.pairings_default_controlbar.events({
-  'click #swap-ctrl, tap #swap-ctrl': function(e, tmpl) {
+  'click #swap-ctrl': function(e, tmpl) {
     e.preventDefault();
 
     Session.set('swapping', true);
   },
-  'click #publish-ctrl, tap #publish-ctrl': function(e, tmpl) {
+  'click #publish-ctrl': function(e, tmpl) {
     e.preventDefault();
 
-    console.log('ha');
-    console.log(Modal.PairingsPublish);
     Modal.show(Modal.PairingsPublish);
+  },
+  'click #manual-ctrl': function(e, tmpl) {
+    e.preventDefault();
+
+    Modal.show(Modal.PairingsManual);
   }
 });

@@ -1,12 +1,17 @@
+var getStrategy = function(type) {
+  return DebateTab.Strategies[type][Session.get(type+'Strategy')];
+};
+
 Template.t_autopair.helpers({
   strategies: function(type) {
     return DebateTab.Strategies[type];
   },
   strategy: function(type) {
-    return DebateTab.Strategies[type][Session.get(type+'Strategy')];
+    return getStrategy(type);
   },
   validate_strategy: function(type) {
-    var validation = DebateTab.Strategies[type][Session.get(type+'Strategy')].validate;
+    var validation = getStrategy(type).validate;
+
     if (validation) {
       try {
         validation();

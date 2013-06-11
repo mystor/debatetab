@@ -25,10 +25,20 @@ Meteor.publish('tournament', function(_slug) {
   });
 });
 
-Meteor.publish('all-updates', function(t_id) {
-  return Updates.find({
-    tournament: t_id
+Meteor.publish('full-tournament', function(_slug) {
+  var tournament_cursor = Tournaments.find({
+    slug: _slug
   });
+
+  var tournament = tournament_cursor.fetch()[0];
+  if (tournament) {
+    return [
+      tournament_cursor,
+      Teams.find({tournament: tournament._id}),
+      Judges.find({tournament: tournament._id}),
+      Rooms.find({tournament: tournament._id})
+    ];
+  }
 });
 
 Meteor.publish('recent-updates', function(t_id) {
@@ -56,7 +66,8 @@ Meteor.publish('all-judges', function(t_id) {
   var fields = {
     _id: 1,
     school: 1,
-    name: 1
+    name: 1,
+    tournament: 1
   };
 
   if (isAdmin(t_id, this.userId)) {
@@ -65,4 +76,20 @@ Meteor.publish('all-judges', function(t_id) {
   }
 
   return Judges.find({ tournament: t_id }, { fields: fields });
+});
+
+Meteor.publish('all-pairings', function(t_id, round) {
+  var fields = {
+    _id: 1,
+    teams: 1,
+    judges: 1,
+    room: 1,
+    chair: 1,
+    round: 1,
+    tournament: 1
+  };
+
+  var pairings = Pairings.find({ tournament: t_id, round: round }, { fields: fields });
+
+  return pairings;
 });

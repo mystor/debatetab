@@ -44,12 +44,12 @@ var compare_teams_by_score = function(a, b) {
 var compare_teams_by_position_frequency = function(pos) {
   return function(a, b) {
     var a_query = {
-      tournament: t_id
+      tournament: DebateTab.tournament('_id')
     };
     a_query['teams.'+pos] = a._id;
 
     var b_query = {
-      tournament: t_id
+      tournament: DebateTab.tournament('_id')
     };
     b_query['teams.'+pos] = b._id;
 
@@ -71,7 +71,7 @@ var generate_brackets = function(teams) {
 
     // Add the team to the correct bracket
     brackets[points] = brackets[points] || [];
-    brackets[points] = team;
+    brackets[points].push(team);
   });
 
   return brackets;
@@ -123,7 +123,7 @@ var pairings_from_pos_grps = function(pos_grps, room_size) {
     for (var pos=0; pos<room_size; pos++) {
       // Find the first avaliable team in `pos_grp`
       // Set that as the team in this position
-      var team;
+      var team = null;
       var pos_grp = pos_grps[pos];
 
       var i=0;
@@ -135,7 +135,7 @@ var pairings_from_pos_grps = function(pos_grps, room_size) {
         i++;
       }
 
-      teams[pos] = team;
+      pairing.teams[pos] = team._id;
     }
 
     pairings.push(pairing);
@@ -181,13 +181,16 @@ DebateTab.registerTeamStrategy({
 
       // Promote any extra teams
       brackets[i] = _.shuffle(brackets[i]);
-      brackets[i+1] = promote_extra(bracket, brackets[i+1], room_size);
+      var next_bracket = promote_extra(brackets[i], brackets[i+1], room_size);
+      if (next_bracket) {
+        brackets[i+1] = next_bracket;
+      }
 
       // Generate position groups
-      var position_groups = position_groups(bracket, room_size);
+      var pos_grps = position_groups(brackets[i], room_size);
 
       // Get the pairings
-      bracket_pairings = pairings_from_pos_grps(position_groups, room_size);
+      var bracket_pairings = pairings_from_pos_grps(pos_grps, room_size);
 
       // Add the pairings to the overall pairings object
       pairings = pairings.concat(bracket_pairings);

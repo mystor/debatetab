@@ -64,19 +64,33 @@
   }
 }
 
-.table-pairings thead {
+#pairings-table thead {
   display: none;
 }
 
-.table-pairings tr:first-child td {
+#pairings-table tr:first-child td {
   border-top: 0;
 }
 
+#pairings-table.show-teams .judges-col {
+  display: none;
+}
+#pairings-table.show-judges .teams-col {
+  display: none;
+}
+
 @media screen and (min-width: @screen-tablet) {
-  .table-pairings thead {
+  #pairings-table thead {
     display: table-header-group;
   }
-  .table-pairings tr:first-child td {
+  #pairings-table tr:first-child td {
     border-top: 1px solid #ddd;
+  }
+
+  #pairings-table.show-teams .judges-col {
+    display: table-cell;
+  }
+  #pairings-table.show-judges .teams-col {
+    display: table-cell;
   }
 }

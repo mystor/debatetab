@@ -8,10 +8,11 @@ Handlebars.registerHelper('ieach', function(context, options) {
   var i = 0;
 
   var each = function(obj) {
-    ret = ret + options.fn(_.extend({
+    ret = ret + options.fn({
+      obj: obj,
       $index0: i,
       $index1: i+1
-    }, obj));
+    });
 
     i++;
   };

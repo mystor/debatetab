@@ -43,18 +43,12 @@ _.extend(DebateTab, {
      * Execute the strategies
      */
     var pairings = teamStrategy.algorithm(teams);
+    _.each(pairings, function(pairing) {
+      pairing.judges = [];
+    });
     pairings = judgeStrategy.algorithm(pairings, judges);
     pairings = roomStrategy.algorithm(pairings, rooms);
 
-    /*
-     * Set the round property on each pairing
-     */
-    _.map(pairings, function(pairing) {
-      return _.extend(pairing, {
-        round: round
-      });
-    });
-    
     return pairings;
   },
 

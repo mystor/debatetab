@@ -37,7 +37,7 @@ Template.forgot_modal.events({
 });
 
 Template.forgot_success_modal.events({
-  'tap #close-success-modal, click #close-success-modal': function(e, tmpl) {
+  'click #close-success-modal': function(e, tmpl) {
     e.preventDefault();
 
     Modal.hide();
