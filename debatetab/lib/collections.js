@@ -62,3 +62,8 @@ Results.schema = {
   points: Number,
   scores: [Number]
 };
+
+// Downloading/downloads
+if (Meteor.isServer) {
+  DLRequests = new Meteor.Collection('dlrequests');
+}

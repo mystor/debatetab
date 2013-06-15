@@ -27,5 +27,12 @@ Template.pairings_publish_modal.events({
 
       Tournaments.update({_id: DebateTab.tournament('_id')}, update);
     }
+  },
+  'click button[name=send-eballots]': function(e, tmpl) {
+    e.preventDefault();
+
+    Meteor.call('sendEBallots', DebateTab.tournament('_id'), DebateTab.round());
+
+    console.log('Sent EBallots!');
   }
 });

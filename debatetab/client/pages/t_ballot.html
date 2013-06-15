@@ -1,0 +1,53 @@
+<template name="t_ballot">
+  <div class="row">
+    <div class="col col-12">
+      <div class="row">
+        {{#ieach teams}}
+        <div class="col col-lg-6">
+          <div class="panel">
+            <div class="panel-heading" style="margin-bottom: 5px;">
+              <div class="pull-left label {{posClass $index0}}" 
+                    style="margin-top: 3px; margin-right: 5px;">
+                {{posSlug $index0}}
+              </div>
+              {{obj.name}}
+
+              {{#isolate}}
+              <div id="{{obj._id}}-place" class="pull-right label label-danger" style="margin-top: 3px; margin-left: 5px;">
+                </div>
+                <div id="{{obj._id}}-score" class="pull-right label label-info" style="margin-top: 3px;">
+                </div>
+              {{/isolate}}
+            </div>
+
+            {{#ieach obj.speakers}}
+              <div class="row">
+                <div class="col col-12">
+                  <h6>{{obj.name}}</h6>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-3">
+                  <input type="number" name="{{../obj._id}}-{{$index0}}" step="0.5">
+                </div>
+                <div class="col col-9" style="padding: 12px 15px;">
+                  <div class="noUiSlider" id="{{../obj._id}}-{{$index0}}" style="width: 100%;"></div>
+                </div>
+              </div>
+            {{/ieach}}
+          </div>
+        </div>
+        {{/ieach}}
+      </div>
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Reason for Decision
+        </div>
+        <textarea>Given Orally</textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </div>
+  </div>
+</template>

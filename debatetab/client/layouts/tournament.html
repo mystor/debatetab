@@ -12,18 +12,20 @@
       <div class="nav-collapse collapse navbar-response-collapse">
         {{#isolate}}
           <ul class="nav navbar-nav">
-            <li class="active">
-              <a href="{{updatesUrl t_slug}}">Updates</a>
+            <li class="{{overviewClass}}">
+              <a href="{{overviewUrl t_slug}}">Overview</a>
             </li>
-            <li>
+            <li class="{{pairingsClass}}">
               <a href="{{pairingsUrl t_slug round}}">Pairings</a>
             </li>
-            <li>
+            <li class="{{resultsClass}}">
               <a href="{{team_resultsUrl t_slug}}">Results</a>
             </li>
-            <li>
-              <a href="#swapping">Set Up</a>
-            </li>
+            {{#if isAdmin}}
+              <li class="{{setupClass}}">
+                <a href="#swapping">Set Up</a>
+              </li>
+            {{/if}}
           </ul>
         {{/isolate}}
 

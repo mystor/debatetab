@@ -1,7 +1,4 @@
 Template.pairings_header.helpers({
-  round: function() {
-    return DebateTab.round();
-  },
   round_count: function() {
     return DebateTab.tournament('round');
   }
@@ -23,7 +20,6 @@ Template.pairings_header.events({
   },
   'keyup #search-box': function(e, tmpl) {
     var new_query = tmpl.find('#search-box').value;
-    console.log(new_query);
 
     Session.set('search', new_query);
   }

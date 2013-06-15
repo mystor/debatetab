@@ -3,22 +3,24 @@
   {{! ROUND SELECTION & SEARCH BOX}}
   {{> pairings_header}}
 
-  {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
-  <div style="height: 40px; margin-top: 10px;">
-    <div class="control-bar input-group" data-spy="affix" data-offset-top="120" data-offset-bottom="270">
-      <span class="input-group-addon">
-        <i class="icon-wrench"></i>
-      </span>
+  {{#if isAdmin}}
+    {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
+    <div style="height: 40px; margin-top: 10px;">
+      <div class="control-bar input-group" data-spy="affix" data-offset-top="120" data-offset-bottom="270">
+        <span class="input-group-addon">
+          <i class="icon-wrench"></i>
+        </span>
 
-      {{#isolate}}
-        {{#if swapping}}
-          {{> pairings_swap_controlbar}}
-        {{else}}
-          {{> pairings_default_controlbar}}
-        {{/if}}
-      {{/isolate}}
+        {{#isolate}}
+          {{#if swapping}}
+            {{> pairings_swap_controlbar}}
+          {{else}}
+            {{> pairings_default_controlbar}}
+          {{/if}}
+        {{/isolate}}
+      </div>
     </div>
-  </div>
+  {{/if}}
 
   {{! MOBILE VIEW SELECTOR}}
   {{#isolate}}

@@ -48,8 +48,6 @@ var pairingsRequest = function(t_id, round) {
     arrays.push(['','','']);
   });
 
-  console.log(arrays);
-
   return [200, {
     'Content-Type': 'text/csv',
     'Content-Disposition': 'attachment; filename="pairings.csv"'
@@ -57,8 +55,6 @@ var pairingsRequest = function(t_id, round) {
 };
 
 Meteor.Router.add('/download/:_token', function(_token) {
-  // TODO: Remove temporary override
-  return pairingsRequest('2adcKw6QxCMnZohhq', 1);
   // Get the request from the token
   var request = DLRequests.findOne({_id: _token});
 
@@ -83,5 +79,35 @@ Meteor.Router.add('/download/:_token', function(_token) {
       ret = [500, 'Request type is not recognised'];
   }
 
+  // Remove the request object
+  DLRequests.remove({_id: _token});
+
   return ret;
+});
+
+Meteor.methods({
+  requestPairingCSV: function(t_id, round) {
+    console.log(t_id);
+    console.log(round);
+    // Validate parameters
+    var tournament = Tournaments.findOne({_id: t_id});
+    if (!tournament) {
+      throw new Meteor.Error('No such tournament');
+    }
+
+    var isAdmin = this.userId && _.indexOf(tournament.admins, this.userId);
+
+    if (tournament.published['pairings-'+round] || isAdmin) {
+      var id = DLRequests.insert({
+        type: 'pairings',
+        tournament: t_id,
+        round: round,
+        when: new Date()
+      });
+      console.log(id);
+      return id;
+    } else {
+      throw new Meteor.Error('No Permission');
+    }
+  }
 });

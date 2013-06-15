@@ -1,0 +1,28 @@
+<template name="t_team_results">
+  {{! VIEW SELECION & SEARCH BOX}}
+  {{> results_header}}
+
+  {{#if isAdmin}}
+    {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
+  {{/if}}
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Team</th>
+        <th>Points</th>
+        <th>Score</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr>
+      <td>1</td>
+      <td>[QDU] Long Team Name</td>
+      <td>45</td>
+      <td>37.5</td>
+      <td style="text-align: right;"><i class="icon-eye-open"></i></td>
+    </tr>
+  </table>
+
+</template>

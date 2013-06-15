@@ -90,32 +90,7 @@ Meteor.Router.add({
   }
 });
 
-currentHash = '';
-
-Meteor.Router.filters({
-  checkHash: function(page) {
-    currentHash = location.hash;
-
-    Meteor.defer(function() {
-      location.hash = currentHash;
-    });
-
-    return page;
-  }
-});
-Meteor.Router.filter('checkHash');
-
-window.onhashchange = function() {
-  currentHash = location.hash;
-};
-
 Meteor.Router.beforeRouting = function() {
-  // Clear the hash if it has already been set
-  if (currentHash === location.hash) {
-    currentHash = location.hash = '';
-  }
-
-  console.log('beforeRouting');
   Modal.hide();
   Session.set('search', '');
   Session.set('t_slug', '');

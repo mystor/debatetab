@@ -23,11 +23,16 @@ Deps.autorun(function() {
 
         switch (page) {
           case 't_pairings':
-            Subs.pairings = Meteor.subscribe('all-pairings', t_id, DebateTab.round());
+            Subs.pairings = Meteor.subscribe('round-pairings', t_id, DebateTab.round());
             if (DebateTab.round() > DebateTab.tournament('round')) {
               // The current round is too large, lets go to the correct round
               Meteor.Router.to('pairings', t_slug, DebateTab.tournament('round'));
             }
+            break;
+          case 't_ballot':
+            console.log('hi');
+            // TODO: Remove hack
+            Subs.pairings = Meteor.subscribe('round-pairings', t_id, 1);
             break;
         }
       } else {

@@ -78,7 +78,7 @@ Meteor.publish('all-judges', function(t_id) {
   return Judges.find({ tournament: t_id }, { fields: fields });
 });
 
-Meteor.publish('all-pairings', function(t_id, round) {
+Meteor.publish('round-pairings', function(t_id, round) {
   var fields = {
     _id: 1,
     teams: 1,
