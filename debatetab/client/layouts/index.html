@@ -1,0 +1,19 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <title>DebateTab.net</title>
+  
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+  {{> body}}
+</body>
+
+<template name="body">
+  {{> modal}}
+  {{! Render the correct layout}}
+  {{! Don't bother isolating as this is the only command in this template}}
+  {{#isolate}}
+    {{renderPage layoutName}}
+  {{/isolate}}
+</template>

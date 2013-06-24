@@ -1,0 +1,92 @@
+<template name="t_pairings">
+
+  {{! ROUND SELECTION & SEARCH BOX}}
+  {{> pairings_header}}
+
+  {{#if isAdmin}}
+    {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
+    <div style="height: 40px; margin-top: 10px;">
+      <div class="control-bar input-group" data-spy="affix" data-offset-top="120" data-offset-bottom="270">
+        <span class="input-group-addon">
+          <i class="icon-wrench"></i>
+        </span>
+
+        {{#isolate}}
+          {{#if swapping}}
+            {{> pairings_swap_controlbar}}
+          {{else}}
+            {{> pairings_default_controlbar}}
+          {{/if}}
+        {{/isolate}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{! MOBILE VIEW SELECTOR}}
+  {{#isolate}}
+    <div class="nav nav-tabs nav-justified visible-sm" style="margin-top: 10px;">
+      <li class="{{team_active}}"><a id="pairings-select-teams" href="#">Teams</a></li>
+      <li class="{{judge_active}}"><a id="pairings-select-judges" href="#">Judges</a></li>
+    </div>
+  {{/isolate}}
+
+  {{! PAIRINGS DISPLAY}}
+  {{#if pairings.count}}
+    <table id="pairings-table" class="table show-teams">
+      <thead>
+        <tr>
+          <th>Room</th>
+          <th>Teams</th>
+          <th>Judges</th>
+        </tr>
+      </thead>
+      {{#isolate}}
+        {{#each pairings}}
+          <tr>
+            {{! Room Name}}
+            <td>
+              <div class="room" data-id="{{room}}" data-pairingId="{{_id}}">
+                {{room_name room}}
+                {{#if room_find_url room}}
+                <p style="text-align: center;">
+                  <a href="{{room_find_url room}}">
+                    <i class="icon-map-marker icon-2x"></i>
+                  </a>
+                </p>
+                {{/if}}
+              </div>
+            </td>
+
+            {{! Teams}}
+            <td class="teams-col">
+              {{#ieach teams}}
+                <div class="team" data-id="{{obj}}" data-pairingId="{{../_id}}">
+                  <span class="label {{position_class $index0}}">{{position_slug $index0}}</span>
+                  [{{team_school obj}}]
+                  {{team_name obj}}
+                </div>
+              {{/ieach}}
+            </td>
+            <td class="judges-col">
+              {{#each judges}}
+                <div class="judge {{chair_class this ../chair}}" data-id="{{this}}" data-pairingId="{{../_id}}">
+                  [{{judge_school this}}]
+                  {{judge_name this}}
+                </div>
+              {{/each}}
+              {{#if holding_judge}}
+              <div class="empty-cell empty-judge" data-pairingid="{{_id}}">empty</div>
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      {{/isolate}}
+    </table>
+  {{else}}
+    <div class="text-center" style="margin-top: 10px;">
+      <p>This round doesn&apos;t have any pairings yet.</p>
+      <p>Use the <em>Manual</em> or <em>Autopair</em> options to generate pairings for the round.</p>
+    </div>
+  {{/if}}
+
+</template>

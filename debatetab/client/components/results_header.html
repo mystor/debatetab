@@ -1,0 +1,27 @@
+<template name="results_header">
+  <div class="row">
+    <div class="col col-sm-3 col-6">
+      {{#isolate}}
+        <select id="view-select">
+          {{#times round_count}}
+            <option value="{{index1}}" 
+                {{#if equal view index1}}selected{{/if}}>
+              Round {{index1}}
+            </option>
+          {{/times}}
+          <option value="team"
+              {{#if equal view 'team'}}selected{{/if}}>
+            Team Results
+          </option>
+          <option value="speaker"
+              {{#if equal view 'speaker'}}selected{{/if}}>
+            Speaker Results
+          </option>
+        </select>
+      {{/isolate}}
+    </div>
+    <div class="col col-sm-9 col-6">
+      <input id="search-box" type="text" placeholder="Search Results">
+    </div>
+  </div>
+</template>

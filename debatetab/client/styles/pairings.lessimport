@@ -1,0 +1,96 @@
+.judge-chair {
+  font-weight: bold;
+}
+.empty-cell {
+  border: 3px dotted @gray-light;
+  border-radius: @border-radius-base;
+  text-align: center;
+  padding: 5px;
+  color: @gray-light;
+  background-color: @gray-lighter;
+  font-size: 65%;
+}
+
+.control-bar {
+
+  .btn-group {
+    a:first-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .ctrl-dscr {
+    display: none;
+  }
+}
+
+@media (min-width: @screen-tablet) {
+  .control-bar .ctrl-dscr {
+    display: inline;
+  }
+}
+
+.page-title {
+  text-align: center;
+  
+  .btn-group {
+    vertical-align: baseline;
+  }
+}
+
+.control-bar {
+  z-index: 10;
+}
+.control-bar.affix {
+  top: 0;
+}
+
+@media screen and (min-width: @screen-tablet) {
+  .control-bar.affix {
+    max-width: 728px;
+  }
+}
+
+@media screen and (min-width: @screen-desktop) {
+  .control-bar.affix {
+    max-width: 940px;
+  }
+}
+
+@media screen and (min-width: @screen-large-desktop) {
+  .control-bar.affix {
+    max-width: 1170px;
+  }
+}
+
+#pairings-table thead {
+  display: none;
+}
+
+#pairings-table tr:first-child td {
+  border-top: 0;
+}
+
+#pairings-table.show-teams .judges-col {
+  display: none;
+}
+#pairings-table.show-judges .teams-col {
+  display: none;
+}
+
+@media screen and (min-width: @screen-tablet) {
+  #pairings-table thead {
+    display: table-header-group;
+  }
+  #pairings-table tr:first-child td {
+    border-top: 1px solid #ddd;
+  }
+
+  #pairings-table.show-teams .judges-col {
+    display: table-cell;
+  }
+  #pairings-table.show-judges .teams-col {
+    display: table-cell;
+  }
+}

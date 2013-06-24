@@ -1,0 +1,24 @@
+<template name="pairings_manual_modal">
+  <div class="modal-body">
+    {{> modal_err}}
+
+    <label class="control-label" for="csv-download">Download Pairings</label>
+    <a class="btn btn-info btn-block" name="csv-download" href="#">Download CSV</a>
+
+    <label class="control-label" for="csv-file" style="margin-top: 10px;">Upload Pairings</label>
+    {{#if uploadsSupported}}
+      <div class="row">
+        <div class="col col-sm-8" style="padding-top: 10px; padding-bottom: 10px;">
+          <input name="csv-file" type="file" style="height: auto; line-height: inherit;">
+        </div>
+        <div class="col col-sm-4">
+          <button name="csv-upload" class="btn btn-success btn-block" type="button">Upload CSV</button>
+        </div>
+      </div>
+    {{else}}
+      <div class="alert alert-info">
+        Uploads require the FileReader API, which is not supported by your browser.
+      </div>
+    {{/if}}
+  </div>
+</template>

@@ -1,0 +1,42 @@
+<template name="pairings_default_controlbar">
+  <div class="btn-group btn-group-justified">
+    <a id="manual-ctrl" href="#" class="btn btn-primary">
+      {{! Manual Edit Button}}
+      <i class="icon-pencil"></i>
+      <span class="ctrl-dscr">
+        Manual
+      </span>
+    </a>
+    <a id="autopair-ctrl" href="{{autopairUrl t_slug round}}" class="btn btn-warning">
+      {{! Auto-pair Button}}
+      <i class="icon-magic"></i>
+      <span class="ctrl-dscr">
+        Autopair
+      </span>
+    </a>
+    <a id="swap-ctrl" href="#" class="btn btn-info">
+      {{! Swapping Button}}
+      <i class="icon-exchange"></i>
+      <span class="ctrl-dscr">
+        Swap
+      </span>
+    </a>
+    {{#if published}}
+      <a id="publish-ctrl" href="#" class="btn btn-success">
+        {{! Public Button}}
+        <i class="icon-eye-open"></i>
+        <span class="ctrl-dscr">
+          Public
+        </span>
+      </a>
+    {{else}}
+      <a id="publish-ctrl" href="#" class="btn btn-danger">
+        {{! Public/Private Button}}
+        <i class="icon-eye-close"></i>
+        <span class="ctrl-dscr">
+          Private
+        </span>
+      </a>
+    {{/if}}
+  </div>
+</template>

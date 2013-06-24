@@ -1,0 +1,19 @@
+<template name="pairings_header">
+  <div class="row">
+    <div class="col col-sm-3 col-6">
+      {{#isolate}}
+        <select id="round-select">
+          {{#times round_count}}
+            <option value="{{index1}}" 
+                {{#if equal round index1}}selected{{/if}}>
+              Round {{index1}}
+            </option>
+          {{/times}}
+        </select>
+      {{/isolate}}
+    </div>
+    <div class="col col-sm-9 col-6">
+      <input id="search-box" type="text" placeholder="Search Pairings">
+    </div>
+  </div>
+</template>

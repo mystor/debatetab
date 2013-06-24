@@ -1,0 +1,15 @@
+[submodule "debatetab/packages/bootstrapless/bootstrap"]
+	path = debatetab/packages/bootstrapless/bootstrap
+	url = https://github.com/twitter/bootstrap.git
+[submodule "debatetab/packages/page-js-ie-support"]
+	path = debatetab/packages/page-js-ie-support
+	url = https://github.com/tmeasday/meteor-page-js-ie-support.git
+[submodule "debatetab/packages/router"]
+	path = debatetab/packages/router
+	url = https://github.com/tmeasday/meteor-router.git
+[submodule "debatetab/packages/noUiSlider"]
+	path = debatetab/packages/noUiSlider
+	url = https://github.com/belisarius222/meteor-noUiSlider.git
+[submodule "debatetab/packages/module"]
+	path = debatetab/packages/module
+	url = https://github.com/Mystor/meteor-module.git

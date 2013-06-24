@@ -1,0 +1,81 @@
+<template name="t_autopair">
+  <div style="height: 40px">
+    <div class="control-bar input-group">
+      <span class="input-group-addon">
+        <i class="icon-wrench"></i>
+      </span>
+
+      {{> autopair_controlbar}}
+    </div>
+  </div>
+
+  <div class="alert alert-info" style="margin-top: 10px;">
+    <i class="icon-info-sign icon-large"></i>
+    Running Autopair will clear any pairings which have already been made this round.
+  </div>
+
+  <div style="margin-left: 5px; margin-right: 5px;">
+    {{#isolate}}
+      <h3>Team Strategy</h3>
+      <select id="team_strategy_select">
+        {{#ieach strategies 'Team'}}
+          <option value="{{$index0}}" {{#if equal team_strategy_id $index0}}selected{{/if}}>{{obj.name}}</option>
+        {{/ieach}}
+      </select>
+
+      {{#with validate_strategy 'Team'}}
+        <div class="alert alert-warning" style="margin-top: 10px;">
+          <i class="icon-exclamation-sign icon-large"></i>
+          {{this}}
+        </div>
+      {{/with}}
+
+      {{#with strategy 'Team'}}
+        <h4>Description</h4>
+        <p>{{#markdown}}{{description}}{{/markdown}}</p>
+      {{/with}}
+    {{/isolate}}
+
+    {{#isolate}}
+      <h3>Judge Strategy</h3>
+      <select id="judge_strategy_select">
+        {{#ieach strategies 'Judge'}}
+          <option value="{{$index0}}" {{#if equal judge_strategy_id $index0}}selected{{/if}}>{{obj.name}}</option>
+        {{/ieach}}
+      </select>
+      
+      {{#with validate_strategy 'Judge'}}
+        <div class="alert alert-warning" style="margin-top: 10px;">
+          <i class="icon-exclamation-sign icon-large"></i>
+          {{this}}
+        </div>
+      {{/with}}
+
+      {{#with strategy 'Judge'}}
+        <h4>Description</h4>
+        <p>{{#markdown}}{{description}}{{/markdown}}</p>
+      {{/with}}
+    {{/isolate}}
+
+    {{#isolate}}
+      <h3>Room Strategy</h3>
+      <select id="room_strategy_select">
+        {{#ieach strategies 'Room'}}
+          <option value="{{$index0}}" {{#if equal room_strategy_id $index0}}selected{{/if}}>{{obj.name}}</option>
+        {{/ieach}}
+      </select>
+
+      {{#with validate_strategy 'Room'}}
+        <div class="alert alert-warning" style="margin-top: 10px;">
+          <i class="icon-exclamation-sign icon-large"></i>
+          {{this}}
+        </div>
+      {{/with}}
+
+      {{#with strategy 'Room'}}
+        <h4>Description</h4>
+        <p>{{#markdown}}{{description}}{{/markdown}}</p>
+      {{/with}}
+    {{/isolate}}
+  </div>
+</template>

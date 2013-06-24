@@ -1,0 +1,30 @@
+<template name="register_modal">
+  <form id="register-form" action="#">
+    <div class="modal-body">
+      {{> modal_err}}
+
+      <div class="control-group">
+        <label class="control-label" for="username">Username</label>
+        <div class="controls">
+          <input type="text" name="username" placeholder="Username">
+        </div>
+      </div>
+      <div class="control-group padded">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+          <input type="text" name="email" placeholder="Email">
+        </div>
+      </div>
+      <div class="control-group padded">
+        <label class="control-label" for="password">Password</label>
+        <div class="controls">
+          <input type="password" name="password" placeholder="Password">
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Create Account</button>
+    </div>
+  </form>
+</template>
