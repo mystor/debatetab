@@ -31,8 +31,7 @@ Deps.autorun(function() {
             break;
           case 't_ballot':
             console.log('hi');
-            // TODO: Remove hack
-            Subs.pairings = Meteor.subscribe('round-pairings', t_id, 1);
+            Subs.ballot = Meteor.subscribe('ballot', t_id, Session.get('ballot_key'));
             break;
         }
       } else {

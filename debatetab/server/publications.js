@@ -93,3 +93,22 @@ Meteor.publish('round-pairings', function(t_id, round) {
 
   return pairings;
 });
+
+Meteor.publish('ballot', function(t_id, ballot_key) {
+  var pairings = Pairings.find({
+    ballot_key: ballot_key,
+    tournament: t_id
+  });
+
+  var pairing = pairings.fetch()[0];
+  if (pairing) {
+    var result_count = Results.find({
+      pairing: pairing
+    }).count();
+
+    if (result_count === 0) {
+      return pairings;
+    }
+  }
+  return [];
+});

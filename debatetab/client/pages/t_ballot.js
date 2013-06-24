@@ -1,11 +1,14 @@
+// Mark dependency on scores changing
 var scoreDeps = new Deps.Dependency();
 
+// TODO: Make get the correct pairing
 var getPairing = function() {
   return Pairings.findOne();
 };
 
 Template.t_ballot.helpers({
   teams: function() {
+    // Returns the list of teams from the pairing
     var pairing = getPairing();
     if (pairing) {
       return _.map(pairing.teams, function(team_id) {
@@ -14,11 +17,16 @@ Template.t_ballot.helpers({
     }
   },
   posSlug: function(posNum) {
+    // Returns the slug for the position posNum
     return DebateTab.tournament('positions')[posNum].slug;
   },
   posClass: function(posNum) {
+    // Returns the class for the position posNum
     var isProp = DebateTab.tournament('positions')[posNum].prop;
     return isProp ? 'label-info' : 'label-danger';
+  },
+  ballotLoaded: function() {
+    return Subs.isReady('ballot');
   }
 });
 
@@ -32,8 +40,6 @@ Deps.autorun(function() {
     var pairing = getPairing();
     if (!pairing) {return;}
 
-    // Get the room size
-    var roomSize = DebateTab.tournament('room_size');
 
     // Get the scores for each team
     var teamScores = _.map(pairing.teams, function(team) {
@@ -63,17 +69,18 @@ Deps.autorun(function() {
     });
 
     // Assign positions
+    var roomSize = DebateTab.tournament('room_size');
     _.each(teamScores, function(score, index) {
       var place = roomSize - index;
-      switch (place) {
+      switch (place % 10) {
         case 1:
-          score.place = '1st';
+          score.place = place+'st';
           break;
         case 2:
-          score.place = '2nd';
+          score.place = place+'nd';
           break;
         case 3:
-          score.place = '3rd';
+          score.place = place+'rd';
           break;
         default:
           score.place = place+'th';
@@ -81,17 +88,24 @@ Deps.autorun(function() {
       }
     });
 
+    // Enable submit button
+    $('#ballot-submit').removeAttr('disabled');
+
     // Mark ties as ties
     for (var i=0; i<(teamScores.length - 1); i++) {
       if (teamScores[i].score === teamScores[i+1].score) {
         teamScores[i].place = 'TIE';
         teamScores[i+1].place = 'TIE';
+        $('#ballot-submit').attr('disabled', 'disabled');
       }
     }
 
+    // Set the labels
     _.each(teamScores, function(score) {
       $('#'+score.id+'-score').html(score.score);
       $('#'+score.id+'-place').html(score.place);
+
+      // Color labels red if it is a tie
       if (score.place === 'TIE') {
         $('#'+score.id+'-place').addClass('label-danger');
         $('#'+score.id+'-place').removeClass('label-success');
@@ -103,10 +117,22 @@ Deps.autorun(function() {
   }
 });
 
+Template.t_ballot.events({
+  'submit #ballot-form': function(e, tmpl) {
+    e.preventDefault();
+    var form = e.currentTarget;
+
+    console.log($(form).serializeArray());
+  },
+  'change .score-box': function(e, tmpl) {
+    scoreDeps.changed();
+  }
+});
+
 Template.t_ballot.rendered = function() {
   $('.noUiSlider').each(function(index) {
     var slider = $(this);
-    var id = slider.attr('id');
+    var id = slider.data('id');
     slider.noUiSlider({
       range: [35, 45],
       start: 38.5,

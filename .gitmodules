@@ -10,3 +10,6 @@
 [submodule "debatetab/packages/noUiSlider"]
 	path = debatetab/packages/noUiSlider
 	url = https://github.com/belisarius222/meteor-noUiSlider.git
+[submodule "debatetab/packages/module"]
+	path = debatetab/packages/module
+	url = https://github.com/Mystor/meteor-module.git
