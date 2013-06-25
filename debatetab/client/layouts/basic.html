@@ -1,0 +1,52 @@
+<template name="basicLayout">
+  <div class="navbar navbar-static-top">
+    <div class="container">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-response-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">DebateTab<small>.net</small></a>
+      
+      <div class="nav-collapse collapse navbar-response-collapse">
+        {{#isolate}}
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+            {{#if currentUser}}
+              <li>
+                <a href="#">New Tournament</a>
+              </li>
+            {{/if}}
+          </ul>
+        {{/isolate}}
+
+        {{! Account Navigation}}
+        {{> accountNav}}
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    {{#isolate}}
+      {{renderPage}}
+    {{/isolate}}
+  </div>
+  <hr />
+  <div class="container">
+    <div style="margin: 0px 5px 20px;">
+      <small>&copy; 2013 <a href="https://github.com/Mystor/">Michael Layzell</a></small>
+      <div class="pull-right">
+        <small>
+          <a href="#">Contact</a> | 
+          <a href="#">About</a> | 
+          <a href="#">Report a Bug</a>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>

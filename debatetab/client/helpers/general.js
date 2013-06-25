@@ -26,3 +26,8 @@ Handlebars.registerHelper('ieach', function(context, options) {
   return ret;
 });
 
+Handlebars.registerHelper('sum', function(arr) {
+  return _.reduce(arr, function(memo, num) {
+    return memo + num;
+  }, 0);
+});

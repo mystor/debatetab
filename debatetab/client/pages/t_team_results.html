@@ -2,9 +2,10 @@
   {{! VIEW SELECION & SEARCH BOX}}
   {{> results_header}}
 
-  {{#if isAdmin}}
-    {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
-  {{/if}}
+  <button type="button" id="download-ctrl" class="btn btn-block btn-primary" style="margin-top: 10px;">
+    <i class="icon-download-alt"></i>
+    Download CSV
+  </button>
 
   <table class="table">
     <thead>

@@ -1,9 +1,17 @@
 <template name="tournament_list">
-  <div class="list-group">
-    {{#each tournament}}
-      <a href="{{updatesUrl slug}}" class="list-group-item">
-        {{name}}
-      </a>
-    {{/each}}
+  <div class="row">
+    <div class="col col-sm-6 col-push-6">
+      <input style="margin-bottom: 10px" type="text" placeholder="Search Tournaments">
+      <div class="list-group">
+        {{#each tournaments}}
+          <a href="{{overviewUrl slug}}" class="list-group-item">
+            {{name}}
+          </a>
+        {{/each}}
+      </div>
+    </div>
+    <div class="col col-sm-6 col-pull-6">
+      Hello There, This is an amount of text which is not that small which will allow me to see how big this column actually is.  This will be helpful.
+    </div>
   </div>
 </template>

@@ -8,6 +8,9 @@ Subs.isReady = function(sub) {
 Deps.autorun(function() {
   var page = Meteor.Router.page();
 
+  /*
+   * Subscriptions WITHIN a tournament
+   */
   var t_slug = Session.get('t_slug');
   if (t_slug) {
     // Subscribe to the tournament
@@ -30,8 +33,11 @@ Deps.autorun(function() {
             }
             break;
           case 't_ballot':
-            console.log('hi');
             Subs.ballot = Meteor.subscribe('ballot', t_id, Session.get('ballot_key'));
+            break;
+          case 't_results':
+            Subs.pairings = Meteor.subscribe('round-pairings', t_id, DebateTab.round());
+            Subs.results = Meteor.subscribe('round-results', t_id, DebateTab.round());
             break;
         }
       } else {
@@ -39,6 +45,13 @@ Deps.autorun(function() {
         Meteor.Router.to('tournament_list');
       }
     }
+  }
+
+  /*
+   * Tournament List
+   */
+  if (page === 'tournament_list') {
+    Subs.tournaments = Meteor.subscribe('all-tournaments');
   }
 
   Subs.deps.changed(); // Trigger sub changes - DON'T USE Subs.isReady IN THIS FUNCTION

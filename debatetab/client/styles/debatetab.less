@@ -8,7 +8,7 @@ body {
 }
 
 // Variable overrides
-@navbar-bg: rgb(0,177,106);
+@navbar-bg: @brand-success;
 @navbar-color: #fff;
 @navbar-link-color: #fff;
 @navbar-link-hover-color: @gray-lighter;
@@ -17,7 +17,11 @@ body {
 
 @grid-gutter-width: 10px;
 
+// General Styles
 @import "modal.lessimport";
 @import "navbar.lessimport";
-@import "pairings.lessimport";
+@import "controlbar.lessimport";
 
+// Page specific styles
+@import "pairings.lessimport";
+@import "results.lessimport";

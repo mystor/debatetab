@@ -1,4 +1,4 @@
+// Create spacing between controls in modals
 .modal-body .control-group.padded {
-  // Make the spacing in modals more attractive
   margin-top: 10px;
 }

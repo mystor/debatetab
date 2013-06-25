@@ -18,14 +18,19 @@ Template.pairings_publish_modal.events({
 
     var published = DebateTab.tournament('published');
     if (published) {
+      // Determine what the new state of pairing publishing should be
       var new_state = !published['pairings-'+DebateTab.round()];
-      var update = {
-        $set: {
-        }
-      };
-      update.$set['published.pairings-'+DebateTab.round()] = new_state;
 
-      Tournaments.update({_id: DebateTab.tournament('_id')}, update);
+      // Either publish or unpublish
+      if (new_state) {
+        Meteor.call('publish', 
+          DebateTab.tournament('_id'), 
+          'pairings-'+DebateTab.round());
+      } else {
+        Meteor.call('unpublish', 
+          DebateTab.tournament('_id'), 
+          'pairings-'+DebateTab.round());
+      }
     }
   },
   'click button[name=send-eballots]': function(e, tmpl) {

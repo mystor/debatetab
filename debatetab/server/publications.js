@@ -14,7 +14,8 @@ var isAdmin = function(t_id, userId) {
 Meteor.publish('all-tournaments', function() {
   return Tournaments.find({}, {
     fields: {
-      name: 1
+      name: 1,
+      slug: 1
     }
   });
 });
@@ -103,7 +104,8 @@ Meteor.publish('ballot', function(t_id, ballot_key) {
   var pairing = pairings.fetch()[0];
   if (pairing) {
     var result_count = Results.find({
-      pairing: pairing
+      tournament: t_id,
+      pairing: pairing._id
     }).count();
 
     if (result_count === 0) {
@@ -111,4 +113,10 @@ Meteor.publish('ballot', function(t_id, ballot_key) {
     }
   }
   return [];
+});
+
+Meteor.publish('round-results', function(t_id, round) {
+  // TODO: Add censoring of fields etc based on publish settings
+
+  return Results.find({ tournament: t_id, round: round});
 });

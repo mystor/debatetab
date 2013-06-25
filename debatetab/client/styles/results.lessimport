@@ -1,0 +1,23 @@
+@max-screen-phone: @screen-tablet - 1px;
+
+@media screen and (max-width: @max-screen-phone) {
+  // Team floats to the right
+  .result-team-summary {
+    float: right;
+  }
+  .result-team-name {
+    display: inline;
+  }
+
+  .table {
+    .result-team {
+      display: block;
+      border-top: 0px;
+    }
+
+    .result-speakers {
+      display: block;
+      border-top: 0px;
+    }
+  }
+}

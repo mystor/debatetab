@@ -17,6 +17,11 @@ Modal = {
   throw_err: function(err) {
     Session.set('modal_error', err);
     Modal.new_err_dep.changed();
+    
+    // Show an error modal
+    if (_.isEmpty(Session.get('modal'))) {
+      Modal.show(Modal.Error);
+    }
   },
   consume_err: function() {
     var err = null;

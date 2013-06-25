@@ -1,6 +1,9 @@
+// Make chairs be in bold
 .judge-chair {
   font-weight: bold;
 }
+
+// Display for empty cells (for judges)
 .empty-cell {
   border: 3px dotted @gray-light;
   border-radius: @border-radius-base;
@@ -11,67 +14,18 @@
   font-size: 65%;
 }
 
-.control-bar {
-
-  .btn-group {
-    a:first-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-  }
-
-  .ctrl-dscr {
-    display: none;
-  }
-}
-
-@media (min-width: @screen-tablet) {
-  .control-bar .ctrl-dscr {
-    display: inline;
-  }
-}
-
-.page-title {
-  text-align: center;
-  
-  .btn-group {
-    vertical-align: baseline;
-  }
-}
-
-.control-bar {
-  z-index: 10;
-}
-.control-bar.affix {
-  top: 0;
-}
-
-@media screen and (min-width: @screen-tablet) {
-  .control-bar.affix {
-    max-width: 728px;
-  }
-}
-
-@media screen and (min-width: @screen-desktop) {
-  .control-bar.affix {
-    max-width: 940px;
-  }
-}
-
-@media screen and (min-width: @screen-large-desktop) {
-  .control-bar.affix {
-    max-width: 1170px;
-  }
-}
-
+// Hide table headings on mobile
 #pairings-table thead {
   display: none;
 }
 
+// No border on top of first row
 #pairings-table tr:first-child td {
   border-top: 0;
 }
 
+// Don't display the teams column when showing judges
+// And vice versa
 #pairings-table.show-teams .judges-col {
   display: none;
 }
@@ -80,6 +34,7 @@
 }
 
 @media screen and (min-width: @screen-tablet) {
+  // Show the heading & the border on top of first row
   #pairings-table thead {
     display: table-header-group;
   }
@@ -87,6 +42,7 @@
     border-top: 1px solid #ddd;
   }
 
+  // Show both teams and judges all of the time
   #pairings-table.show-teams .judges-col {
     display: table-cell;
   }

@@ -1,0 +1,56 @@
+// Wrapper around the control bar
+.control-bar-wrapper {
+  height: 40px;
+  margin-top: 10px;
+}
+
+.control-bar {
+  // No rounding on first button on left
+  .btn-group {
+    a:first-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  // Hide the description by default
+  .ctrl-dscr {
+    display: none;
+  }
+}
+
+// Show the description when on tablet or larger screens
+@media (min-width: @screen-tablet) {
+  .control-bar .ctrl-dscr {
+    display: inline;
+  }
+}
+
+// Make the control bar float on top
+.control-bar {
+  z-index: 10;
+}
+
+// Floating control bar - get correct width!
+.control-bar.affix {
+  top: 5px;
+  margin-right: 5px;
+}
+
+@media screen and (min-width: @screen-tablet) {
+  .control-bar.affix {
+    max-width: 728px - 10px;
+  }
+}
+
+@media screen and (min-width: @screen-desktop) {
+  .control-bar.affix {
+    max-width: 940px - 10px;
+  }
+}
+
+@media screen and (min-width: @screen-large-desktop) {
+  .control-bar.affix {
+    max-width: 1170px - 10px;
+  }
+}
