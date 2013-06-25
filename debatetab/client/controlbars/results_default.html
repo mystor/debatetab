@@ -7,12 +7,32 @@
         Manual
       </span>
     </a>
-    <a id="publish-ctrl" href="#" class="btn btn-success">
-      {{! Public Button}}
-      <i class="icon-eye-open"></i>
-      <span class="ctrl-dscr">
-        Public
-      </span>
-    </a>
+    {{#if all_published}}
+      <a id="publish-ctrl" href="#" class="btn btn-success">
+        {{! Public Button}}
+        <i class="icon-eye-open"></i>
+        <span class="ctrl-dscr">
+          Public
+        </span>
+      </a>
+    {{else}}
+      {{#if ranks_published}}
+        <a id="publish-ctrl" href="#" class="btn btn-warning">
+          {{! Partial Button}}
+          <i class="icon-eye-close"></i>
+          <span class="ctrl-dscr">
+            Only Ranks
+          </span>
+        </a>
+      {{else}}
+        <a id="publish-ctrl" href="#" class="btn btn-danger">
+          {{! Private Button}}
+          <i class="icon-eye-close"></i>
+          <span class="ctrl-dscr">
+            Private
+          </span>
+        </a>
+      {{/if}}
+    {{/if}}
   </div>
 </template>

@@ -5,14 +5,16 @@
   {{#if isAdmin}}
     {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
     <div class="control-bar-wrapper">
-      <div class="control-bar input-group">
-        <span class="input-group-addon">
-          <i class="icon-wrench"></i>
-        </span>
+      <div class="control-bar">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="icon-wrench"></i>
+          </span>
 
-        {{#isolate}}
-          {{> results_default_controlbar}}
-        {{/isolate}}
+          {{#isolate}}
+            {{> results_default_controlbar}}
+          {{/isolate}}
+        </div>
       </div>
     </div>
   {{/if}}
@@ -20,7 +22,7 @@
   {{! Results Display}}
   <div class="list-group" style="padding-top: 10px;">
     {{#each pairings}}
-      <div class="list-group-item" style="padding: 10px 5px 0px;">
+      <div class="list-group-item" style="padding: 10px 0px 0px; border: 0px;">
         <h4 class="list-group-item-heading" style="text-align: center;">{{room_name room}}</h4>
         <p class="list-group-item-text">
         <table class="table" style="margin-bottom: 0px;">
@@ -33,7 +35,9 @@
                 </div>
                 <div class="result-team-summary">
                   {{#with result this}}
-                    <div class="label label-info">{{sum scores}}</div>
+                    {{#with scores}}
+                      <div class="label label-info">{{sum this}}</div>
+                    {{/with}}
                     <div class="label label-success">{{to_rank points}}</div>
                   {{else}}
                     <div class="label label-danger">No Data</div>
@@ -45,7 +49,10 @@
                   <div>
                     {{obj.name}}
                     {{#with result ..}}
-                      <div class="label label-info">{{speaker_score scores ../$index0}}</div>
+                      {{#with scores}}
+                        <div class="label label-info">
+                          {{speaker_score this ../../$index0}}</div>
+                      {{/with}}
                     {{/with}}
                   </div>
                 {{/ieach}}

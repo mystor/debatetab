@@ -1,0 +1,9 @@
+.map-box {
+  text-align: center;
+}
+
+.tournament-info-table {
+  th {
+    padding-right: 20px;
+  }
+}

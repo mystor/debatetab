@@ -1,0 +1,40 @@
+<template name="results_publish_modal">
+  <div class="modal-body">
+    {{> modal_err}}
+
+    <div class="control-group">
+      <label class="control-label" for="publish-ranks">Publish Ranks</label>
+      <div class="controls">
+        {{#if ranks_published}}
+          <button name="publish-ranks" type="button" 
+                class="btn btn-block btn-success">
+            <i class="icon-eye-open"></i> Public
+          </button>
+        {{else}}
+          <button name="publish-ranks" type="button" 
+                class="btn btn-block btn-danger">
+            <i class="icon-eye-close"></i> Private
+          </button>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="control-group" style="margin-top: 10px;">
+      <label class="control-label" for="publish-scores">Publish Speaker Scores</label>
+      <div class="controls">
+        {{#if scores_published}}
+          <button name="publish-scores" type="button" 
+                class="btn btn-block btn-success">
+            <i class="icon-eye-open"></i> Public
+          </button>
+        {{else}}
+          <button name="publish-scores" type="button" 
+                class="btn btn-block btn-danger">
+            <i class="icon-eye-close"></i> Private
+          </button>
+        {{/if}}
+      </div>
+    </div>
+
+  </div>
+</template>

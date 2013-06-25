@@ -27,6 +27,16 @@ module('reverse', function() {
 
       var judge = Judges.findOne({school: school, name: name});
       return judge;
+    },
+    speaker: function(team, uid) {
+      uid = uid.trim();
+
+      var index = _.reduce(team.speakers, function(memo, speaker, i) {
+        if (speaker.name === uid) return i;
+        return memo;
+      }, -1);
+
+      return index;
     }
   };
 });

@@ -1,0 +1,29 @@
+<template name="t_overview">
+  <div class="row">
+    <div class="col col-sm-7">
+      <div class="panel">
+        <div class="panel-heading">
+          Tournament Information
+        </div>
+        <table class="tournament-info-table">
+          <tr>
+            <th>Name</th>
+            <td>{{name}}</td>
+          </tr>
+          <tr>
+            <th>When</th>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>{{location}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col col-sm-5 map-box">
+      <a href="http://google.com/maps?q={{encodedLocation}}">
+        <img alt="map" width="300" height="200" src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&visual_refresh=true&markers=size:mid|{{encodedLocation}}&zoom=13&size=300x200&key=AIzaSyCBWEFf_7bt7PDCJmmAq_nZJiItLLq0MXs">
+      </a>
+    </div>
+  </div>
+</template>

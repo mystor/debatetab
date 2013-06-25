@@ -26,7 +26,7 @@ module('validate', function() {
      * If the round is invalid, throws an error
      */
     round: function(tournament, round) {
-      if (!(_iisNumber(round) && round % 1 === 0)) {
+      if (!(_.isNumber(round) && round % 1 === 0)) {
         throw new Meteor.Error(404, 'Round: '+round+' is not an integer');
       } else if (tournament.round < round) {
         throw new Meteor.Error(404, 'Round: '+round+' does not exist');
