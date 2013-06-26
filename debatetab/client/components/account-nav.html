@@ -1,12 +1,18 @@
 <template name="accountNav">
   <ul class="nav navbar-nav account-nav">
     {{#if currentUser}}
-      <li class="dropdown">
-      <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{currentUser.username}}!</a>
+      <li class="dropdown account-welcome-dropdown">
+        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{currentUser.username}}!</a>
         <ul class="dropdown-menu pull-left" role="menu" aria-labelledby="drop2">
-          <li><a id="nav-changepw" href="#">Change Password</a></li>
-          <li><a id="nav-logoff" href="#">Log off</a></li>
+          <li><a class="account-nav-changepw" href="#">Change Password</a></li>
+          <li><a class="account-nav-logoff" href="#">Log off</a></li>
         </ul>
+      </li>
+      <li class="account-nav-item">
+        <a class="account-nav-changepw" href="#">Change Password</a>
+      </li>
+      <li class="account-nav-item">
+        <a class="account-nav-logoff" href="#">Log off</a>
       </li>
     {{else}}
       {{#if loggingIn}}

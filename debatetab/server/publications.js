@@ -19,7 +19,7 @@ module(function() {
     return Tournaments.find({}, {
       fields: {
         name: 1,
-        slug: 1
+           slug: 1
       }
     });
   });
@@ -38,11 +38,11 @@ module(function() {
     var tournament = tournament_cursor.fetch()[0];
     if (tournament) {
       return [
-        tournament_cursor,
-        Teams.find({tournament: tournament._id}),
-        Judges.find({tournament: tournament._id}),
-        Rooms.find({tournament: tournament._id})
-      ];
+    tournament_cursor,
+    Teams.find({tournament: tournament._id}),
+    Judges.find({tournament: tournament._id}),
+    Rooms.find({tournament: tournament._id})
+    ];
     }
   });
 
@@ -51,7 +51,7 @@ module(function() {
       tournament: t_id
     }, {
       sort: [['when', 'desc']],
-      limit: 5
+           limit: 5
     });
   });
 
@@ -70,9 +70,9 @@ module(function() {
   Meteor.publish('all-judges', function(t_id) {
     var fields = {
       _id: 1,
-      school: 1,
-      name: 1,
-      tournament: 1
+    school: 1,
+    name: 1,
+    tournament: 1
     };
 
     if (isAdmin(t_id, this.userId)) {

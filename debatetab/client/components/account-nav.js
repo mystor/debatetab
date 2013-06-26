@@ -4,7 +4,7 @@ Template.accountNav.events({
 
     Modal.show(Modal.Login);
   },
-  'click #nav-logoff': function(e, tmpl) {
+  'click .account-nav-logoff': function(e, tmpl) {
     e.preventDefault();
 
     Meteor.logout();

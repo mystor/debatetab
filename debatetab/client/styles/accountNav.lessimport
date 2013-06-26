@@ -1,0 +1,12 @@
+li.account-welcome-dropdown {
+  display: none;
+}
+
+@media screen and (min-width: @screen-tablet) {
+  li.account-nav-item {
+    display: none;
+  }
+  li.account-welcome-dropdown {
+    display: block;
+  }
+}
