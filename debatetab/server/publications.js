@@ -84,19 +84,23 @@ module(function() {
   });
 
   Meteor.publish('round-pairings', function(t_id, round) {
-    var fields = {
-      _id: 1,
-      teams: 1,
-      judges: 1,
-      room: 1,
-      chair: 1,
-      round: 1,
-      tournament: 1
-    };
+    var tournament = validate.tournament(t_id);
+    validate.round(tournament, round);
 
-    var pairings = Pairings.find({ tournament: t_id, round: round }, { fields: fields });
+    if (published.show('pairings-'+round, this.userId, tournament)) {
+      var fields = {
+        _id: 1,
+        teams: 1,
+        judges: 1,
+        room: 1,
+        chair: 1,
+        round: 1,
+        tournament: 1
+      };
 
-    return pairings;
+      return Pairings.find({ tournament: t_id, round: round }, { fields: fields });
+    }
+    return [];
   });
 
   Meteor.publish('ballot', function(t_id, ballot_key) {

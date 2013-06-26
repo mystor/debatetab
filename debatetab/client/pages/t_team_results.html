@@ -7,23 +7,39 @@
     Download CSV
   </button>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Team</th>
-        <th>Points</th>
-        <th>Score</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tr>
-      <td>1</td>
-      <td>[QDU] Long Team Name</td>
-      <td>45</td>
-      <td>37.5</td>
-      <td style="text-align: right;"><i class="icon-eye-open"></i></td>
-    </tr>
-  </table>
+  {{#isolate}}
+    <table class="table agg-result-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          {{#times roundCount}}
+            <th>{{$index1}}</th>
+          {{/times}}
+          <th>Points</th>
+          <th>Score</th>
+          <th>Stdev</th>
+        </tr>
+      </thead>
+      {{#ieach teamInfos}}
+        <tr>
+          <td>{{ordinal $index1}}</td>
+          <td>[{{obj.school}}] {{obj.name}}</td>
+          {{#each obj.dispPoints}}
+            <td class="agg-result-detail-cell">
+              {{#if this}}
+                {{this}}
+              {{else}}
+                ?
+              {{/if}}
+            </td>
+          {{/each}}
+          <td>{{obj.netPoints}}</td>
+          <td>{{obj.meanScore}}</td>
+          <td class="agg-result-detail-cell">{{obj.stdev}}</td>
+        </tr>
+      {{/ieach}}
+    </table>
+  {{/isolate}}
 
 </template>

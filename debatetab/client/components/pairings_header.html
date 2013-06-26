@@ -4,9 +4,9 @@
       {{#isolate}}
         <select id="round-select">
           {{#times round_count}}
-            <option value="{{index1}}" 
-                {{#if equal round index1}}selected{{/if}}>
-              Round {{index1}}
+            <option value="{{$index1}}" 
+                {{#if equal round $index1}}selected{{/if}}>
+              Round {{$index1}}
             </option>
           {{/times}}
         </select>

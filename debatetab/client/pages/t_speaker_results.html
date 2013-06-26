@@ -7,4 +7,36 @@
     Download CSV
   </button>
 
+  {{#isolate}}
+    <table class="table agg-result-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Speaker</th>
+          {{#times roundCount}}
+            <th>{{$index1}}</th>
+          {{/times}}
+          <th>Score</th>
+          <th>Stdev</th>
+        </tr>
+      </thead>
+      {{#ieach speakerInfos}}
+        <tr>
+          <td>{{ordinal $index1}}</td>
+          <td>[{{obj.school}}] {{obj.name}}</td>
+          {{#each obj.dispScores}}
+            <td class="agg-result-detail-cell">
+              {{#if this}}
+                {{this}}
+              {{else}}
+                ?
+              {{/if}}
+            </td>
+          {{/each}}
+          <td>{{obj.meanScore}}</td>
+          <td>{{obj.stdev}}</td>
+        </tr>
+      {{/ieach}}
+    </table>
+  {{/isolate}}
 </template>

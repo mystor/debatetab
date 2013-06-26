@@ -26,8 +26,25 @@ Handlebars.registerHelper('ieach', function(context, options) {
   return ret;
 });
 
+Handlebars.registerHelper('times', function(iterations, options) {
+  var ret = '';
+
+  for (var i=0; i<iterations; i++) {
+    ret = ret + options.fn({
+      $index0: i,
+      $index1: i+1
+    });
+  }
+
+  return ret;
+});
+
 Handlebars.registerHelper('sum', function(arr) {
-  return _.reduce(arr, function(memo, num) {
-    return memo + num;
-  }, 0);
+  var math = module('math');
+  return math.sum(arr);
+});
+
+Handlebars.registerHelper('ordinal', function(num) {
+  var ordinal = module('ordinal');
+  return ordinal(num);
 });

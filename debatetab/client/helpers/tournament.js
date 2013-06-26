@@ -13,17 +13,3 @@ Handlebars.registerHelper('round', function() {
 Handlebars.registerHelper('isAdmin', function() {
   return DebateTab.isAdmin();
 });
-
-Handlebars.registerHelper('times', function(count, options) {
-  var out = '';
-
-  for (var i=0; i<count; i++) {
-    out += options.fn({
-      index0: i,
-      index1: i+1
-    });
-  }
-
-  return out;
-});
-

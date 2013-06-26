@@ -39,6 +39,14 @@ Deps.autorun(function() {
             Subs.pairings = Meteor.subscribe('round-pairings', t_id, DebateTab.round());
             Subs.results = Meteor.subscribe('round-results', t_id, DebateTab.round());
             break;
+          case 't_speaker_results': // Fall through
+          case 't_team_results':
+            var round_count = DebateTab.tournament('round');
+            for (var round=1; round<round_count+1; round++) {
+              Subs['pairings-'+round] = Meteor.subscribe('round-pairings', t_id, round);
+              Subs['results-'+round] = Meteor.subscribe('round-results', t_id, round);
+            }
+            break;
         }
       } else {
         // Tournament doesn't exist! Redirect

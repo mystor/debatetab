@@ -96,3 +96,4 @@ Meteor.Router.beforeRouting = function() {
   Session.set('t_slug', '');
   Session.set('round', 0);
 };
+

@@ -4,9 +4,9 @@
       {{#isolate}}
         <select id="view-select">
           {{#times round_count}}
-            <option value="{{index1}}" 
-                {{#if equal view index1}}selected{{/if}}>
-              Round {{index1}}
+            <option value="{{$index1}}" 
+                {{#if equal view $index1}}selected{{/if}}>
+              Round {{$index1}}
             </option>
           {{/times}}
           <option value="team"
