@@ -22,7 +22,7 @@
       </thead>
       {{#ieach speakerInfos}}
         <tr>
-          <td>{{ordinal $index1}}</td>
+          <td>{{ordinal obj.rank}}</td>
           <td>[{{obj.school}}] {{obj.name}}</td>
           {{#each obj.dispScores}}
             <td class="agg-result-detail-cell">
@@ -33,8 +33,8 @@
               {{/if}}
             </td>
           {{/each}}
-          <td>{{obj.meanScore}}</td>
-          <td>{{obj.stdev}}</td>
+          <td>{{fixedNum obj.meanScore 4}}</td>
+          <td>{{fixedNum obj.stdev 4}}</td>
         </tr>
       {{/ieach}}
     </table>

@@ -21,3 +21,13 @@
     }
   }
 }
+
+@media screen and (min-width: @screen-tablet) {
+  .result-team {
+    width: 50%;
+  }
+  .result-speakers {
+    width: 50%;
+    text-align: right;
+  }
+}

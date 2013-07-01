@@ -10,6 +10,9 @@ Template.results_header.helpers({
   },
   round_count: function() {
     return DebateTab.tournament('round');
+  },
+  query: function() {
+    return Session.get('search');
   }
 });
 

@@ -2,14 +2,44 @@ module(function() {
   var math = module('math');
   var ordinal = module('ordinal');
 
+  var speakerInfosDeps = new Deps.Dependency();
+  var speakerInfos = [];
+
+  var pageShowingDeps = new Deps.Dependency();
+  var pageShowing = false;
+
   Template.t_speaker_results.helpers({
     speakerInfos: function() {
+      speakerInfosDeps.depend();
+      return speakerInfos;
+    },
+    roundCount: function() {
+      return DebateTab.tournament('round');
+    }
+  });
+
+  Template.t_speaker_results.rendered = function() {
+    if (pageShowing === false) {
+      pageShowing = true;
+      pageShowingDeps.changed();
+    }
+  };
+
+  Deps.autorun(function() {
+    console.log('foo');
+    if (Meteor.Router.page() === 't_speaker_results') {
+      // Ensure that the page is already showing
+      pageShowingDeps.depend();
+      if (!pageShowing) { return; }
+
       var roundCount = DebateTab.tournament('round');
       var roomSize = DebateTab.tournament('room_size');
       var teamSize = DebateTab.tournament('team_size');
 
       var teams = Teams.find({ tournament: DebateTab.tournament('_id') }).fetch();
-      var speakerInfos = [];
+
+      // Clear the speakerInfos object
+      speakerInfos = [];
       _.each(teams, function(team) {
         var t_results = Results.find({
           tournament: DebateTab.tournament('_id'),
@@ -74,10 +104,15 @@ module(function() {
         }
       }).reverse();
 
-      return speakerInfos;
-    },
-    roundCount: function() {
-      return DebateTab.tournament('round');
+      // Give each speaker info a rank
+      _.each(speakerInfos, function(speakerInfo, index) {
+        speakerInfo.rank = index + 1;
+      });
+
+      speakerInfosDeps.changed();
+    } else if (pageShowing === true) {
+      pageShowing = false;
+      pageShowingDeps.changed();
     }
   });
 });

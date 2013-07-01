@@ -92,7 +92,7 @@ Meteor.Router.add({
 
 Meteor.Router.beforeRouting = function() {
   Modal.hide();
-  Session.set('search', '');
+  Session.setDefault('search', '');
   Session.set('t_slug', '');
   Session.set('round', 0);
 };

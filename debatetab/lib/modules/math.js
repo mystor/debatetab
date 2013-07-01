@@ -21,9 +21,9 @@ module('math', function() {
       } else {
         // Fall back if there are not enough elements for a hilodrop
         if (count > 1) {
-          return hilodrop(arr, count-1);
+          return math.hilodrop(arr, count-1);
         } else {
-          return mean(arr);
+          return math.mean(arr);
         }
       }
     },

@@ -33,61 +33,77 @@
   {{/isolate}}
 
   {{! PAIRINGS DISPLAY}}
-  {{#if pairings.count}}
-    <table id="pairings-table" class="table show-teams">
-      <thead>
-        <tr>
-          <th>Room</th>
-          <th>Teams</th>
-          <th>Judges</th>
-        </tr>
-      </thead>
-      {{#isolate}}
-        {{#each pairings}}
+  {{#if pairingsLoaded}}
+    {{#if pairings.count}}
+      <table id="pairings-table" class="table show-teams">
+        <thead>
           <tr>
-            {{! Room Name}}
-            <td>
-              <div class="room" data-id="{{room}}" data-pairingId="{{_id}}">
-                {{room_name room}}
-                {{#if room_find_url room}}
-                <p style="text-align: center;">
-                  <a href="{{room_find_url room}}">
-                    <i class="icon-map-marker icon-2x"></i>
-                  </a>
-                </p>
-                {{/if}}
-              </div>
-            </td>
-
-            {{! Teams}}
-            <td class="teams-col">
-              {{#ieach teams}}
-                <div class="team" data-id="{{obj}}" data-pairingId="{{../_id}}">
-                  <span class="label {{position_class $index0}}">{{position_slug $index0}}</span>
-                  [{{team_school obj}}]
-                  {{team_name obj}}
-                </div>
-              {{/ieach}}
-            </td>
-            <td class="judges-col">
-              {{#each judges}}
-                <div class="judge {{chair_class this ../chair}}" data-id="{{this}}" data-pairingId="{{../_id}}">
-                  [{{judge_school this}}]
-                  {{judge_name this}}
-                </div>
-              {{/each}}
-              {{#if holding_judge}}
-              <div class="empty-cell empty-judge" data-pairingid="{{_id}}">empty</div>
-              {{/if}}
-            </td>
+            <th>Room</th>
+            <th>Teams</th>
+            <th>Judges</th>
           </tr>
-        {{/each}}
-      {{/isolate}}
-    </table>
+        </thead>
+        {{#isolate}}
+          {{#each pairings}}
+            <tr>
+              {{! Room Name}}
+              <td>
+                <div class="room" data-id="{{room}}" data-pairingId="{{_id}}">
+                  {{room_name room}}
+                  {{#if room_find_url room}}
+                  <p style="text-align: center;">
+                    <a href="{{room_find_url room}}">
+                      <i class="icon-map-marker icon-2x"></i>
+                    </a>
+                  </p>
+                  {{/if}}
+                </div>
+              </td>
+
+              {{! Teams}}
+              <td class="teams-col">
+                {{#ieach teams}}
+                  <div class="team" data-id="{{obj}}" data-pairingId="{{../_id}}">
+                    <span class="label {{position_class $index0}}">{{position_slug $index0}}</span>
+                    [{{team_school obj}}]
+                    {{team_name obj}}
+                  </div>
+                {{/ieach}}
+              </td>
+              <td class="judges-col">
+                {{#each judges}}
+                  <div class="judge {{chair_class this ../chair}}" data-id="{{this}}" data-pairingId="{{../_id}}">
+                    [{{judge_school this}}]
+                    {{judge_name this}}
+                  </div>
+                {{/each}}
+                {{#if holding_judge}}
+                <div class="empty-cell empty-judge" data-pairingid="{{_id}}">empty</div>
+                {{/if}}
+              </td>
+            </tr>
+          {{/each}}
+        {{/isolate}}
+      </table>
+    {{else}}
+      <div class="text-center" style="padding-top: 10px;">
+        {{#if searchQuery}}
+          <i class="icon-search icon-4x"></i><br>
+          <h3>Can't find any pairings</h3>
+          <h4>Your query ({{searchQuery}}) has no results</h4>
+        {{else}}
+          <i class="icon-info icon-4x"></i><br>
+          <h3>No pairings here</h3>
+          {{#if isAdmin}}
+            <h4>You can use the <em>Manual</em> or <em>Autopair</em> options to generate some!</h4>
+          {{/if}}
+        {{/if}}
+      </div>
+    {{/if}}
   {{else}}
-    <div class="text-center" style="margin-top: 10px;">
-      <p>This round doesn&apos;t have any pairings yet.</p>
-      <p>Use the <em>Manual</em> or <em>Autopair</em> options to generate pairings for the round.</p>
+    <div class="text-center" style="padding-top: 10px;">
+      <i class="icon-spinner icon-spin icon-4x"></i>
+      <h3>Loading Pairings...</h3>
     </div>
   {{/if}}
 

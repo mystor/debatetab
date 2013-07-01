@@ -35,8 +35,8 @@
             </td>
           {{/each}}
           <td>{{obj.netPoints}}</td>
-          <td>{{obj.meanScore}}</td>
-          <td class="agg-result-detail-cell">{{obj.stdev}}</td>
+          <td>{{fixedNum obj.meanScore 4}}</td>
+          <td class="agg-result-detail-cell">{{fixedNum obj.stdev 4}}</td>
         </tr>
       {{/ieach}}
     </table>

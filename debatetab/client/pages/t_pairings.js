@@ -33,62 +33,13 @@ module(function() {
      * LIST OF PAIRINGS
      */
     pairings: function() {
-      var $regex = {
-        $regex: Meteor.Regex.clean(Session.get('search')),
-        $options: 'i'
-      };
-      // Find any teams which match the search query
-      var teams = _.map(Teams.find({
-        tournament: DebateTab.tournament('_id'),
-        $or: [
-          {name: $regex},
-          {school: $regex},
-          {
-            speakers: {
-              $elemMatch: {
-                name: $regex
-              }
-            }
-          }
-        ]
-      }).fetch(), function(team) {return team._id;});
-
-      var rooms = _.map(Rooms.find({
-        tournament: DebateTab.tournament('_id'),
-        name: $regex
-      }).fetch(), function(room) {return room._id;});
-
-      var judges = _.map(Judges.find({
-        tournament: DebateTab.tournament('_id'),
-        $or: [
-          {name: $regex},
-          {school: $regex}
-        ]
-      }).fetch(), function(judge) {return judge._id;});
-
-      var pairings = Pairings.find({
-        tournament: DebateTab.tournament('_id'),
-        round: DebateTab.round(),
-        $or: [
-          {
-            $where: function() {
-              return !_.isEmpty(_.intersection(this.teams, teams));
-            }
-          },
-          {
-            $where: function() {
-              return !_.isEmpty(_.intersection(this.judges, judges));
-            }
-          },
-          {
-            room: {
-              $in: rooms
-            }
-          }
-        ]
-      });
-      // console.log(pairings.fetch());
-      return pairings;
+      return module('searchPairings')(Session.get('search'));
+    },
+    pairingsLoaded: function() {
+      return Subs.isReady('pairings');
+    },
+    searchQuery: function() {
+      return Session.get('search');
     },
 
     swapping: function() {

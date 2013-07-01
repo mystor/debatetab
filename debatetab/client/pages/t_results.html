@@ -20,48 +20,55 @@
   {{/if}}
 
   {{! Results Display}}
-  <div class="list-group" style="padding-top: 10px;">
-    {{#each pairings}}
-      <div class="list-group-item" style="padding: 10px 0px 0px; border: 0px;">
-        <h4 class="list-group-item-heading" style="text-align: center;">{{room_name room}}</h4>
-        <p class="list-group-item-text">
-        <table class="table" style="margin-bottom: 0px;">
-          {{#each teams}}
-            <tr>
-              <td class="result-team">
-                <div class="result-team-name">
-                  [{{team_school this}}]
-                  {{team_name this}}
-                </div>
-                <div class="result-team-summary">
-                  {{#with result this}}
-                    {{#with scores}}
-                      <div class="label label-info">{{sum this}}</div>
-                    {{/with}}
-                    <div class="label label-success">{{to_rank points}}</div>
-                  {{else}}
-                    <div class="label label-danger">No Data</div>
-                  {{/with}}
-                </div>
-              </td>
-              <td class="result-speakers">
-                {{#ieach team_speakers this}}
-                  <div>
-                    {{obj.name}}
-                    {{#with result ..}}
+  {{#if resultsLoaded}}
+    <div class="list-group" style="padding-top: 10px;">
+      {{#each pairings}}
+        <div class="list-group-item" style="padding: 10px 0px 0px; border: 0px;">
+          <h4 class="list-group-item-heading" style="text-align: center;">{{room_name room}}</h4>
+          <p class="list-group-item-text">
+          <table class="table" style="margin-bottom: 0px;">
+            {{#each teams}}
+              <tr>
+                <td class="result-team">
+                  <div class="result-team-name">
+                    [{{team_school this}}]
+                    {{team_name this}}
+                  </div>
+                  <div class="result-team-summary">
+                    {{#with result this}}
                       {{#with scores}}
-                        <div class="label label-info">
-                          {{speaker_score this ../../$index0}}</div>
+                        <div class="label label-info">{{sum this}}</div>
                       {{/with}}
+                      <div class="label label-success">{{to_rank points}}</div>
+                    {{else}}
+                      <div class="label label-danger">No Data</div>
                     {{/with}}
                   </div>
-                {{/ieach}}
-              </td>
-            </tr>
-          {{/each}}
-        </p>
-      </div>
-    {{/each}}
-  </div>
+                </td>
+                <td class="result-speakers">
+                  {{#ieach team_speakers this}}
+                    <div>
+                      {{obj.name}}
+                      {{#with result ..}}
+                        {{#with scores}}
+                          <div class="label label-info">
+                            {{speaker_score this ../../$index0}}</div>
+                        {{/with}}
+                      {{/with}}
+                    </div>
+                  {{/ieach}}
+                </td>
+              </tr>
+            {{/each}}
+          </p>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="text-center" style="padding-top: 10px">
+      <i class="icon-spinner icon-spin icon-4x"></i>
+      <h3>Loading Results...</h3>
+    </div>
+  {{/if}}
 
 </template>

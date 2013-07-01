@@ -48,3 +48,7 @@ Handlebars.registerHelper('ordinal', function(num) {
   var ordinal = module('ordinal');
   return ordinal(num);
 });
+
+Handlebars.registerHelper('fixedNum', function(num, precision) {
+  return num.toFixed(precision);
+});

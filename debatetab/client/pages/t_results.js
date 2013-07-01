@@ -3,10 +3,10 @@ module(function() {
 
   Template.t_results.helpers({
     pairings: function() {
-      return Pairings.find({
-        tournament: DebateTab.tournament('_id'),
-        round: DebateTab.round()
-      });
+      return module('searchPairings')(Session.get('search'));
+    },
+    resultsLoaded: function() {
+      return Subs.isReady('results') && Subs.isReady('pairings');
     },
     result: function(team_id) {
       return Results.findOne({
