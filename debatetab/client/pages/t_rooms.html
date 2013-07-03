@@ -1,0 +1,56 @@
+<template name="t_rooms">
+  {{! SETUP TYPE SELECTION & SEARCH BOX}}
+  {{> setup_header}}
+
+  {{! CONTROL BAR}}
+  <div class="control-bar-wrapper">
+    <div class="control-bar">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="icon-wrench"></i>
+        </span>
+        {{#isolate}}
+          {{!> rooms_default_controlbar}}
+        {{/isolate}}
+      </div>
+    </div>
+  </div>
+
+  {{#if roomsLoaded}}
+    {{#if rooms.count}}
+      <table id="rooms-table" class="table">
+        <thead>
+          <tr>
+            <th>&nbsp;<!-- LOCATION --></th>
+            <th>Name</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        {{#isolate}}
+          {{#each rooms}}
+            <tr>
+              <td class="text-right" style="width: 1%; padding-bottom: 0px;">
+                {{#if find_url}}
+                  <a href="{{find_url}}" class="icon-stack find-url-hover pull-right" title="{{find_url}}" style="margin-top: -3px;">
+                    <i class="icon-map-marker"></i>
+                    <i class="icon-circle-blank text-success icon-stack-base"></i>
+                  </span>
+                {{else}}
+                  <span class="icon-stack pull-right" style="margin-top: -3px">
+                    <i class="icon-map-marker"></i>
+                    <i class="icon-ban-circle text-danger icon-stack-base"></i>
+                  </span>
+                {{/if}}
+              </td>
+              <td>{{name}}</td>
+              <td>{{rank}}</td>
+            </tr>
+          {{/each}}
+        {{/isolate}}
+      </table>
+    {{else}}
+      {{! TODO: Fix this error message}}
+      This tournament has no rooms!
+    {{/if}}
+  {{/if}}
+</template>

@@ -19,17 +19,33 @@ var load_round = function(t_slug, _round) {
 
 // Define the routes
 Meteor.Router.add({
-  '/': { // TODO: Home, display the list of tournaments
+  /*
+   * Homepage - tournament list + marketing
+   */
+  '/': {
     as: 'tournament_list',
     to: 'tournament_list'
   },
-  '/t/:_slug': { // TODO: Display updates for tournament
+  /*
+   * Display tournament info & basic tournament commands
+   */
+  '/t/:_slug': {
     as: 'overview',
     to: 't_overview',
     and: load_tournament
   },
-  // TODO: Add redirecting to current round for when no round is defined
-  '/t/:_slug/pairings/:_round': { // TODO: Display pairings for round
+  /*
+   * PAIRINGS RELATED ROUTES
+   */
+  '/t/:_slug/pairings': {
+    to: function(_slug) {
+      Meteor.defer(function() {
+        Meteor.Router.to('pairings', _slug, DebateTab.round());
+      });
+      return '';
+    }
+  },
+  '/t/:_slug/pairings/:_round': {
     as: 'pairings',
     to: 't_pairings',
     and: function(_slug, _round) {
@@ -49,6 +65,9 @@ Meteor.Router.add({
       Session.setDefault('RoomStrategy', 0);
     }
   },
+  /*
+   * RESULT RELATED ROUTES
+   */
   '/t/:_slug/results': { // Redirect to team results tab
     to: function(_slug) {
       Meteor.defer(function () {
@@ -57,36 +76,49 @@ Meteor.Router.add({
       return '';
     }
   },
-  '/t/:_slug/results/team': { // TODO: Display team tab
+  '/t/:_slug/results/team': { // TEAM TAB
     as: 'team_results',
     to: 't_team_results',
     and: load_tournament
   },
-  '/t/:_slug/results/speaker': { // TODO: Display speaker tab
+  '/t/:_slug/results/speaker': { // SPEAKER TAB
     as: 'speaker_results',
     to: 't_speaker_results',
     and: load_tournament
   },
-  '/t/:_slug/results/:_round': { // TODO: Display results
+  '/t/:_slug/results/:_round': {
     as: 'results',
     to: 't_results',
     and: load_round
   },
-  '/t/:_slug/pairing/:_id': { // TODO: Display individual pairing
-    as: 'pairing',
-    to: 't_pairing',
-    and: function(_slug, _id) {
-      load_tournament(_slug);
-      Session.set('pairing', _id);
-    }
-  },
-  '/t/:_slug/ballot/:_guid': { // TODO: Allow for modifying of ballot
+  /*
+   * BALLOT EDITING & SUBMISSION
+   */
+  '/t/:_slug/ballot/:_guid': { 
     as: 'ballot',
     to: 't_ballot',
     and: function(_slug, _guid) {
       load_tournament(_slug);
       Session.set('ballot_key', _guid);
     }
+  },
+  /*
+   * TOURNAMENT SETUP
+   */
+  '/t/:_slug/setup/teams': {
+    as: 'team_list',
+    to: 't_teams',
+    and: load_tournament
+  },
+  '/t/:_slug/setup/judges': {
+    as: 'judge_list',
+    to: 't_judges',
+    and: load_tournament
+  },
+  '/t/:_slug/setup/rooms': {
+    as: 'room_list',
+    to: 't_rooms',
+    and: load_tournament
   }
 });
 

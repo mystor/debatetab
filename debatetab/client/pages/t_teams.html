@@ -1,0 +1,56 @@
+<template name="t_teams">
+  {{! SETUP TYPE SELECTION & SEARCH BOX}}
+  {{> setup_header}}
+
+  {{! CONTROL BAR}}
+  <div class="control-bar-wrapper">
+    <div class="control-bar">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="icon-wrench"></i>
+        </span>
+        {{#isolate}}
+          {{!> teams_default_controlbar}}
+        {{/isolate}}
+      </div>
+    </div>
+  </div>
+
+  {{#if teamsLoaded}}
+    {{#if teams.count}}
+      <table id="teams-table" class="table">
+        <thead>
+          <tr>
+            <th style="width: 1%">School</th>
+            <th>Name</th>
+            <th>Debaters</th>
+          </tr>
+        </thead>
+        {{#isolate}}
+          {{#each teams}}
+            <tr>
+              <td style="width: 1%">[{{school}}]</td>
+              <td>{{name}}</td>
+              <td>
+                {{#each speakers}}
+                  <div>
+                    {{name}}
+                    {{#each flags}}
+                      <div class="label label-info">{{this}}</div>
+                    {{/each}}
+                  </div>
+                {{/each}}
+              </td>
+              <td style="width: 1%">
+                <a href="#"><i class="icon-edit-sign icon-2x"></i></a>
+              </td>
+            </tr>
+          {{/each}}
+        {{/isolate}}
+      </table>
+    {{else}}
+      {{! TODO: Fix this error message}}
+      This tournament has no teams!
+    {{/if}}
+  {{/if}}
+</template>

@@ -1,6 +1,7 @@
 module(function() {
   var math = module('math');
   var ordinal = module('ordinal');
+  var regex = module('regex');
 
   var speakerInfosDeps = new Deps.Dependency();
   var speakerInfos = [];
@@ -11,6 +12,17 @@ module(function() {
   Template.t_speaker_results.helpers({
     speakerInfos: function() {
       speakerInfosDeps.depend();
+      var query = Session.get('search');
+      if (query) {
+        // There is a search query going on
+
+        var $regex = new RegExp(regex.clean(query), 'i');
+        return _.filter(speakerInfos, function(speakerInfo) {
+          return $regex.test(speakerInfo.name) ||
+              $regex.test(speakerInfo.school) ||
+              $regex.test(speakerInfo.team);
+        });
+      }
       return speakerInfos;
     },
     roundCount: function() {
@@ -26,7 +38,8 @@ module(function() {
   };
 
   Deps.autorun(function() {
-    console.log('foo');
+    var start = +new Date();
+    console.log('yippee');
     if (Meteor.Router.page() === 't_speaker_results') {
       // Ensure that the page is already showing
       pageShowingDeps.depend();
@@ -114,5 +127,6 @@ module(function() {
       pageShowing = false;
       pageShowingDeps.changed();
     }
+    console.log(new Date() - start);
   });
 });

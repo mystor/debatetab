@@ -1,0 +1,51 @@
+<template name="t_judges">
+  {{! SETUP VIEW SELECTION & SEARCH BOX}}
+  {{> setup_header}}
+
+  {{! CONTROL BAR}}
+  <div class="control-bar-wrapper">
+    <div class="control-bar">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="icon-wrench"></i>
+        </span>
+        {{#isolate}}
+          {{!> judges_default_controlbar}}
+        {{/isolate}}
+      </div>
+    </div>
+  </div>
+
+  {{#if judgesLoaded}}
+    {{#if judges.count}}
+      {{#each judges}}
+        <div class="col col-sm-6 col-lg-3">
+          <div class="panel">
+            [{{school}}] {{name}}
+            <div class="label label-info pull-right">Rank: {{rank}}</div>
+          </div>
+        </div>
+      {{/each}}
+      <table id="judges-table" class="table">
+        <thead>
+          <tr>
+            <th style="width: 1%">School</th>
+            <th>Name</th>
+            {{#if isAdmin}}
+              <th>Rank</th>
+            {{/if}}
+          </tr>
+        </thead>
+        {{#isolate}}
+          {{#each judges}}
+            <tr>
+              <td style="width: 1%">[{{school}}]</td>
+              <td>{{name}}</td>
+              <td>{{rank}}</td>
+            </tr>
+          {{/each}}
+        {{/isolate}}
+      </table>
+    {{/if}}
+  {{/if}}
+</template>

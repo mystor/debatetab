@@ -1,0 +1,22 @@
+<template name="setup_header">
+  <div class="row">
+    <div class="col col-sm-3 col-6">
+      {{#isolate}}
+        <select id="view-select">
+          <option value="teams" {{#if equal 'teams' view}}selected{{/if}}>
+            Teams
+          </option>
+          <option value="judges" {{#if equal 'judges' view}}selected{{/if}}>
+            Judges
+          </option>
+          <option value="rooms" {{#if equal 'rooms' view}}selected{{/if}}>
+            Rooms
+          </option>
+        </select>
+      {{/isolate}}
+    </div>
+    <div class="col col-sm-9 col-6">
+      <input id="search-box" type="text" value="{{query}}" placeholder="Search Settings">
+    </div>
+  </div>
+</template>

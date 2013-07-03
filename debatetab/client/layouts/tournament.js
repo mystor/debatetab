@@ -19,6 +19,10 @@ Template.tournamentLayout.helpers({
     }
   },
   setupClass: function() {
-    return ''; // TODO: add support for setup pages
+    if (Meteor.Router.page() === 't_teams' ||
+        Meteor.Router.page() === 't_judges' ||
+        Meteor.Router.page() === 't_rooms') {
+      return 'active';
+    }
   }
 });
