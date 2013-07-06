@@ -38,8 +38,6 @@ module(function() {
   };
 
   Deps.autorun(function() {
-    var start = +new Date();
-    console.log('yippee');
     if (Meteor.Router.page() === 't_speaker_results') {
       // Ensure that the page is already showing
       pageShowingDeps.depend();
@@ -127,6 +125,5 @@ module(function() {
       pageShowing = false;
       pageShowingDeps.changed();
     }
-    console.log(new Date() - start);
   });
 });

@@ -12,6 +12,17 @@ Template.setup_header.helpers({
   },
   query: function() {
     return Session.get('search');
+  },
+  targetName: function() {
+    if (Meteor.Router.page() === 't_teams') {
+      return 'Teams';
+    } else if (Meteor.Router.page() === 't_judges') {
+      return 'Judges';
+    } else if (Meteor.Router.page() === 't_rooms') {
+      return 'Rooms';
+    } else {
+      throw 'SETUP HEADER DISPLAYING ON INVALID PAGE';
+    }
   }
 });
 
