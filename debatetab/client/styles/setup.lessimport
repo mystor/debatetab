@@ -1,18 +1,28 @@
 // Edit link for setup
 .setup-edit-link {
+  // Create spacing between link and labels
   padding-left: 10px;
-  margin-top: -5px;
+  // Posiition in the center of the cell
+  margin-top: -4px;
+  // Don't show underlines on hover
   a {
     text-decoration: none;
   }
 }
+.setup-rank-label {
+  // Position in the center of the cell
+  margin-top: 2px;
+}
 
 a.setup-find-url, span.setup-find-url {
+  // Position in the center of the cell
   margin-top: -5px;
+  // Don't show underlines on hover
   text-decoration: none;
 }
 
 .setup-item-panel {
+  // Move the padding to the top, and make it 10px
   margin-top: 10px;
   margin-bottom: 0px;
 }
