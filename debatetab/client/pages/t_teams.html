@@ -33,36 +33,6 @@
           </div>
         </div>
       {{/each}}
-      <table id="teams-table" class="table">
-        <thead>
-          <tr>
-            <th style="width: 1%">School</th>
-            <th>Name</th>
-            <th>Debaters</th>
-          </tr>
-        </thead>
-        {{#isolate}}
-          {{#each teams}}
-            <tr>
-              <td style="width: 1%">[{{school}}]</td>
-              <td>{{name}}</td>
-              <td>
-                {{#each speakers}}
-                  <div>
-                    {{name}}
-                    {{#each flags}}
-                      <div class="label label-info">{{this}}</div>
-                    {{/each}}
-                  </div>
-                {{/each}}
-              </td>
-              <td style="width: 1%">
-                <a href="#"><i class="icon-edit-sign icon-2x"></i></a>
-              </td>
-            </tr>
-          {{/each}}
-        {{/isolate}}
-      </table>
     {{else}}
       {{! TODO: Fix this error message}}
       This tournament has no teams!
