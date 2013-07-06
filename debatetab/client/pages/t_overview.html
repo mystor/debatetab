@@ -6,17 +6,37 @@
           Tournament Information
         </div>
         <table class="tournament-info-table">
-          <tr>
-            <th>Name</th>
-            <td>{{name}}</td>
-          </tr>
-          <tr>
-            <th>When</th>
-          </tr>
-          <tr>
-            <th>Location</th>
-            <td>{{location}}</td>
-          </tr>
+          {{#with tournament}}
+            <tr>
+              <th>Name</th>
+              <td>{{name}}</td>
+            </tr>
+            <tr>
+              <th>When</th>
+              <td>{{date when}}</td>
+            </tr>
+            <tr>
+              <th>Location</th>
+              <td>{{location}}</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+              <th>Type</th>
+              <td>{{type.name}}</td>
+            </tr>
+            <tr>
+              <th>Team Size</th>
+              <td>{{team_size}}</td>
+            </tr>
+            <tr>
+              <th>Room Size</th>
+              <td>{{room_size}}</td>
+            </tr>
+            <tr>
+              <th>Score Range</th>
+              <td>{{min_score}}, {{sum min_score score_inc}} ... {{max_score}}</td>
+            </tr>
+          {{/with}}
         </table>
       </div>
     </div>

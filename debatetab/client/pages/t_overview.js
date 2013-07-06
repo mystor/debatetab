@@ -1,4 +1,7 @@
 Template.t_overview.helpers({
+  tournament: function() {
+    return DebateTab.tournament();
+  },
   location: function() {
     return DebateTab.tournament('location');
   },

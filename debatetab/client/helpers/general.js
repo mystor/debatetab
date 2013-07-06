@@ -41,7 +41,11 @@ Handlebars.registerHelper('times', function(iterations, options) {
 
 Handlebars.registerHelper('sum', function(arr) {
   var math = module('math');
-  return math.sum(arr);
+  if (_.isArray(arr)) {
+    return math.sum(arr);
+  } else {
+    return math.sum(_.initial(arguments));
+  }
 });
 
 Handlebars.registerHelper('ordinal', function(num) {
