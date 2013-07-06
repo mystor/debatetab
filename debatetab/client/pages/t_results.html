@@ -21,9 +21,9 @@
 
   {{! Results Display}}
   {{#if resultsLoaded}}
-    <div class="list-group" style="padding-top: 10px;">
-      {{#each pairings}}
-        <div class="list-group-item" style="padding: 10px 0px 0px; border: 0px;">
+    {{#each pairings}}
+      <div class="col col-lg-6">
+        <div class="panel" style="margin-top: 10px; margin-bottom: 0px;">
           <h4 class="list-group-item-heading" style="text-align: center;">{{room_name room}}</h4>
           <p class="list-group-item-text">
           <table class="table" style="margin-bottom: 0px;">
@@ -62,8 +62,8 @@
             {{/each}}
           </p>
         </div>
-      {{/each}}
-    </div>
+      </div>
+    {{/each}}
   {{else}}
     <div class="text-center" style="padding-top: 10px">
       <i class="icon-spinner icon-spin icon-4x"></i>

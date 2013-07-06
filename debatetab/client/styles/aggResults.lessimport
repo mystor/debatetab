@@ -8,7 +8,7 @@
   }
 }
 
-@media screen and (min-width: @screen-tablet) {
+@media screen and (min-width: @screen-desktop) {
   .agg-result-table {
     .agg-result-detail-cell {
       display: table-cell;

@@ -18,6 +18,21 @@
 
   {{#if teamsLoaded}}
     {{#if teams.count}}
+      {{#each teams}}
+        <div class="col col-lg-6">
+          <div class="panel setup-item-panel">
+            <div class="pull-right setup-edit-link" style="margin-top: 0px;">
+              <a href="#"><i class="icon-edit-sign icon-2x"></i></a>
+            </div>
+            <div>[{{school}}] {{name}}</div>
+            {{#each speakers}}
+              <div>{{name}}
+                {{#each flags}}<div class="label label-info">{{this}}</div>{{/each}}
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
       <table id="teams-table" class="table">
         <thead>
           <tr>

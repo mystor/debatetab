@@ -19,33 +19,19 @@
   {{#if judgesLoaded}}
     {{#if judges.count}}
       {{#each judges}}
-        <div class="col col-sm-6 col-lg-3">
-          <div class="panel">
-            [{{school}}] {{name}}
+        <div class="col col-sm-6 col-lg-4">
+          <div class="panel setup-item-panel">
+            [{{school}}] {{name}} 
+            <div class="pull-right setup-edit-link">
+              <a href="#"><i class="icon-edit-sign icon-2x"></i></a>
+            </div>
             <div class="label label-info pull-right">Rank: {{rank}}</div>
           </div>
         </div>
       {{/each}}
-      <table id="judges-table" class="table">
-        <thead>
-          <tr>
-            <th style="width: 1%">School</th>
-            <th>Name</th>
-            {{#if isAdmin}}
-              <th>Rank</th>
-            {{/if}}
-          </tr>
-        </thead>
-        {{#isolate}}
-          {{#each judges}}
-            <tr>
-              <td style="width: 1%">[{{school}}]</td>
-              <td>{{name}}</td>
-              <td>{{rank}}</td>
-            </tr>
-          {{/each}}
-        {{/isolate}}
-      </table>
+    {{else}}
+      {{! TODO: Fix this error message}}
+      This tournament has no judges!
     {{/if}}
   {{/if}}
 </template>
