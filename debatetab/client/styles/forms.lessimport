@@ -1,0 +1,10 @@
+@media screen and (min-width: @screen-tablet) {
+  input.form-left-text {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  input.form-right-text {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+}

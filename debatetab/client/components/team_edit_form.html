@@ -1,0 +1,32 @@
+<template name="team_edit_form">
+  <div class="row" style="margin-top: 0px;">
+    <div class="control-group col col-sm-3" style="padding: 0px;">
+      <label class="control-label" for="school">School</label>
+      <div class="controls">
+        <input class="form-left-text" type="text" placeholder="School">
+      </div>
+    </div>
+    <div class="control-group col col-sm-9" style="padding: 0px;">
+      <label class="control-label" for="name">Name</label>
+      <div class="controls">
+        <input class="form-right-text" type="text" placeholder="Name">
+      </div>
+    </div>
+  </div>
+  {{#times tournament 'team_size'}}
+    <div class="row" style="margin-top: 10px;">
+      <div class="control-group col col-sm-9" style="padding: 0px;">
+        <label class="control-label" for="school">Speaker {{$index1}} Name</label>
+        <div class="controls">
+          <input class="form-left-text" type="text" placeholder="Speaker Name">
+        </div>
+      </div>
+      <div class="control-group col col-sm-3" style="padding: 0px;">
+        <label class="control-label" for="name">Flags</label>
+        <div class="controls">
+          <input class="form-right-text" type="text" placeholder="Flags">
+        </div>
+      </div>
+    </div>
+  {{/times}}
+</template>
