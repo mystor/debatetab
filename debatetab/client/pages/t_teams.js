@@ -8,3 +8,16 @@ Template.t_teams.helpers({
     return Subs.isReady('teams');
   }
 });
+
+Template.t_teams.events({
+  'click .team-edit-btn': function(e, tmpl) {
+    e.preventDefault();
+
+    // Get the team's ID
+    var teamId = $(e.currentTarget).data('id');
+    Session.set('editing', teamId);
+
+    // Show the modal
+    Modal.show(Modal.TeamsEdit);
+  }
+});

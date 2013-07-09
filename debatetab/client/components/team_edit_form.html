@@ -3,28 +3,28 @@
     <div class="control-group col col-sm-3" style="padding: 0px;">
       <label class="control-label" for="school">School</label>
       <div class="controls">
-        <input class="form-left-text" type="text" placeholder="School">
+        <input class="form-left-text" name="school" type="text" placeholder="School" value="{{school}}">
       </div>
     </div>
     <div class="control-group col col-sm-9" style="padding: 0px;">
       <label class="control-label" for="name">Name</label>
       <div class="controls">
-        <input class="form-right-text" type="text" placeholder="Name">
+        <input class="form-right-text" name="name" type="text" placeholder="Name" value="{{name}}">
       </div>
     </div>
   </div>
   {{#times tournament 'team_size'}}
     <div class="row" style="margin-top: 10px;">
       <div class="control-group col col-sm-9" style="padding: 0px;">
-        <label class="control-label" for="school">Speaker {{$index1}} Name</label>
+        <label class="control-label" for="speaker-{{$index0}}">Speaker {{$index1}} Name</label>
         <div class="controls">
-          <input class="form-left-text" type="text" placeholder="Speaker Name">
+          <input class="form-left-text" name="speaker-{{$index0}}" type="text" placeholder="Speaker Name" value="{{speakerName ../speakers $index0}}">
         </div>
       </div>
       <div class="control-group col col-sm-3" style="padding: 0px;">
-        <label class="control-label" for="name">Flags</label>
+        <label class="control-label" for="flags-{{$index0}}">Flags</label>
         <div class="controls">
-          <input class="form-right-text" type="text" placeholder="Flags">
+          <input class="form-right-text" name="flags-{{$index0}}" type="text" placeholder="Flags" value="{{speakerFlags ../speakers $index0}}">
         </div>
       </div>
     </div>
