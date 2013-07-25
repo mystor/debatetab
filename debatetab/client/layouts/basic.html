@@ -19,8 +19,8 @@
               <a href="#">Contact</a>
             </li>
             {{#if currentUser}}
-              <li>
-                <a href="#">New Tournament</a>
+              <li class="{{create_tournamentClass}}">
+                <a href="{{create_tournamentUrl}}">New Tournament</a>
               </li>
             {{/if}}
           </ul>

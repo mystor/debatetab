@@ -1,0 +1,92 @@
+<template name="create_tournament">
+  <form id="create_form">
+    <div class="row">
+      <div class="col col-sm-6">
+        <div class="control-group">
+          <label class="control-label" for="name">Tournament Name</label>
+          <div class="controls">
+            <input type="text" name="name" placeholder="(required)">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="slug">Slug</label>
+          <div class="controls">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="icon-globe"></i>
+                http://debatetab.net/t/
+              </span>
+              <input type="text" name="slug" placeholder="(required)">
+            </div>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="location">Location</label>
+          <div class="controls">
+            <input type="text" name="location" placeholder="(optional)">
+          </div>
+        </div>
+
+        {{! TODO: TEMPORARY, AT SOME POINT REMOVE BETA KEY REQUIREMENT }}
+        <div class="control-group">
+          <label class="control-label" for="betakey">Beta Key</label>
+          <div class="controls">
+            <input type="text" name="betakey" placeholder="Email beta@debatetab.net to get one (required)">
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-sm-6">
+        <div class="control-group">
+          <label class="control-label" for="type">Tournament Type</label>
+          <div class="controls">
+            <select name="type">
+              {{#each tournamentTypes}}
+                <option {{#if thisTournament name}}selected{{/if}}>{{name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 10px;">
+          <div class="panel-heading">
+            Summary
+          </div>
+
+          {{#with currentTournament}}
+            <table>
+              <tr>
+                <td>Team Size</td>
+                <td>{{team_size}}</td>
+              </tr>
+              <tr>
+                <td>Room Size</td>
+                <td>{{room_size}}</td>
+              </tr>
+              <tr>
+                <td>Score Range</td>
+                <td>{{min_score}} - {{max_score}} by {{score_incr}}</td>
+              </tr>
+              <tr>
+                <td>Positions</td>
+                <td>
+                  {{#each positions}}
+                    <div>
+                      <span class="label {{#if prop}}label-success{{else}}label-danger{{/if}}">{{slug}}</span>
+                      {{name}}
+                    </div>
+                  {{/each}}
+                </td>
+              </tr>
+            </table>
+          {{/with}}
+        </div>
+      </div>
+
+      {{! Submit Button }}
+      <div class="col col-12">
+        <button class="btn btn-primary btn-block" type="submit">Create Tournament</button>
+      </div>
+    </div>
+  </form>
+</template>

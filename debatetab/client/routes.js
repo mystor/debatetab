@@ -26,6 +26,24 @@ Meteor.Router.add({
     as: 'tournament_list',
     to: 'tournament_list'
   },
+
+  /*
+   * Tournament Creation page
+   */
+  '/create': {
+    as: 'create_tournament',
+    to: function() {
+      if (!Meteor.userId) {
+        // Redirect the user to the front page
+        // They shouldn't be here if they aren't logged in
+        Meteor.defer(function() {
+          Meteor.Router.to('tournament_list');
+        });
+      }
+      return 'create_tournament';
+    }
+  },
+
   /*
    * Display tournament info & basic tournament commands
    */
