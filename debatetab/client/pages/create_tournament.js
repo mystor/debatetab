@@ -48,6 +48,7 @@ module(function() {
           });
         } else {
           // Redirect to the tournament's overview
+          // TODO: Determine why this isn't working
           Meteor.Router.to('overview', res);
         }
       });

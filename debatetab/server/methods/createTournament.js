@@ -61,7 +61,7 @@ Meteor.methods({
       team_size: theType.team_size,
       min_score: theType.min_score,
       max_score: theType.max_score,
-      score_incr: theType.score_incr,
+      score_inc: theType.score_inc,
       round: 1
     };
 

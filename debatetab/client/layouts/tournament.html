@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="/">DebateTab<small>.net</small></a>
+      {{> logo}}
       
       <div class="nav-collapse collapse navbar-response-collapse">
         {{#isolate}}
@@ -46,17 +46,6 @@
       {{/if}}
     {{/isolate}}
   </div>
-  <hr />
-  <div class="container">
-    <div style="margin: 0px 5px 20px;">
-      <small>&copy; 2013 <a href="https://github.com/Mystor/">Michael Layzell</a></small>
-      <div class="pull-right">
-        <small>
-          <a href="#">Contact</a> | 
-          <a href="#">About</a> | 
-          <a href="#">Report a Bug</a>
-        </small>
-      </div>
-    </div>
-  </div>
+
+  {{> footer}}
 </template>
