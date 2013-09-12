@@ -17,6 +17,11 @@ Package.on_use(function(api) {
     'debatetab/pairing.js'
   ], 'client');
 
+  api.export('DebateTab', ['client', 'server']);
+  api.export('DTS', 'server');
+
   // Modal related files
   api.add_files(['modal.js'], 'client');
+
+  api.export('Modal', 'client');
 });

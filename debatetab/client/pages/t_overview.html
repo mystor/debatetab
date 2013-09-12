@@ -11,17 +11,27 @@
               <th>Name</th>
               <td>{{name}}</td>
             </tr>
+            {{#if when}}
             <tr>
               <th>When</th>
               <td>{{date when}}</td>
             </tr>
+            {{/if}}
+            {{#if location}}
             <tr>
               <th>Location</th>
               <td>{{location}}</td>
             </tr>
+            {{/if}}
             <tr>
               <th>Type</th>
-              <td>{{type.name}}</td>
+              <td>
+                {{#if type.name}}
+                  {{type.name}}
+                {{else}}
+                  <i>Custom</i>
+                {{/if}}
+              </td>
             </tr>
             <tr>
               <th>Team Size</th>
@@ -33,16 +43,22 @@
             </tr>
             <tr>
               <th>Score Range</th>
-              <td>{{min_score}}, {{sum min_score score_inc}} ... {{max_score}}</td>
+              <td>
+                {{min_score}} to {{max_score}} by {{score_inc}}
+              </td>
             </tr>
           {{/with}}
         </table>
       </div>
     </div>
     <div class="col col-sm-5 map-box">
-      <a href="http://google.com/maps?q={{encodedLocation}}">
-        <img alt="map" width="300" height="200" src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&visual_refresh=true&markers=size:mid|{{encodedLocation}}&zoom=13&size=300x200&key=AIzaSyCBWEFf_7bt7PDCJmmAq_nZJiItLLq0MXs">
-      </a>
+      {{#if location}}
+        <a href="http://google.com/maps?q={{encodedLocation}}">
+          <img alt="map" width="300" height="200" src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&visual_refresh=true&markers=size:mid|{{encodedLocation}}&zoom=13&size=300x200&key=AIzaSyCBWEFf_7bt7PDCJmmAq_nZJiItLLq0MXs">
+        </a>
+      {{else}}
+        <img alt="no-map" width="300" height="200" src="/images/no-map.png">
+      {{/if}}
     </div>
   </div>
 </template>
