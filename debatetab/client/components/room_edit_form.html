@@ -1,0 +1,26 @@
+<template name="room_edit_form">
+  <div class="row" style="margin-top: 0px">
+    <div class="control-group col col-sm-9" style="padding: 0px">
+      <label class="control-label" for="name">Name</label>
+      <div class="controls">
+        <input class="form-control form-left-text" name="name" type="text" placeholder="Name" value="{{name}}">
+      </div>
+    </div>
+
+    <div class="control-group col col-sm-3" style="padding: 0px">
+      <label class="control-label" for="rank">Rank</label>
+      <div class="controls">
+        <input class="form-control form-right-text" name="rank" type="text" placeholder="Rank" value="{{rank}}">
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px;">
+    <div class="control-group" style="padding: 0px;">
+      <label class="control-label" for="find_url">URL</label>
+      <div class="controls">
+        <input class="form-control" name="find_url" type="text" placeholder="Directions URL" value="{{find_url}}">
+      </div>
+    </div>
+  </div>
+</template>

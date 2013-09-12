@@ -1,7 +1,7 @@
 <template name="tournament_list">
   <div class="row">
     <div class="col col-sm-6 col-push-6">
-      <input style="margin-bottom: 10px" type="text" placeholder="Search Tournaments">
+      <input class="form-control input-sm" style="margin-bottom: 10px" type="text" placeholder="Search Tournaments">
       <div class="list-group">
         {{#each tournaments}}
           <a href="{{overviewUrl slug}}" class="list-group-item">

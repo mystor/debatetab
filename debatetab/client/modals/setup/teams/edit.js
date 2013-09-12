@@ -5,6 +5,11 @@ Modal.TeamsEdit = {
 
 Template.teams_edit_modal.helpers({
   team: function() {
+    console.log(Session.get('editing'));
+    console.log(Teams.findOne({
+      tournament: DebateTab.tournament('_id'),
+      _id: Session.get('editing')
+    }));
     return Teams.findOne({
       tournament: DebateTab.tournament('_id'),
       _id: Session.get('editing')

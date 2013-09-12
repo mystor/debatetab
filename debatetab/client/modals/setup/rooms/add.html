@@ -1,0 +1,13 @@
+<template name="room_add_modal">
+  <form id="add-form">
+    <div class="modal-body">
+      {{> modal_err}}
+
+      {{> room_edit_form}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="done-btn" class="btn btn-default pull-left">Done</button>
+      <button type="submit" class="btn btn-primary">Add Room</button>
+    </div>
+  </form>
+</template>

@@ -1,11 +1,11 @@
 <template name="t_overview">
   <div class="row">
     <div class="col col-sm-7">
-      <div class="panel">
+      <div class="panel panel-default">
         <div class="panel-heading">
           Tournament Information
         </div>
-        <table class="tournament-info-table">
+        <table class="table">
           {{#with tournament}}
             <tr>
               <th>Name</th>
@@ -19,7 +19,6 @@
               <th>Location</th>
               <td>{{location}}</td>
             </tr>
-            <tr><td>&nbsp;</td></tr>
             <tr>
               <th>Type</th>
               <td>{{type.name}}</td>

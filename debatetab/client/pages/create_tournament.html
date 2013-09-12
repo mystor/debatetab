@@ -5,7 +5,7 @@
         <div class="control-group">
           <label class="control-label" for="name">Tournament Name</label>
           <div class="controls">
-            <input type="text" name="name" placeholder="(required)">
+            <input type="text" class="form-control" name="name" placeholder="(required)">
           </div>
         </div>
         <div class="control-group">
@@ -16,14 +16,14 @@
                 <i class="icon-globe"></i>
                 http://debatetab.net/t/
               </span>
-              <input type="text" name="slug" placeholder="(required)">
+              <input type="text" class="form-control" name="slug" placeholder="(required)">
             </div>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="location">Location</label>
           <div class="controls">
-            <input type="text" name="location" placeholder="(optional)">
+            <input type="text" class="form-control" name="location" placeholder="(optional)">
           </div>
         </div>
 
@@ -31,7 +31,7 @@
         <div class="control-group">
           <label class="control-label" for="betakey">Beta Key</label>
           <div class="controls">
-            <input type="text" name="betakey" placeholder="Email beta@debatetab.net to get one (required)">
+            <input type="text" class="form-control" name="betakey" placeholder="Email beta@debatetab.net to get one (required)">
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
         <div class="control-group">
           <label class="control-label" for="type">Tournament Type</label>
           <div class="controls">
-            <select name="type">
+            <select class="form-control" name="type">
               {{#each tournamentTypes}}
                 <option {{#if thisTournament name}}selected{{/if}}>{{name}}</option>
               {{/each}}
@@ -48,13 +48,13 @@
           </div>
         </div>
 
-        <div class="panel" style="margin-top: 10px;">
+        <div class="panel panel-default" style="margin-top: 10px;">
           <div class="panel-heading">
             Summary
           </div>
 
           {{#with currentTournament}}
-            <table>
+            <table class="table">
               <tr>
                 <td>Team Size</td>
                 <td>{{team_size}}</td>

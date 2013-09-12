@@ -4,29 +4,18 @@
   {{> pairings_header}}
 
   {{#if isAdmin}}
-    {{! CONTROL BAR - AVOID REACTIVE CHANGES}}
-    <div class="control-bar-wrapper">
-      <div class="control-bar">
-        <div class="input-group">
-          <span class="input-group-addon">
-            <i class="icon-wrench"></i>
-          </span>
-
-          {{#isolate}}
-            {{#if swapping}}
-              {{> pairings_swap_controlbar}}
-            {{else}}
-              {{> pairings_default_controlbar}}
-            {{/if}}
-          {{/isolate}}
-        </div>
-      </div>
-    </div>
+    {{#controlbar}}
+      {{#if swapping}}
+        {{> pairings_swap_controlbar}}
+      {{else}}
+        {{> pairings_default_controlbar}}
+      {{/if}}
+    {{/controlbar}}
   {{/if}}
 
   {{! MOBILE VIEW SELECTOR}}
   {{#isolate}}
-    <div class="nav nav-tabs nav-justified visible-sm" style="margin-top: 10px;">
+    <div class="nav nav-tabs nav-justified visible-xs" style="margin-top: 10px;">
       <li class="{{team_active}}"><a id="pairings-select-teams" href="#">Teams</a></li>
       <li class="{{judge_active}}"><a id="pairings-select-judges" href="#">Judges</a></li>
     </div>

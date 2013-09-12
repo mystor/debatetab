@@ -1,5 +1,4 @@
 var files = [
-'less/accordion.lessimport',
 'less/alerts.lessimport',
 'less/badges.lessimport',
 'less/bootstrap.lessimport',
@@ -14,6 +13,7 @@ var files = [
 'less/forms.lessimport',
 'less/glyphicons.lessimport',
 'less/grid.lessimport',
+'less/input-groups.lessimport',
 'less/jumbotron.lessimport',
 'less/labels.lessimport',
 'less/list-group.lessimport',
@@ -32,19 +32,14 @@ var files = [
 'less/responsive-utilities.lessimport',
 'less/scaffolding.lessimport',
 'less/tables.lessimport',
+'less/theme.lessimport',
 'less/thumbnails.lessimport',
 'less/tooltip.lessimport',
 'less/type.lessimport',
 'less/utilities.lessimport',
 'less/variables.lessimport',
 'less/wells.lessimport',
-'js/bootstrap.js',
-'fonts/glyphiconshalflings-regular.eot',
-'fonts/glyphiconshalflings-regular.otf',
-'fonts/glyphiconshalflings-regular.svg',
-'fonts/glyphiconshalflings-regular.ttf',
-'fonts/glyphiconshalflings-regular.woff'];
-
+'js/bootstrap.js'];
 Package.describe({
   summary: 'Bootstrap 3 Less Package'
 });

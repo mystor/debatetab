@@ -3,18 +3,7 @@
   {{> setup_header}}
 
   {{! CONTROL BAR}}
-  <div class="control-bar-wrapper">
-    <div class="control-bar">
-      <div class="input-group">
-        <span class="input-group-addon">
-          <i class="icon-wrench"></i>
-        </span>
-        {{#isolate}}
-          {{> teams_default_controlbar}}
-        {{/isolate}}
-      </div>
-    </div>
-  </div>
+  {{#controlbar}}{{> teams_default_controlbar}}{{/controlbar}}
 
   {{#if teamsLoaded}}
     {{#if teams.count}}
@@ -27,7 +16,9 @@
             <div>[{{school}}] {{name}}</div>
             {{#each speakers}}
               <div>{{name}}
-                {{#each flags}}<div class="label label-info">{{this}}</div>{{/each}}
+                {{#each flags}}
+                  <div class="label label-info">{{this}}</div>
+                {{/each}}
               </div>
             {{/each}}
           </div>

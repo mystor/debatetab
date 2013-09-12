@@ -1,0 +1,17 @@
+<template name="room_edit_modal">
+  <form id="edit-form" action="#">
+    <div class="modal-body">
+      {{> modal_err}}
+
+      {{#with team}}
+        {{#constant}}
+          {{> room_edit_form}}
+        {{/constant}}
+      {{/with}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="drop-btn" class="btn btn-danger pull-left">Remove</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</template>

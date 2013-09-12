@@ -1,7 +1,24 @@
 Template.t_teams.helpers({
   teams: function() {
+    var regex = module('regex');
+
+    var $regex = {
+      $regex: regex.clean(Session.get('search')),
+      $options: 'i'
+    };
     return Teams.find({
-      tournament: DebateTab.tournament('_id')
+      tournament: DebateTab.tournament('_id'),
+      $or: [
+        {name: $regex},
+        {school: $regex},
+        {
+          speakers: {
+            $elemMatch: {
+              name: $regex
+            }
+          }
+        }
+      ]
     });
   },
   teamsLoaded: function() {

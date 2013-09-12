@@ -3,18 +3,7 @@
   {{> setup_header}}
 
   {{! CONTROL BAR}}
-  <div class="control-bar-wrapper">
-    <div class="control-bar">
-      <div class="input-group">
-        <span class="input-group-addon">
-          <i class="icon-wrench"></i>
-        </span>
-        {{#isolate}}
-          {{> rooms_default_controlbar}}
-        {{/isolate}}
-      </div>
-    </div>
-  </div>
+  {{#controlbar}}{{> rooms_default_controlbar}}{{/controlbar}}
 
   {{#if roomsLoaded}}
     {{#if rooms.count}}
@@ -34,7 +23,7 @@
             {{/if}}
             {{name}}
             <div class="pull-right setup-edit-link">
-              <a href="#"><i class="icon-edit-sign icon-2x"></i></a>
+              <a href="#" class="room-edit-btn" data-id="{{_id}}"><i class="icon-edit-sign icon-2x"></i></a>
             </div>
             <div class="label label-info pull-right setup-rank-label">Rank: {{rank}}</div>
           </div>

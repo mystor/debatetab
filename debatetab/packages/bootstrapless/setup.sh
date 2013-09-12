@@ -1,19 +1,20 @@
 cd bootstrap
-make clean
-make bootstrap-js
+
+# Build the css and js
+npm install
+grunt
 
 # Copy the files we are using
 cd ../
 rm -r less
 rm -r js
-rm -r fonts
 
 cp -r bootstrap/less less
-cp -r bootstrap/fonts fonts
-cp -r bootstrap/bootstrap/js js
+cp -r bootstrap/dist/js js
 
 cd less
-# Chamge imports
+
+# Chamge imports in bootstrap.less to use .lessimport
 sed -e 's/\.less";/\.lessimport";/g' bootstrap.less > bootstrap.lessimport
 rm bootstrap.less
 
@@ -32,8 +33,7 @@ done
 
 # other files which should be added
 cd ../
-
-echo "'js/bootstrap.js',\n'fonts/glyphiconshalflings-regular.eot',\n'fonts/glyphiconshalflings-regular.otf',\n'fonts/glyphiconshalflings-regular.svg',\n'fonts/glyphiconshalflings-regular.ttf',\n'fonts/glyphiconshalflings-regular.woff'];\n" >> package.js
+echo "'js/bootstrap.js'];" >> package.js
 
 # Add the actual code
 cat package_base.js >> package.js
