@@ -12,7 +12,6 @@ accounts-password
 insecure
 showdown
 standard-app-packages
-bootstrapless
 csv
 debatetab-globals
 hashstate
@@ -22,3 +21,5 @@ page-js-ie-support
 regex-helpers
 router
 reactive-dict
+bootstrap-3
+accounts-ui-bootstrap-3

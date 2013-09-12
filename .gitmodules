@@ -4,6 +4,3 @@
 [submodule "debatetab/packages/module"]
 	path = debatetab/packages/module
 	url = https://github.com/Mystor/meteor-module.git
-[submodule "debatetab/packages/bootstrapless/bootstrap"]
-	path = debatetab/packages/bootstrapless/bootstrap
-	url = https://github.com/twbs/bootstrap.git
