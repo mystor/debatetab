@@ -1,6 +1,6 @@
 <template name="tournament_list">
   <div class="row">
-    <div class="col col-sm-6 col-push-6">
+    <div class="col col-sm-6 col-sm-push-6">
       <input class="form-control input-sm" style="margin-bottom: 10px" type="text" placeholder="Search Tournaments">
       <div class="list-group">
         {{#each tournaments}}
@@ -10,8 +10,12 @@
         {{/each}}
       </div>
     </div>
-    <div class="col col-sm-6 col-pull-6">
-      Hello There, This is an amount of text which is not that small which will allow me to see how big this column actually is.  This will be helpful.
+    <div class="col col-sm-6 col-sm-pull-6">
+      <p class="text-center"><img alt="DebateTab Logo" src="/images/no-map.png"></p>
+      <h3>Welcome to DebateTab.net!</h3>
+      <p>DebateTab aims to be the future of debate tabbing software by bringing the convenience and power of centralized "cloud" computing &amp; storage to debate tabbing software.</p>
+      <p>With DebateTab, every debater can check their pairings online from their smartphone, and every judge can fill out their ballots without ever having to walk to the tabs room</p>
+      <p>If you are interested in testing out the future of debate tournament software, please email us at <a href="mailto:beta@debatetab.net">beta@debatetab.net</a></p>
     </div>
   </div>
 </template>
