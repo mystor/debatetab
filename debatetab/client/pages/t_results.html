@@ -12,9 +12,13 @@
       <div class="col col-lg-6">
         <div class="panel" style="margin-top: 10px; margin-bottom: 0px;">
           <h4 class="list-group-item-heading" style="text-align: center;">
-            <a href="#" title="Reason For Decision" class="pull-left"><i class="icon-comment"></i></a>
+            {{#if hasRFD this}}
+              <a href="#" title="Reason For Decision" class="pull-left"><i class="icon-comment"></i></a>
+            {{/if}}
             {{room_name room}}
-            <a href="#" title="Edit Result" class="pull-right"><i class="icon-edit-sign icon-large"></i></a>
+            {{#if isAdmin}}
+              <a href="#" title="Edit Result" class="pull-right"><i class="icon-edit-sign icon-large"></i></a>
+            {{/if}}
           </h4>
           <p class="list-group-item-text">
           <table class="table" style="margin-bottom: 0px;">
