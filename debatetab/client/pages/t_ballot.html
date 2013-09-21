@@ -5,7 +5,7 @@
         <div class="row">
           {{#ieach teams}}
           <div class="col col-lg-6">
-            <div class="panel">
+            <div class="panel panel-default">
               <div class="panel-heading" style="margin-bottom: 5px;">
                 <div class="pull-left label {{posClass $index0}}" 
                       style="margin-top: 3px; margin-right: 5px;">
@@ -24,16 +24,16 @@
               </div>
 
               {{#ieach obj.speakers}}
-                <div class="row">
-                  <div class="col col-12">
+                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                  <div class="col col-xs-12">
                     <h6>{{obj.name}}</h6>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col col-3">
-                    <input type="number" class="score-box" name="{{../obj._id}}-{{$index0}}" step="0.5">
+                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                  <div class="col col-xs-3">
+                    <input type="number" class="form-control score-box" name="{{../obj._id}}-{{$index0}}" step="0.5">
                   </div>
-                  <div class="col col-9" style="padding: 14px 15px;">
+                  <div class="col col-xs-9" style="padding: 14px 15px;">
                     <div class="noUiSlider" data-id="{{../obj._id}}-{{$index0}}" style="width: 100%;"></div>
                   </div>
                 </div>
@@ -48,7 +48,7 @@
               <div class="panel-heading">
                 Reason for Decision
               </div>
-              <textarea name="rfd">Given Orally</textarea>
+              <textarea name="rfd" class="form-control">Given Orally</textarea>
             </div>
 
             <button id="ballot-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
