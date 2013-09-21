@@ -31,5 +31,15 @@ Template.teams_edit_modal.events({
     });
 
     Modal.hide();
+  },
+  'click #drop-btn': function(e, tmpl) {
+    // TODO: Add more advanced dropping procedures
+    e.preventDefault();
+
+    if (confirm('Are you sure you want to drop this team?')) {
+      Teams.remove({ _id: Session.get('editing') });
+      Modal.hide();
+      Session.set('editing', '');
+    }
   }
 });

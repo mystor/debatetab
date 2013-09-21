@@ -26,5 +26,14 @@ Template.judge_edit_modal.events({
     });
 
     Modal.hide();
+  },
+  'click #drop-btn': function(e, tmpl) {
+    e.preventDefault();
+
+    if (confirm('Drop this judge?')) {
+      Judges.remove({ _id: Session.get('editing') });
+      Modal.hide();
+      Session.set('editing', '');
+    }
   }
 });

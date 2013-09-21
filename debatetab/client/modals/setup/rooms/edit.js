@@ -12,7 +12,7 @@ Template.room_edit_modal.helpers({
   }
 });
 
-Template.teams_edit_modal.events({
+Template.room_edit_modal.events({
   'submit #edit-form': function(e, tmpl) {
     e.preventDefault();
 
@@ -26,5 +26,15 @@ Template.teams_edit_modal.events({
     });
 
     Modal.hide();
+  },
+  'click #drop-btn': function(e, tmpl) {
+    // TODO: Make dropping function correctly
+    e.preventDefault();
+
+    if (confirm('Drop this room?')) {
+      Rooms.remove({ _id: Session.get('editing') });
+      Modal.hide();
+      Session.set('editing', '');
+    }
   }
 });
