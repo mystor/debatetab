@@ -32,18 +32,18 @@
 
 @media screen and (min-width: @screen-tablet) {
   .control-bar.affix {
-    max-width: 728px - 10px;
+    max-width: 730px - 10px;
   }
 }
 
 @media screen and (min-width: @screen-desktop) {
   .control-bar.affix {
-    max-width: 940px - 10px;
+    max-width: 950px - 10px;
   }
 }
 
 @media screen and (min-width: @screen-lg-desktop) {
   .control-bar.affix {
-    max-width: 1170px - 10px;
+    max-width: 1150px - 10px;
   }
 }
