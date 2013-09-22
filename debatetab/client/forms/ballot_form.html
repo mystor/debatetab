@@ -51,4 +51,17 @@
       <button id="ballot-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
     </div>
   </div>
+  {{#isolate}}{{> ballot_form_autorun}}{{/isolate}}
+  {{> ballot_form_rendered}}
+</template>
+
+<template name="ballot_form_autorun">
+  <!-- This template is rendered whenever the scores are changed.  Its only purpose is to
+  use jQuery to update the score numbers in the form -->
+  {{autorun this}}
+</template>
+
+<template name="ballot_form_rendered">
+  <!-- This template is rendered when the ballot form is for the first time.  
+  The rendered callback shouldn't be called again when ballot_form_autorun is re-rendered -->
 </template>

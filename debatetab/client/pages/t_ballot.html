@@ -1,59 +1,8 @@
 <template name="t_ballot">
   {{#if ballotLoaded}}
-    {{#if teams}}
+    {{#with pairing}}
       <form id="ballot-form" action="#">
-        <div class="row">
-          {{#ieach teams}}
-          <div class="col col-lg-6">
-            <div class="panel panel-default">
-              <div class="panel-heading" style="margin-bottom: 5px;">
-                <div class="pull-left label {{posClass $index0}}" 
-                      style="margin-top: 3px; margin-right: 5px;">
-                  {{posSlug $index0}}
-                </div>
-                {{obj.name}}
-
-                {{#isolate}}
-                  <div id="{{obj._id}}-place" {{! PLACE ICON}}
-                    class="pull-right label label-danger" 
-                    style="margin-top: 3px; margin-left: 5px;"></div>
-                  <div id="{{obj._id}}-score" {{! SCORE ICON}}
-                    class="pull-right label label-info" 
-                    style="margin-top: 3px;"></div>
-                {{/isolate}}
-              </div>
-
-              {{#ieach obj.speakers}}
-                <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                  <div class="col col-xs-12">
-                    <h6>{{obj.name}}</h6>
-                  </div>
-                </div>
-                <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                  <div class="col col-xs-3">
-                    <input type="number" class="form-control score-box" name="{{../obj._id}}-{{$index0}}" step="0.5">
-                  </div>
-                  <div class="col col-xs-9" style="padding: 14px 15px;">
-                    <div class="noUiSlider" data-id="{{../obj._id}}-{{$index0}}" style="width: 100%;"></div>
-                  </div>
-                </div>
-              {{/ieach}}
-            </div>
-          </div>
-          {{/ieach}}
-        </div>
-        <div class="row">
-          <div class="col col-12">
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                Reason for Decision
-              </div>
-              <textarea name="rfd" class="form-control">Given Orally</textarea>
-            </div>
-
-            <button id="ballot-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
-          </div>
-        </div>
+        {{> ballot_form}}
       </form>
     {{else}}
       <div class="text-center">
@@ -61,7 +10,7 @@
         <h3>Could not load e-ballot</h3>
         <h4>It either does not exist, or has already been submitted</h4>
       </div>
-    {{/if}}
+    {{/with}}
   {{else}}
     <div class="text-center">
       <i class="icon-spinner icon-spin icon-4x"></i><br>

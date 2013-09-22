@@ -3,8 +3,10 @@ module(function() {
 
   Meteor.methods({
     submitBallot: function(ballot, t_id, ballot_key) {
+      console.log(ballot);
       // Perform permission etc validation
       var tournament = validate.tournament(t_id);
+      console.log(tournament.min_score, tournament.max_score, tournament.score_inc);
       var pairing = validate.ballot(tournament, ballot_key);
 
       var team_size = tournament.team_size;
