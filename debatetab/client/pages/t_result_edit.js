@@ -25,3 +25,32 @@ Template.t_result_edit.helpers({
     return Subs.isReady('result') && Subs.isReady('pairing');
   }
 });
+
+
+Template.t_result_edit.events({
+  'submit #ballot-form': function(e, tmpl) {
+    e.preventDefault();
+    var form = e.currentTarget;
+    var arr = $(form).serializeArray();
+
+    // Load the form data into a map
+    var map = {};
+    _.each(arr, function(pair) {
+      if (pair.name !== 'rfd') {
+        pair.value = parseFloat(pair.value);
+      }
+      map[pair.name] = pair.value;
+    });
+
+    Meteor.call('updateBallot', map, 
+                DebateTab.tournament('_id'), 
+                Session.get('editing'), function(err, result) {
+      if (err) {
+        Modal.throw_err({ short: 'Ballot Error', long: err.reason });
+      } else {
+        // TODO: Show ballot submission success dialog
+        Meteor.Router.to('overview', DebateTab.tournament('slug'));
+      }
+    });
+  }
+});

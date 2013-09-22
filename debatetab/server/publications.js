@@ -98,7 +98,7 @@ module(function() {
         tournament: 1
       };
 
-      if (published.show('results-'+round, this.userId, tournament)) {
+      if (published.show('scores-'+round, this.userId, tournament)) {
         fields.rfd = 1;
       }
 
@@ -125,7 +125,7 @@ module(function() {
     var round = pairing.fetch()[0].round;
     if (published.show('pairings-'+round, this.userId, tournament)) {
 
-      if (published.show('results-'+round, this.userId, tournament)) {
+      if (published.show('scores-'+round, this.userId, tournament)) {
         fields.rfd = 1;
         return Pairings.find({ tournament: t_id, _id: _id }, { fields: fields });
       } else {

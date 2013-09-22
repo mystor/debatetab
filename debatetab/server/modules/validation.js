@@ -55,6 +55,22 @@ module('validate', function() {
       }
 
       return pairing;
+    },
+    /*
+     * Checks if the pairing exists
+     * Returns the pairing.
+     * If it doesn't exist, throws an error.
+     */
+    pairing: function(tournament, pairing_id) {
+      var pairing = Pairings.findOne({
+        tournament: tournament._id,
+        _id: pairing_id
+      });
+      if (!pairing) {
+        throw new Meteor.Error(404, 'Pairing with id: '+pairing_id+' does not exist');
+      }
+
+      return pairing;
     }
   };
 });
