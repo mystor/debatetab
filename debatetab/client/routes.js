@@ -120,6 +120,14 @@ Meteor.Router.add({
       Session.set('ballot_key', _guid);
     }
   },
+  '/t/:_slug/result/:_result': {
+    as: 'result_edit',
+    to: 't_result_edit',
+    and: function(_slug, _pairing) {
+      load_tournament(_slug);
+      Session.set('editing', _pairing);
+    }
+  },
   /*
    * TOURNAMENT SETUP
    */

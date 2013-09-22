@@ -1,26 +1,14 @@
-var getPairing = function() {
-  return Pairings.findOne({
-    ballot_key: Session.get('ballot_key')
-  });
-};
-
 Template.t_ballot.helpers({
   pairing: function() {
-    var pairing = getPairing();
+    var pairing = Pairings.findOne({
+      ballot_key: Session.get('ballot_key')
+    });
+
     if (pairing) {
       pairing.teams = _.map(pairing.teams, function(team_id) {
         return Teams.findOne({_id: team_id});
       });
       return pairing;
-    }
-  },
-  teams: function() {
-    // Returns the list of teams from the pairing
-    var pairing = getPairing();
-    if (pairing) {
-      return _.map(pairing.teams, function(team_id) {
-        return Teams.findOne({_id: team_id});
-      });
     }
   },
   ballotLoaded: function() {

@@ -35,6 +35,10 @@ Deps.autorun(function() {
           case 't_ballot':
             Subs.ballot = Meteor.subscribe('ballot', t_id, Session.get('ballot_key'));
             break;
+          case 't_result_edit':
+            Subs.result = Meteor.subscribe('pairing-result', t_id, Session.get('editing'));
+            Subs.pairing = Meteor.subscribe('pairing', t_id, Session.get('editing'));
+            break;
           case 't_results':
             Subs.pairings = Meteor.subscribe('round-pairings', t_id, DebateTab.round());
             Subs.results = Meteor.subscribe('round-results', t_id, DebateTab.round());

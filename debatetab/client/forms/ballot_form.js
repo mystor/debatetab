@@ -107,12 +107,15 @@ Template.ballot_form_autorun.autorun = function(pairing) {
  */
 Template.ballot_form_rendered.rendered = function() {
   var tournament = DebateTab.tournament();
-  var start_score = Math.round((tournament.max_score + tournament.min_score) / (2 * tournament.score_inc)) * tournament.score_inc;
+  var default_start_score = Math.round((tournament.max_score + tournament.min_score) / (2 * tournament.score_inc)) * tournament.score_inc;
 
   // Set up each of the sliders
   $('.noUiSlider').each(function(index) {
     var slider = $(this);
     var id = slider.data('id');
+
+    // Check if it already has a value
+    var start_score = parseFloat($('input[name='+id+']').val()) || default_start_score;
 
     slider.noUiSlider({
       range: [tournament.min_score, tournament.max_score],
@@ -128,5 +131,7 @@ Template.ballot_form_rendered.rendered = function() {
         scoreDeps.changed();
       }
     });
+
+    scoreDeps.changed();
   });
 }

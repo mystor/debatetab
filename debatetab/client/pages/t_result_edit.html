@@ -1,0 +1,19 @@
+<template name="t_result_edit">
+  {{#if loaded}}
+    {{#with pairing}}
+      <form id="ballot-form" action="#">
+        {{> ballot_form}}
+      </form>
+    {{else}}
+      <div class="text-center">
+        <i class="icon-excalmation icon-4x"></i><br>
+        <h3>Could not load pairing</h3>
+      </div>
+    {{/with}}
+  {{else}}
+    <div class="text-center">
+      <i class="icon-spinner icon-spin icon-4x"></i><br>
+      <h3>Loading Ballot...</h3>
+    </div>
+  {{/if}}
+</template>

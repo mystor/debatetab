@@ -56,3 +56,11 @@ Handlebars.registerHelper('ordinal', function(num) {
 Handlebars.registerHelper('fixedNum', function(num, precision) {
   return num.toFixed(precision);
 });
+
+Handlebars.registerHelper('or', function() {
+  for (var i=0; i<(arguments.length - 1); i++) {
+    if (arguments[i]) {
+      return arguments[i];
+    }
+  }
+});

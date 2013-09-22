@@ -98,8 +98,41 @@ module(function() {
         tournament: 1
       };
 
+      if (published.show('results-'+round, this.userId, tournament)) {
+        fields.rfd = 1;
+      }
+
       return Pairings.find({ tournament: t_id, round: round }, { fields: fields });
     }
+    return [];
+  });
+
+  Meteor.publish('pairing', function(t_id, _id) {
+    var tournament = validate.tournament(t_id);
+
+    var fields = {
+      _id: 1,
+      teams: 1,
+      judges: 1,
+      room: 1,
+      chair: 1,
+      round: 1,
+      tournament: 1
+    };
+
+    pairing = Pairings.find({ tournament: t_id, _id: _id }, { fields: fields });
+
+    var round = pairing.fetch()[0].round;
+    if (published.show('pairings-'+round, this.userId, tournament)) {
+
+      if (published.show('results-'+round, this.userId, tournament)) {
+        fields.rfd = 1;
+        return Pairings.find({ tournament: t_id, _id: _id }, { fields: fields });
+      } else {
+        return pairing;
+      }
+    }
+
     return [];
   });
 
@@ -121,6 +154,27 @@ module(function() {
       }
     }
     return [];
+  });
+
+  Meteor.publish('pairing-result', function(t_id, pairing) {
+    var tournament = validate.tournament(t_id);
+
+    var round = Pairings.findOne({ tournament: t_id, _id: pairing }, { fields: { round: 1 }}).round;
+    if (published.show('ranks-'+round, this.userId, tournament)) {
+      var fields = {
+        _id: 1,
+        tournament: 1,
+        round: 1,
+        pairing: 1,
+        team: 1,
+        points: 1
+      };
+
+      if (published.show('scores-'+round, this.userId, tournament)) {
+        fields.scores = 1;
+      }
+      return Results.find({ tournament: t_id, pairing: pairing }, { fields: fields });
+    }
   });
 
   Meteor.publish('round-results', function(t_id, round) {

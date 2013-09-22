@@ -60,6 +60,22 @@ module(function() {
     }
   });
 
+  Template.t_results.events({
+    'click .edit-result-btn': function(e, tmpl) {
+      e.preventDefault();
+      var _id = $(e.currentTarget).data('id');
+
+      Meteor.Router.to('result_edit', DebateTab.tournament('slug'), _id);
+    },
+    'click .view-rfd-btn': function(e, tmpl) {
+      e.preventDefault();
+      var _id = $(e.currentTarget).data('id');
+
+      Session.set('viewing', _id);
+      Modal.show(Modal.ViewRFD);
+    }
+  });
+
   // Require the controlbar module
   var controlbar = module('controlbar');
 
