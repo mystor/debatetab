@@ -13,13 +13,11 @@ showdown
 standard-app-packages
 csv
 debatetab-globals
-hashstate
 module
 noUiSlider
 page-js-ie-support
-regex-helpers
-router
 reactive-dict
 bootstrap-3
 accounts-ui-bootstrap-3
 font-awesome
+iron-router

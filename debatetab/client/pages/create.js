@@ -1,7 +1,7 @@
 module(function() {
   var tournamentTypes = module('tournament_types');
 
-  Template.create_tournament.helpers({
+  Template.create.helpers({
     tournamentTypes: function () {
       return tournamentTypes;
     },
@@ -19,7 +19,7 @@ module(function() {
     }
   });
 
-  Template.create_tournament.events({
+  Template.create.events({
     "change select[name=type]": function (e, tmpl) {
       e.preventDefault();
 
@@ -49,13 +49,13 @@ module(function() {
         } else {
           // Redirect to the tournament's overview
           // TODO: Determine why this isn't working
-          Meteor.Router.to('overview', res);
+          Router.go('overview', res);
         }
       });
     }
   });
 
-  Template.create_tournament.rendered = function () {
+  Template.create.rendered = function () {
     // Select british parliamentary by default
     Session.setDefault('tournamentType', 'British Parliamentary');
   };

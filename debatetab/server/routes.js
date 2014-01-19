@@ -1,4 +1,4 @@
-Meteor.Router.add('/download/:_token', function(_token) {
+/*Meteor.Router.add('/download/:_token', function(_token) {
   var pairingscsv = module('pairingscsv');
   var resultscsv = module('resultscsv');
 
@@ -33,4 +33,4 @@ Meteor.Router.add('/download/:_token', function(_token) {
 
   return ret;
 });
-
+*/

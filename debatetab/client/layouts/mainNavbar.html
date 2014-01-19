@@ -1,0 +1,15 @@
+<template name="mainNavbar">
+  <ul class="nav navbar-nav">
+    <li>
+      <a href="#">About</a>
+    </li>
+    <li>
+      <a href="#">Contact</a>
+    </li>
+    {{#if currentUser}}
+      <li class="{{navClass 'create'}}">
+        <a href="{{urlFor 'create'}}">Create Tournament</a>
+      </li>
+    {{/if}}
+  </ul>
+</template>

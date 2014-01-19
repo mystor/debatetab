@@ -1,5 +1,15 @@
+var publish = function(name, fn) {
+  Meteor.publish(name, function() {
+    try {
+      return fn.apply(this, arguments);
+    } catch (e) {
+      return [];
+    }
+  });
+}
 /*
  * Helper functions for getting admin permissions
+ * TODO: Move to using the validate module instead
  */
 var admins = function(t_id) {
   return Tournaments.findOne({_id: t_id},{fields:{admins: 1}}).admins;
@@ -16,6 +26,22 @@ module(function() {
    * Publications
    */
   Meteor.publish('all-tournaments', function() {
+    var Future = Npm.require('fibers/future');
+    var future = new Future;
+
+    Meteor.setTimeout(function() {
+      var cursor = Tournaments.find({}, {
+        fields: {
+          name: 1,
+             slug: 1
+        }
+      });
+      console.log('hello?');
+      future.return(cursor);
+    }, 2000);
+    
+    return future.wait();
+
     return Tournaments.find({}, {
       fields: {
         name: 1,
@@ -75,16 +101,17 @@ module(function() {
     tournament: 1
     };
 
-    if (isAdmin(t_id, this.userId)) {
-      fields.rank = 1;
-      fields.email = 1;
-    }
+    // TODO: Add this back in
+    // if (isAdmin(t_id, this.userId)) {
+    //   fields.rank = 1;
+    //   fields.email = 1;
+    // }
 
     return Judges.find({ tournament: t_id }, { fields: fields });
   });
 
-  Meteor.publish('round-pairings', function(t_id, round) {
-    var tournament = validate.tournament(t_id);
+  publish('round-pairings', function(slug, round) {
+    var tournament = validate.tournament(slug);
     validate.round(tournament, round);
 
     if (published.show('pairings-'+round, this.userId, tournament)) {
@@ -102,7 +129,7 @@ module(function() {
         fields.rfd = 1;
       }
 
-      return Pairings.find({ tournament: t_id, round: round }, { fields: fields });
+      return Pairings.find({ tournament: tournament._id, round: round }, { fields: fields });
     }
     return [];
   });

@@ -1,42 +1,32 @@
-<template name="basicLayout">
+<template name="layout">
   <div class="navbar navbar-default navbar-static-top">
     <div class="container">
+      {{! Responsive menu show button}}
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-response-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
 
+      {{! Logo}}
       {{> logo}}
 
       <div class="navbar-collapse collapse navbar-response-collapse">
-        {{#isolate}}
-          <ul class="nav navbar-nav">
-            {{! Not Yet Implemented
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-            }}
-            {{#if currentUser}}
-              <li class="{{create_tournamentClass}}">
-                <a href="{{create_tournamentUrl}}">Create Tournament</a>
-              </li>
-            {{/if}}
-          </ul>
-        {{/isolate}}
-
+        {{yield 'navbar'}}
+        
         {{! Account Navigation}}
-        {{> accountNav}}
+        <ul class="nav navbar-nav account-nav">
+          {{loginButtons}}
+        </ul>
       </div>
     </div>
   </div>
+
+  {{! Main Contents}}
   <div class="container">
-    {{#isolate}}
-      {{renderPage}}
-    {{/isolate}}
+    {{yield}}
   </div>
+
+  {{! Static Footer}}
   {{> footer}}
 </template>

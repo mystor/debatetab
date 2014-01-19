@@ -2,13 +2,29 @@ module('validate', function() {
   return {
     /*
      * Loads the tournament, throws an error if it doesn't exist.
+     *
+     * Fields: If you pass an objects, passes that object as fields param.
+     * If you pass no object, passes default fields parameter
+     * If you pass the boolean true, you don't pass a fields parameter
      */
-    tournament: function(t_id) {
-      var tournament = Tournaments.findOne({_id: t_id});
+    tournament: function(slug, fields) {
+      var tournament;
+      if (fields && typeof fields === 'object') {
+        tournament = Tournaments.findOne({slug: slug}, {fields: fields});
+      } else if (fields === true) {
+        tournament = Tournaments.findOne({slug: slug});
+      } else {
+        tournament = Tournaments.findOne({slug: slug}, {fields: {
+          _id: 1,
+          published: 1,
+          admins: 1,
+          round: 1
+        }});
+      }
       if (tournament) {
         return tournament;
       } else {
-        throw new Meteor.Error(404, 'Tournament with id: '+t_id+' does not exist');
+        throw new Meteor.Error(404, 'Tournament with slug: '+slug+' does not exist');
       }
     },
     /*

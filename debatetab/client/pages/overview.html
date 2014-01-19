@@ -1,12 +1,11 @@
-<template name="t_overview">
+<template name="overview">
   <div class="row">
     <div class="col col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Tournament Information
+          Tournament Information {{log this}} {{#with this}}{{log name}}{{/with}}
         </div>
         <table class="table">
-          {{#with tournament}}
             <tr>
               <th>Name</th>
               <td>{{name}}</td>
@@ -47,7 +46,6 @@
                 {{min_score}} to {{max_score}} by {{score_inc}}
               </td>
             </tr>
-          {{/with}}
         </table>
       </div>
     </div>

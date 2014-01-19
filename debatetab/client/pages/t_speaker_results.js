@@ -38,7 +38,7 @@ module(function() {
   };
 
   Deps.autorun(function() {
-    if (Meteor.Router.page() === 't_speaker_results') {
+    if (false) {//Meteor.Router.page() === 't_speaker_results') {
       // Ensure that the page is already showing
       pageShowingDeps.depend();
       if (!pageShowing) { return; }

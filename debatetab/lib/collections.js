@@ -1,4 +1,12 @@
-Tournaments = new Meteor.Collection('tournaments');
+Tournaments = new Meteor.Collection('tournaments', {
+  transform: function(doc) {
+    doc.encodedLocation = function() {
+      return encodeURIComponent(doc.location);
+    };
+
+    return doc;
+  }
+});
 Tournaments.schema = {
   _id: Match.Optional(String),
   name: String,

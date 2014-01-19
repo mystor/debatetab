@@ -64,3 +64,13 @@ Handlebars.registerHelper('or', function() {
     }
   }
 });
+
+Handlebars.registerHelper('log', function(x) {
+  console.log(x);
+  return '';
+});
+
+Handlebars.registerHelper('navClass', function() {
+  var args = _.initial(arguments);
+  return (_.indexOf(args, Router.current().route.name) !== -1) ? 'active' : '';
+})

@@ -4,7 +4,7 @@ _.extend(DebateTab, {
      * Get the current tournament
      */
     var tournament = Tournaments.findOne({
-      slug: Session.get('t_slug')
+      slug: Router.current().params.slug //Session.get('t_slug')
     });
 
     if (tournament) {

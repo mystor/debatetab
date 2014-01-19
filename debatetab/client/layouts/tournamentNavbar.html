@@ -1,0 +1,18 @@
+<template name="tournamentNavbar">
+  <ul class="nav navbar-nav">
+    <li class="{{navClass 'overview'}}">
+      <a href="{{urlFor 'overview' tournament}}">Overview</a>
+    </li>
+    <li class="{{navClass 'pairings'}}">
+      <a href="{{urlFor 'pairings' tournament}}">Pairings</a>
+    </li>
+    <li class="{{navClass 'speakerTab' 'teamTab' 'results'}}">
+      <a href="{{urlFor 'speakerTab' tournament}}">Results</a>
+    </li>
+    {{#if isAdmin}}
+      <li class="{{navClass 'teams' 'judges' 'rooms' 'scratches'}}">
+        <a href="{{urlFor 'teams' tournament}}">Set Up</a>
+      </li>
+    {{/if}}
+  </ul>
+</template>
