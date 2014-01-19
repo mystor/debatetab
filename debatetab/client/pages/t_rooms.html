@@ -11,19 +11,19 @@
         <div class="col col-sm-6 col-lg-4">
           <div class="panel setup-item-panel" style="padding-bottom: 10px;">
             {{#if find_url}}
-              <a href="{{find_url}}" class="icon-stack setup-find-url find-url-hover" title="{{find_url}}">
-                <i class="icon-map-marker"></i>
-                <i class="icon-circle-blank text-success icon-stack-base"></i>
+              <a href="{{find_url}}" class="fa fa-stack setup-find-url find-url-hover" title="{{find_url}}">
+                <i class="fa fa-map-marker"></i>
+                <i class="fa fa-circle-o text-success fa-stack-base"></i>
               </a>
             {{else}}
-              <span class="icon-stack setup-find-url">
-                <i class="icon-map-marker"></i>
-                <i class="icon-ban-circle text-danger icon-stack-base"></i>
+              <span class="fa fa-stack setup-find-url">
+                <i class="fa fa-map-marker"></i>
+                <i class="fa fa-ban text-danger fa-stack-base"></i>
               </span>
             {{/if}}
             {{name}}
             <div class="pull-right setup-edit-link">
-              <a href="#" class="room-edit-btn" data-id="{{_id}}"><i class="icon-edit-sign icon-2x"></i></a>
+              <a href="#" class="room-edit-btn" data-id="{{_id}}"><i class="fa fa-pencil-square fa-2x"></i></a>
             </div>
             <div class="label label-info pull-right setup-rank-label">Rank: {{rank}}</div>
           </div>

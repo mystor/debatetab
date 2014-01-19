@@ -13,11 +13,11 @@
         <div class="panel" style="margin-top: 10px; margin-bottom: 0px;">
           <h4 class="list-group-item-heading" style="text-align: center;">
             {{#if rfd}}
-              <a href="#" title="Reason For Decision" class="pull-left view-rfd-btn" data-id="{{_id}}"><i class="icon-comment"></i></a>
+              <a href="#" title="Reason For Decision" class="pull-left view-rfd-btn" data-id="{{_id}}"><i class="fa fa-comment"></i></a>
             {{/if}}
             {{room_name room}}
             {{#if isAdmin}}
-              <a href="#" title="Edit Result" class="pull-right edit-result-btn" data-id="{{_id}}"><i class="icon-edit-sign icon-large"></i></a>
+              <a href="#" title="Edit Result" class="pull-right edit-result-btn" data-id="{{_id}}"><i class="fa fa-pencil-square fa-large"></i></a>
             {{/if}}
           </h4>
           <p class="list-group-item-text">
@@ -61,7 +61,7 @@
     {{/each}}
   {{else}}
     <div class="text-center" style="padding-top: 10px">
-      <i class="icon-spinner icon-spin icon-4x"></i>
+      <i class="fa fa-spinner fa-spin fa-4x"></i>
       <h3>Loading Results...</h3>
     </div>
   {{/if}}

@@ -42,7 +42,7 @@
                   {{#if room_find_url room}}
                   <p style="text-align: center;">
                     <a href="{{room_find_url room}}">
-                      <i class="icon-map-marker icon-2x"></i>
+                      <i class="fa fa-map-marker fa-2x"></i>
                     </a>
                   </p>
                   {{/if}}
@@ -77,11 +77,11 @@
     {{else}}
       <div class="text-center" style="padding-top: 10px;">
         {{#if searchQuery}}
-          <i class="icon-search icon-4x"></i><br>
+          <i class="fa fa-search fa-4x"></i><br>
           <h3>Can't find any pairings</h3>
           <h4>Your query ({{searchQuery}}) has no results</h4>
         {{else}}
-          <i class="icon-info icon-4x"></i><br>
+          <i class="fa fa-info fa-4x"></i><br>
           <h3>No pairings here</h3>
           {{#if isAdmin}}
             <h4>You can use the <em>Manual</em> or <em>Autopair</em> options to generate some!</h4>
@@ -91,7 +91,7 @@
     {{/if}}
   {{else}}
     <div class="text-center" style="padding-top: 10px;">
-      <i class="icon-spinner icon-spin icon-4x"></i>
+      <i class="fa fa-spinner fa-spin fa-4x"></i>
       <h3>Loading Pairings...</h3>
     </div>
   {{/if}}
